@@ -1,12 +1,30 @@
 Welcome to visit our Project!
 
-Log of Works
-Started at 20230626
+Log of Works(Started at 20230626)
 
-1st day
+Final Project Start!
 
-2nd day
+1st day - 20230626(Mon)
+-Make WireFrames
 
-3rd day
+2nd day - 20230627(Tue)            
+-Make WireFrames
 
-4th day
+3rd day - 20230628(Wen)
+-Make PPT Index
+
+4th day - 20230629(Tur)
+-First Sprint Scrum
+
+5th day - 20230630(Fri)
+-Make ERD(With ERD Cloud)
+
+6+7th day - 20230701~0702(Sat~Sun)
+-Get Some Rest
+
+Sprint1 finish
+
+///////////////////////////////////////////////////////////////////////
+
+8th day - 20230703(Mon)
+-Create Git Repository
