@@ -204,19 +204,6 @@ scene.add(pointLight);
 const ambientLight = new AmbientLight(0x333333);
 scene.add(ambientLight);
 
-
-// 6 SCENE BACKGROUND
-// 6.1 CubeTextureLoader
-/*const cubeTextureLoader = new CubeTextureLoader();
-scene.background = cubeTextureLoader.load([
-    './assets/stars.jpg',
-    './assets/stars.jpg',
-    './assets/stars.jpg',
-    './assets/stars.jpg',
-    './assets/stars.jpg',
-    './assets/stars.jpg'
-]);*/
-
 // 6.2 Starfield
 var starGeometry = new SphereGeometry(2000, 100, 100);
 var starMaterial = new MeshPhongMaterial({
@@ -226,12 +213,6 @@ var starMaterial = new MeshPhongMaterial({
 });
 var starField = new Mesh(starGeometry, starMaterial);
 scene.add(starField);
-
-//6.3 Simple
-/*const loader = new TextureLoader();
-loader.load('./assets/stars_a.jpg', function (texture) {
-    scene.background = texture;
-});*/
 
 // 7 responsivity
 window.addEventListener('resize', () => {
