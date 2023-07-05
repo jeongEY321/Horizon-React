@@ -7,4 +7,9 @@
 
 * {
     font-family: 'PyeongChangPeace-Bold';
+    overflow-y: scroll;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
