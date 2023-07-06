@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../layout/header.scss';
+import '../scss/headerSolar.scss';
 
 export default function Header() {
   return (

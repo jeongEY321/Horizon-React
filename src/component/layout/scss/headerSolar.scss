@@ -1,18 +1,12 @@
 
  .MainHeader {
-    max-width: 1900px;
-    max-height: 1080px;
-    min-height: 100vh;
-    min-width: 100vw;
-    height: 100%;
-    margin: 0 auto;
-    background-color: black;
-
+   width: 100%;
+   height: 100%;
  }
  
  .menu {
     width: 100%;
-    background-image: url("../assets/image/Tip001Blue.png");
+    background-image: url("../../assets/image/Tip001Blue.png");
     background-size: 100% 100%;
     height: 135px;
  }
@@ -35,13 +29,14 @@
     background: none;
     color: white;
     padding: 50px;
-    font-size: 20px;
+    font-size: 25px;
     margin-bottom: 5px;
-    background: url("../assets/image/Btn07Blue_p.png"), no-repeat;
+    background: url("../../assets/image/Btn07Blue_p.png"), no-repeat;
     background-size: cover;
     width: 14%;
     height: 10%;
     opacity: 50%;
+    line-height: 10%;
  }
 
 
