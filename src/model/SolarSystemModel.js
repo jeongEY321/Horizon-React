@@ -39,16 +39,27 @@ import ModelLoadingPage from './ModelLoadingPage';
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
+
+  // 로딩중인지 아닌지 확인
   const [isLoading, setIsLoading] = useState(true);
   let count = 0;
-  // const [change, setChange] = useState('all');
-  // 변경 시 화면 멈추는 상황이 나와 사용 x
   
-  // const changeValue = (e) => {
-  //   console.log(e.target.value);
-  //   setChange(e.target.value);
-  // }
+  // 버튼눌렀을 때 값 가져오기
+  const [change, setChange] = useState('all');
+  
+  const changeValue = (e) => {
+    //change = e.target.value;
+    setChange(e.target.value);
+    console.log(change);
+  }
+  
+  // 값 변경되어도 아래거에서 적용이 안돼서 적용되게 작성
+  const changeRef = useRef(change);
+  useEffect(() => {
+    changeRef.current = change;
+  }, [change]);
 
+  // script 태그 src가 제대로 들어오지 않아 내용 넣기.
   useEffect(() => {
     const SolarSystemScript = () => {
       // 1 Scene 시작 위치 설정
@@ -202,24 +213,15 @@ const SolarSystemModel = () => {
       neptune.scale.set(0.3, 0.3, 0.3);
       neptune.position.x +=5.5;
 
-
-      var Objects = scene.children;
-      console.log(Objects);
-      console.log(Objects[2].name);
-
       // 3 the camera 카메라
-
       const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
       camera.position.z = 6; // 높을수록 멀리서 봄
-
       scene.add(camera);
-
 
       // 4 the renderer
       const renderer = new WebGLRenderer({ canvas: canvas });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(window.innerWidth, window.innerHeight, false);
-
 
       // 5 lights 명암
       const pointLight = new PointLight(0xFFFFFF, 2, 300);
@@ -273,23 +275,7 @@ const SolarSystemModel = () => {
       const clock = new Clock();
       const cameraControls = new CameraControls(camera, canvas);
       cameraControls.dollyToCursor = true;
-
-      //행성 고를 변수
-      let change = 'all';
-
-      // 클릭 시 값 변경(행성 변경), querySelectorAll로 할 시 화면 적용 안됨.
-      document.querySelector('.mercury-btn').onclick = function() {change = 'mercury';}
-      document.querySelector('.venus-btn').onclick = function() {change = 'venus';}
-      document.querySelector('.earth-btn').onclick = function() {change = 'earth';}
-      document.querySelector('.mars-btn').onclick = function() {change = 'mars';}
-      document.querySelector('.jupiter-btn').onclick = function() {change = 'jupiter';}
-      document.querySelector('.saturn-btn').onclick = function() {change = 'saturn';}
-      document.querySelector('.uranus-btn').onclick = function() {change = 'uranus';}
-      document.querySelector('.neptune-btn').onclick = function() {change = 'neptune';}
-      document.querySelector('.moon-btn').onclick = function() {change = 'moon';}
-      document.querySelector('.sun-btn').onclick = function() {change = 'sun';}
-      document.querySelector('.all-btn').onclick = function() {change = 'all';}
-
+      
       // 각 천체의 궤도를 그리는 함수
       function createOrbit(radius) {
         const geometry = new THREE.TorusGeometry( radius, 0.01, 2, 64 );
@@ -311,30 +297,31 @@ const SolarSystemModel = () => {
 
       // 9 the animation
       function animate() {
-          const delta = clock.getDelta();
-          cameraControls.update(delta);
+        const delta = clock.getDelta();
+        cameraControls.update(delta);
 
-          sun.rotation.y += 0.0009;
-          earth.rotation.y += 0.008; //자전 속도
-          earthObj.rotation.y += 0.008; //공전 속도
-          moonObj.rotation.y -= 0.0055;
-          mercury.rotation.y += 0.005;
-          mercuryObj.rotation.y += 0.0332;
-          venus.rotation.y -= 0.002;
-          venusObj.rotation.y += 0.0129;
-          mars.rotation.y += 0.005;
-          marsObj.rotation.y += 0.004; // 화성까지는 2.92/@ 365일 기준
-          saturn.rotation.y += 0.038;
-          saturnObj.rotation.y += 0.002; // 목성부터는 2.92/@ 100으로 나눔
-          jupiter.rotation.y += 0.0034;
-          jupiterObj.rotation.y += 0.001;
-          uranus.rotation.y -= 0.0025;
-          uranusObj.rotation.y += 0.0003;
-          neptune.rotation.y += 0.0015;
-          neptuneObj.rotation.y += 0.0002;
-        // 행성 을 기준으로 보기
-        if (change !== 'all') {
-          switch (change) {
+        sun.rotation.y += 0.0009;
+        earth.rotation.y += 0.008; //자전 속도
+        earthObj.rotation.y += 0.008; //공전 속도
+        moonObj.rotation.y -= 0.0055;
+        mercury.rotation.y += 0.005;
+        mercuryObj.rotation.y += 0.0332;
+        venus.rotation.y -= 0.002;
+        venusObj.rotation.y += 0.0129;
+        mars.rotation.y += 0.005;
+        marsObj.rotation.y += 0.004; // 화성까지는 2.92/@ 365일 기준
+        saturn.rotation.y += 0.038;
+        saturnObj.rotation.y += 0.002; // 목성부터는 2.92/@ 100으로 나눔
+        jupiter.rotation.y += 0.0034;
+        jupiterObj.rotation.y += 0.001;
+        uranus.rotation.y -= 0.0025;
+        uranusObj.rotation.y += 0.0003;
+        neptune.rotation.y += 0.0015;
+        neptuneObj.rotation.y += 0.0002;
+        
+        // 행성을 기준으로 보기
+        if (changeRef.current !== 'all') {
+          switch (changeRef.current) {
             case 'mercury': // 수성
               const mercuryPosition = mercury.getWorldPosition(new THREE.Vector3());
               camera.position.copy(mercuryPosition);
@@ -398,22 +385,23 @@ const SolarSystemModel = () => {
             }
         }
 
+        // 로딩중에도 애니메이션이 10~15번정도 작동을 해버려서 count 로 로딩 끝난 시점 확인.
         if(count < 20) {
           count++;
         } else {
+          // 로딩 끝나면 false로 바꿔주기.
           if(isLoading) {
             setIsLoading(false);
           }
         }
         
-        
+        // 렌더링, 애니메이션 다시 실행
         renderer.render(scene, camera);
-        requestAnimationFrame(animate); // 애니메이션 다시 실행
+        requestAnimationFrame(animate);
         
       }
       animate();
     };
-
     SolarSystemScript(); // SolarSystemScript 함수를 호출합니다.
   }, []);
 
@@ -421,7 +409,7 @@ const SolarSystemModel = () => {
     <>
       <canvas ref={canvasRef} id="three-canvas" />
       {isLoading? <ModelLoadingPage /> : ''}
-      <Controlls />
+      <Controlls change={changeValue} />
     </>
   );
 }
