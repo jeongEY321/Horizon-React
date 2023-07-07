@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import './scss/SolarSystemModel.scss';
-import Controlls from './Controlls';
+import '../scss/SolarSystemModel.scss';
 import * as THREE from 'three';
 import {
     Scene,
@@ -36,7 +35,8 @@ import {
 } from 'three';
 import CameraControls from 'camera-controls';
 import ModelLoadingPage from './ModelLoadingPage';
-import Footer from '../components/layout/js/Footer';
+import Footer from '../../component/layout/Footer';
+import PlanetContext from '../../component/layout/PlanetContext';
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
@@ -49,9 +49,7 @@ const SolarSystemModel = () => {
   const [change, setChange] = useState('all');
   
   const changeValue = (e) => {
-    //change = e.target.value;
     setChange(e.target.value);
-    console.log(change);
   }
   
   // 값 변경되어도 아래거에서 적용이 안돼서 적용되게 작성
@@ -76,38 +74,38 @@ const SolarSystemModel = () => {
       const loader = new TextureLoader();
 
       const sunMaterial = new MeshBasicMaterial({
-          map: loader.load(require('./img/sun.jpeg'))
+          map: loader.load(require('../img/sun.jpeg'))
       });
       const mercuryMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/mercury.png'))
+          map: loader.load(require('../img/mercury.png'))
       });
       const venusMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/venus.jpeg'))
+          map: loader.load(require('../img/venus.jpeg'))
       });
       const earthMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/earth.jpeg'))
+          map: loader.load(require('../img/earth.jpeg'))
       });
       const moonMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/moon.jpg'))
+          map: loader.load(require('../img/moon.jpg'))
       });
       const marsMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/mars.jpeg'))
+          map: loader.load(require('../img/mars.jpeg'))
       });
       const jupiterMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/jupiter.jpg'))
+          map: loader.load(require('../img/jupiter.jpg'))
       });
       const saturnMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/saturn.jpg'))
+          map: loader.load(require('../img/saturn.jpg'))
       });
       const saturnRingMaterial = new MeshBasicMaterial({
-          map: loader.load(require('./img/saturn-ring.png')),
+          map: loader.load(require('../img/saturn-ring.png')),
           side: DoubleSide
       });
       const uranusMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/uranus.jpg'))
+          map: loader.load(require('../img/uranus.jpg'))
       });
       const neptuneMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/neptune.jpg'))
+          map: loader.load(require('../img/neptune.jpg'))
       });
 
       // 2.3 CREATION Mesh(geometry, Material) 행성 생성
@@ -234,7 +232,7 @@ const SolarSystemModel = () => {
       // 6.2 Starfield
       var starGeometry = new SphereGeometry(2000, 100, 100);
       var starMaterial = new MeshPhongMaterial({
-          map: loader.load(require('./img/stars_a.jpg')),
+          map: loader.load(require('../img/stars_a.jpg')),
           side: DoubleSide,
           shininess: 1
       });
@@ -300,28 +298,29 @@ const SolarSystemModel = () => {
       function animate() {
         const delta = clock.getDelta();
         cameraControls.update(delta);
-
-        sun.rotation.y += 0.0009;
-        earth.rotation.y += 0.008; //자전 속도
-        earthObj.rotation.y += 0.008; //공전 속도
-        moonObj.rotation.y -= 0.0055;
-        mercury.rotation.y += 0.005;
-        mercuryObj.rotation.y += 0.0332;
-        venus.rotation.y -= 0.002;
-        venusObj.rotation.y += 0.0129;
-        mars.rotation.y += 0.005;
-        marsObj.rotation.y += 0.004; // 화성까지는 2.92/@ 365일 기준
-        saturn.rotation.y += 0.038;
-        saturnObj.rotation.y += 0.002; // 목성부터는 2.92/@ 100으로 나눔
-        jupiter.rotation.y += 0.0034;
-        jupiterObj.rotation.y += 0.001;
-        uranus.rotation.y -= 0.0025;
-        uranusObj.rotation.y += 0.0003;
-        neptune.rotation.y += 0.0015;
-        neptuneObj.rotation.y += 0.0002;
         
         // 행성을 기준으로 보기
         if (changeRef.current !== 'all') {
+            
+          sun.rotation.y += 0.0009;
+          earth.rotation.y += 0.008; //자전 속도
+          earthObj.rotation.y += 0.0008; //공전 속도
+          moonObj.rotation.y -= 0.00055;
+          mercury.rotation.y += 0.005;
+          mercuryObj.rotation.y += 0.00332;
+          venus.rotation.y -= 0.002;
+          venusObj.rotation.y += 0.00129;
+          mars.rotation.y += 0.005;
+          marsObj.rotation.y += 0.0004; // 화성까지는 2.92/@ 365일 기준
+          saturn.rotation.y += 0.038;
+          saturnObj.rotation.y += 0.0002; // 목성부터는 2.92/@ 100으로 나눔
+          jupiter.rotation.y += 0.0034;
+          jupiterObj.rotation.y += 0.0001;
+          uranus.rotation.y -= 0.0025;
+          uranusObj.rotation.y += 0.00003;
+          neptune.rotation.y += 0.0015;
+          neptuneObj.rotation.y += 0.00002;
+
           switch (changeRef.current) {
             case 'mercury': // 수성
               const mercuryPosition = mercury.getWorldPosition(new THREE.Vector3());
@@ -384,6 +383,27 @@ const SolarSystemModel = () => {
               camera.lookAt(sunPosition);
             break;
             }
+        } else {
+          
+          sun.rotation.y += 0.0009;
+          earth.rotation.y += 0.008; //자전 속도
+          earthObj.rotation.y += 0.008; //공전 속도
+          moonObj.rotation.y -= 0.0055;
+          mercury.rotation.y += 0.005;
+          mercuryObj.rotation.y += 0.0332;
+          venus.rotation.y -= 0.002;
+          venusObj.rotation.y += 0.0129;
+          mars.rotation.y += 0.005;
+          marsObj.rotation.y += 0.004; // 화성까지는 2.92/@ 365일 기준
+          saturn.rotation.y += 0.038;
+          saturnObj.rotation.y += 0.002; // 목성부터는 2.92/@ 100으로 나눔
+          jupiter.rotation.y += 0.0034;
+          jupiterObj.rotation.y += 0.001;
+          uranus.rotation.y -= 0.0025;
+          uranusObj.rotation.y += 0.0003;
+          neptune.rotation.y += 0.0015;
+          neptuneObj.rotation.y += 0.0002;
+
         }
 
         // 로딩중에도 애니메이션이 10~15번정도 작동을 해버려서 count 로 로딩 끝난 시점 확인.
@@ -410,6 +430,7 @@ const SolarSystemModel = () => {
     <>
       <canvas ref={canvasRef} id="three-canvas" />
       {isLoading? <ModelLoadingPage /> : ''}
+      {change != 'all' ? <PlanetContext /> : ''}
       <Footer change={changeValue} />
     </>
   );

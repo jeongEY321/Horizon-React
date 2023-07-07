@@ -1,5 +1,5 @@
 import React from 'react'
-import './scss/ModelLoadingPage.scss';
+import '../scss/ModelLoadingPage.scss';
 
 const ModelLoadingPage = () => {
   return (
