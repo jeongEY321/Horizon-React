@@ -36,6 +36,7 @@ import {
 } from 'three';
 import CameraControls from 'camera-controls';
 import ModelLoadingPage from './ModelLoadingPage';
+import Footer from '../component/layout/Footer';
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
@@ -407,7 +408,7 @@ const SolarSystemModel = () => {
     <>
       <canvas ref={canvasRef} id="three-canvas" />
       {isLoading? <ModelLoadingPage /> : ''}
-      <Controlls change={changeValue} />
+      <Footer change={changeValue} />
     </>
   );
 }
