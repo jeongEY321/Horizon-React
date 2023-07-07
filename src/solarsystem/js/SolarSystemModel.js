@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import './scss/SolarSystemModel.scss';
+import '../scss/SolarSystemModel.scss';
 import Controlls from './Controlls';
 import * as THREE from 'three';
 import {
@@ -36,7 +36,7 @@ import {
 } from 'three';
 import CameraControls from 'camera-controls';
 import ModelLoadingPage from './ModelLoadingPage';
-import Footer from '../component/layout/Footer';
+import Footer from '../../component/layout/Footer';
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
@@ -49,9 +49,7 @@ const SolarSystemModel = () => {
   const [change, setChange] = useState('all');
   
   const changeValue = (e) => {
-    //change = e.target.value;
     setChange(e.target.value);
-    console.log(change);
   }
   
   // 값 변경되어도 아래거에서 적용이 안돼서 적용되게 작성
@@ -76,38 +74,38 @@ const SolarSystemModel = () => {
       const loader = new TextureLoader();
 
       const sunMaterial = new MeshBasicMaterial({
-          map: loader.load(require('./img/sun.jpeg'))
+          map: loader.load(require('../img/sun.jpeg'))
       });
       const mercuryMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/mercury.png'))
+          map: loader.load(require('../img/mercury.png'))
       });
       const venusMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/venus.jpeg'))
+          map: loader.load(require('../img/venus.jpeg'))
       });
       const earthMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/earth.jpeg'))
+          map: loader.load(require('../img/earth.jpeg'))
       });
       const moonMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/moon.jpg'))
+          map: loader.load(require('../img/moon.jpg'))
       });
       const marsMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/mars.jpeg'))
+          map: loader.load(require('../img/mars.jpeg'))
       });
       const jupiterMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/jupiter.jpg'))
+          map: loader.load(require('../img/jupiter.jpg'))
       });
       const saturnMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/saturn.jpg'))
+          map: loader.load(require('../img/saturn.jpg'))
       });
       const saturnRingMaterial = new MeshBasicMaterial({
-          map: loader.load(require('./img/saturn-ring.png')),
+          map: loader.load(require('../img/saturn-ring.png')),
           side: DoubleSide
       });
       const uranusMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/uranus.jpg'))
+          map: loader.load(require('../img/uranus.jpg'))
       });
       const neptuneMaterial = new MeshStandardMaterial({
-          map: loader.load(require('./img/neptune.jpg'))
+          map: loader.load(require('../img/neptune.jpg'))
       });
 
       // 2.3 CREATION Mesh(geometry, Material) 행성 생성
@@ -234,7 +232,7 @@ const SolarSystemModel = () => {
       // 6.2 Starfield
       var starGeometry = new SphereGeometry(2000, 100, 100);
       var starMaterial = new MeshPhongMaterial({
-          map: loader.load(require('./img/stars_a.jpg')),
+          map: loader.load(require('../img/stars_a.jpg')),
           side: DoubleSide,
           shininess: 1
       });

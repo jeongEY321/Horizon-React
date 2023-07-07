@@ -1,5 +1,5 @@
 import './App.css';
-import SolarSystemModel from './model/SolarSystemModel';
+import SolarSystemModel from './solarsystem/js/SolarSystemModel';
 
 
 function App() {
