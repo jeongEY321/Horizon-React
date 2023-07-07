@@ -1,9 +1,9 @@
 import './App.css';
 import SolarSystemModel from './solarsystem/js/SolarSystemModel';
-
 import HeaderSolar from './component/layout/js/HeaderSolar.js';
 
 function App() {
+
   return (
     <>
       <SolarSystemModel />
