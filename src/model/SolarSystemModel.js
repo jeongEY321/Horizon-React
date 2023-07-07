@@ -48,9 +48,7 @@ const SolarSystemModel = () => {
   const [change, setChange] = useState('all');
   
   const changeValue = (e) => {
-    //change = e.target.value;
     setChange(e.target.value);
-    console.log(change);
   }
   
   // 값 변경되어도 아래거에서 적용이 안돼서 적용되게 작성
