@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import './scss/footer.scss';
+import '../scss/footer.scss';
 import { Grid } from '@mui/material';
 
 export default function Footer({change}) {

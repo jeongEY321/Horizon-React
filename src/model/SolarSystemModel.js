@@ -36,7 +36,7 @@ import {
 } from 'three';
 import CameraControls from 'camera-controls';
 import ModelLoadingPage from './ModelLoadingPage';
-import Footer from '../component/layout/Footer';
+import Footer from '../components/layout/js/Footer';
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
