@@ -20,20 +20,7 @@ Final Project Start!
 -ERD작성 시작(Make ERD Start(With ERD Cloud))
 
 6+7th day - 20230701~0702(Sat~Sun)
--휴식(Get Some Rest)
-
-Sprint1 finish
-
-///////////////////////////////////////////////////////////////////////
-
-8th day - 20230703(Mon)
--GIt저장소 생성 및 프로젝트 시작
-(Create Git Repository & Project Start)
-
-9th day - 20230704(Tue)
--Make PPT, 
-
-1. 추가 라이브러리
+-추가 npm 라이브러리 삽입(Add New npm Library)
 ```
 $ npm install react-icons  // 아이콘
 $ npm install classnames   // 클래스 add/remove 편리한거
@@ -46,5 +33,27 @@ $ npm install -g react-devtools
 $ npm install three // 3D
 $ npm install camera-controls // 카메라 시점
 ```
+
+Sprint1 finish
+///////////////////////////////////////////////////////////////////////
+
+8th day - 20230703(Mon)
+-GIt저장소 생성 및 프로젝트 시작(Create Git Repository & Project Start)
+
+9th day - 20230704(Tue)
+-Make PPT, intelliJ 시작, Scrum 2-1
+
 10th day - 20230705(Wen)
+-Header, footer 제작시작
+
+11th day - 20230706(Thu)
+-태양계 기능 구현
+
+12th day - 20230707(Fri)
+-태양계 footer button 기능, Scrum 2-2
+
+13+14th day - 20230708~0709(Sat~Sun)
 -
+
+Sprint2 finish
+///////////////////////////////////////////////////////////////////////
