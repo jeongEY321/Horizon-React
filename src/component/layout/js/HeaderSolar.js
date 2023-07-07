@@ -1,7 +1,10 @@
-import * as React from 'react';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import '../scss/headerSolar.scss';
 
-export default function Header() {
+const HeaderSolar = () => {
+
+
   return (
     <div className='MainHeader'>
       <header className='menu'>
@@ -15,3 +18,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default HeaderSolar; 
