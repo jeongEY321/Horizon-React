@@ -35,8 +35,8 @@ import {
 } from 'three';
 import CameraControls from 'camera-controls';
 import ModelLoadingPage from './ModelLoadingPage';
-import Footer from '../../components/layout/js/Footer';
-import PlanetContext from '../../components/layout/js/PlanetContext';
+import Footer from '../../layout/js/Footer';
+import PlanetContext from '../../layout/js/PlanetContext';
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
@@ -407,7 +407,7 @@ const SolarSystemModel = () => {
         }
 
         // 로딩중에도 애니메이션이 10~15번정도 작동을 해버려서 count 로 로딩 끝난 시점 확인.
-        if(count < 30) {
+        if(count < 100) {
           count++;
         } else {
           // 로딩 끝나면 false로 바꿔주기.
