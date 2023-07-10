@@ -30,6 +30,14 @@ export default function Footer({change}) {
               <>
                 <div className={`ft-btn-group ${menuAnimation}`}>
                   <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <Button className='ft-btn plant-btn sun-btn' value="sun" onClick={change}>
+                      Sun
+                    </Button>
+
+                    <Button className='ft-btn plant-btn moon-btn' value="moon" onClick={change}>
+                      Moon
+                    </Button>
+                    
                     <Button className='ft-btn plant-btn mercury-btn' value="mercury" onClick={change}>
                       Mercury
                     </Button>
@@ -60,15 +68,7 @@ export default function Footer({change}) {
                     
                     <Button className='ft-btn plant-btn neptune-btn' value="neptune" onClick={change}>
                       Neptune
-                    </Button>
-                    
-                    <Button className='ft-btn plant-btn moon-btn' value="moon" onClick={change}>
-                      Moon
-                    </Button>
-                    
-                    <Button className='ft-btn plant-btn sun-btn' value="sun" onClick={change}>
-                      Sun
-                    </Button>
+                    </Button>                   
                     
                     <Button className='ft-btn plant-btn all-btn' value="all" onClick={change}>
                       All

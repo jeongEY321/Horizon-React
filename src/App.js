@@ -1,5 +1,7 @@
 import './App.css';
-import SolarSystemModel from './model/SolarSystemModel.js';
+import Join from './components/user/Join';
+import Login from './components/user/Login';
+import SolarSystemModel from './solarsystem/js/SolarSystemModel';
 
 
 function App() {
@@ -7,6 +9,7 @@ function App() {
   return (
     <>
       <SolarSystemModel />
+      {/* <Join /> */}
       
     </>
   );
