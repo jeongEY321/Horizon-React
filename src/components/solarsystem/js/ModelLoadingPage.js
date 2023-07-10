@@ -6,8 +6,8 @@ const ModelLoadingPage = () => {
   return (
     
     <div className='check-loading'>
-      <div class="loadingio-spinner-spinner-qsmf429nagj">
-        <div class="ldio-5oqyuib2goi">
+      <div className="loadingio-spinner-spinner-qsmf429nagj">
+        <div className="ldio-5oqyuib2goi">
           <div></div>
           <div></div>
           <div></div>
