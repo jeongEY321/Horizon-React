@@ -399,7 +399,7 @@ const SolarSystemModel = () => {
           saturnObj.rotation.y += 0.002; // 목성부터는 2.92/@ 100으로 나눔
           jupiter.rotation.y += 0.0034;
           jupiterObj.rotation.y += 0.001;
-          uranus.rotation.y -= 0.0025;
+          uranus.rotation.x -= 0.0025;
           uranusObj.rotation.y += 0.0003;
           neptune.rotation.y += 0.0015;
           neptuneObj.rotation.y += 0.0002;
@@ -407,7 +407,7 @@ const SolarSystemModel = () => {
         }
 
         // 로딩중에도 애니메이션이 10~15번정도 작동을 해버려서 count 로 로딩 끝난 시점 확인.
-        if(count < 20) {
+        if(count < 30) {
           count++;
         } else {
           // 로딩 끝나면 false로 바꿔주기.
@@ -429,7 +429,7 @@ const SolarSystemModel = () => {
   return (
     <>
       <canvas ref={canvasRef} id="three-canvas" />
-      {isLoading? <ModelLoadingPage /> : ''}
+      {isLoading && <ModelLoadingPage /> }
       {change != 'all' ? <PlanetContext /> : ''}
       <Footer change={changeValue} />
     </>
