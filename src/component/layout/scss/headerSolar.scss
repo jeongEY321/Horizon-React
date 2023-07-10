@@ -1,16 +1,17 @@
-
- .MainHeader {
+.MainHeader {
    width: 100%;
    height: 100%;
  }
  
+ //헤더 전체 영역
  .menu {
     width: 100%;
     background-image: url("../../assets/image/Tip001Blue.png");
     background-size: 100% 100%;
     height: 130px;
  }
- 
+
+ //
  .menuBtn{
     display: flex;
     justify-content: space-evenly;
@@ -41,5 +42,4 @@
  .menuBtn button:hover {
     opacity: 100%;
  }
- 
  
