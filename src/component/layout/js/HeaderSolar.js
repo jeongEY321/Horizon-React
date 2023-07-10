@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import '../scss/headerSolar.scss';
+import '../../../components/layout/scss/headerSolar.scss';
 
 const HeaderSolar = () => {
 

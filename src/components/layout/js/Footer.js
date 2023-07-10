@@ -10,6 +10,7 @@ import { Grid } from '@mui/material';
 
 export default function Footer({change}) {
 
+  // 하단 메뉴버튼 클릭 이벤트
   const [isMenuOpen, setMenuOpen] = React.useState(false);
   const [menuAnimation, setMenuAnimation] = React.useState('');
 
