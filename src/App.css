@@ -30,21 +30,3 @@
   height: 40vmin;
   pointer-events: none;
 }
-
-.planet-content-box {
-    /* display: none; */
-    width: 25%;
-    height: 80%;
-    background: rgba(148, 191, 247, 0.9);
-    position: absolute;
-    right: 1%;
-    top: 7%;
-    border-radius: 10px;
-    overflow-y: scroll;  
-  }
-  
-  .planet-content-box .content {
-    padding: 10%;
-    color: white;    
-  }
-

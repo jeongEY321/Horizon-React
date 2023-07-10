@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../../solarsystem/scss/headerSolar.scss';
 
+
 const HeaderSolar = () => {
 
 

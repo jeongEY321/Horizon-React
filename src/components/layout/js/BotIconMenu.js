@@ -1,5 +1,5 @@
 import React from 'react'
-import './scss/boticonmenu.scss'
+import '../scss/boticonmenu.scss'
 import { Grid } from '@mui/material';
 import { Button } from 'reactstrap';
 

@@ -1,6 +1,8 @@
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { Container } from 'reactstrap'
+import './scss/Join.scss'
+import { Link } from 'react-router-dom'
 
 const Join = () => {
   return (
@@ -11,28 +13,7 @@ const Join = () => {
                       <Typography component="h1" variant="h5">
                           계정 생성
                       </Typography>
-                  </Grid>
-
-                  {/* <Grid item xs={12}>
-                    <div className="thumbnail-box" onClick={() => $fileTag.current.click()}>
-                      <img
-                        // src={require("../../assets/img/image-add.png")}
-                        src={imgFile ? imgFile : require("../../assets/img/image-add.png")}
-                        // src={imgFile || require("../../assets/img/image-add.png")}
-                        alt="profile"
-
-                      />
-                    </div>
-                    <label className='signup-img-label' htmlFor='profile-img'>프로필 이미지 추가</label>
-                    <input
-                      id='profile-img'
-                      type='file'
-                      style={{display: 'none'}}
-                      accept='image/*'
-                      ref={$fileTag}
-                      onChange={showThumbnailHandler}                  
-                    />
-                  </Grid> */}
+                  </Grid>                  
 
                   <Grid item xs={12}>
                       <TextField
@@ -44,6 +25,7 @@ const Join = () => {
                           id="username"
                           label="유저 이름"
                           autoFocus
+                          // onChange={''}
                       />
                       <span></span>
                   </Grid>
@@ -56,6 +38,7 @@ const Join = () => {
                           label="이메일 주소"
                           name="email"
                           autoComplete="email"
+                          // onChange={''}
                       />
                       <span></span>
                   </Grid>
@@ -68,7 +51,8 @@ const Join = () => {
                           label="패스워드"
                           type="password"
                           id="password"
-                          autoComplete="current-password"                          
+                          autoComplete="current-password"
+                          // onChange={''}                          
                       />
                       <span></span>
                   </Grid>
@@ -81,7 +65,8 @@ const Join = () => {
                           label="패스워드 확인"
                           type="password"
                           id="password-check"
-                          autoComplete="check-password"                          
+                          autoComplete="check-password" 
+                          // onChange={''}                         
                       />
                       <span id='check-span'></span>
                   </Grid>
@@ -97,13 +82,13 @@ const Join = () => {
                       </Button>
                   </Grid>
               </Grid>
-              {/* <Grid container justify="flex-end">
+              <Grid container justify="flex-end">
                   <Grid item>
-                      <Link href="/login" variant="body2">
+                      {/* <Link href="/login" variant="body2">
                           이미 계정이 있습니까? 로그인 하세요.
-                      </Link>
+                      </Link> */}
                   </Grid>
-              </Grid> */}
+              </Grid>
           </form>
       </Container>
   )
