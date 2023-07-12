@@ -1,15 +1,13 @@
-import { Button, Grid, TextField, Typography } from '@mui/material'
-import React, { useContext, useEffect, useState } from 'react'
-import { Container } from 'reactstrap'
-import '../scss/Join.scss'
-import { Link, useNavigate } from 'react-router-dom'
-import AuthContext from '../../util/AuthContext'
-import { API_BASE_URL as BASE, USER } from '../../util/host-config'
-import DaumPostcode from 'react-daum-postcode';
-
+import { Button, Grid, TextField, Typography } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { Container } from "reactstrap";
+import "../scss/Join.scss";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../../util/AuthContext";
+import { API_BASE_URL as BASE, USER } from "../../util/host-config";
+import DaumPostcode from "react-daum-postcode";
 
 const Join = () => {
-  
   //베이스 URL
   const API_BASE_URL = BASE + USER;
 
@@ -30,119 +28,115 @@ const Join = () => {
   //   }
   // }, [isLoggedIn, redirection]);
 
-
-
   // 상태변수로 회원가입 입력값 관리
   const [userValue, setUserValue] = useState({
-    userName : '',
-    password : '',
-    email : '',
-    addr : '',
-    detailAddr : '',
+    userName: "",
+    password: "",
+    email: "",
+    addr: "",
+    detailAddr: "",
   });
-
 
   // 검증 메세지 상태변수 관리
   const [message, setMessage] = useState({
-    userName : '',
-    password : '',
-    passwordCheck : '',
-    email : ''
+    userName: "",
+    password: "",
+    passwordCheck: "",
+    email: "",
   });
-
 
   // 검증 완료 체크 상태변수 관리
   const [correct, setCorrect] = useState({
-    userName : false,
-    password : false,
-    passwordCheck : false,
-    email : false
+    userName: false,
+    password: false,
+    passwordCheck: false,
+    email: false,
   });
 
   // 검증 데이터 상태변수에 저장
-  const saveInputState = ({key, inputVal, flag, msg}) => {
-    inputVal !== 'pass' && setUserValue({
-      ...userValue,
-      [key] : inputVal
-    });
+  const saveInputState = ({ key, inputVal, flag, msg }) => {
+    inputVal !== "pass" &&
+      setUserValue({
+        ...userValue,
+        [key]: inputVal,
+      });
 
     setMessage({
       ...message,
-      [key] : msg
+      [key]: msg,
     });
 
     setCorrect({
       ...correct,
-      [key] : flag
+      [key]: flag,
     });
   };
 
-  const nameHandler = e => {
+  const nameHandler = (e) => {
     // 이름 입력 조건 2~5글자 정규식
     const nameRegex = /^[가-힣]{2,5}$/;
     const inputVal = e.target.value;
-    
+
     //입력값 검증
     let msg; //검증 메세지 저장 변수
     let flag = false; //입력값 검증 체크 변수
-  
-    if(inputVal === '') {
-      msg = '유저 이름은 필수입니다.';
-    } else if(!nameRegex.test(inputVal)) {
-      msg = '2~5글자 사이의 한글로 작성하세요!';
+
+    if (inputVal === "") {
+      msg = "유저 이름은 필수입니다.";
+    } else if (!nameRegex.test(inputVal)) {
+      msg = "2~5글자 사이의 한글로 작성하세요!";
     } else {
-      msg = '사용 가능한 이름입니다.';
+      msg = "사용 가능한 이름입니다.";
       flag = true;
     }
     saveInputState({
-      key : 'userName',
+      key: "userName",
       inputVal,
       msg,
-      flag
+      flag,
     });
   };
 
-
   // 이메일 중복 체크 서버 통신 함수
-  const fetchDuplicateCheck = email => {
-
-    let msg = '', flag = false;
+  const fetchDuplicateCheck = (email) => {
+    let msg = "",
+      flag = false;
     fetch(`${API_BASE_URL}/check?email=${email}`)
-      .then(res => {
-        if(res.status === 200) {
+      .then((res) => {
+        if (res.status === 200) {
           return res.json();
         }
       })
-      .then(json => {
+      .then((json) => {
         console.log(json);
-        if(json) {
-          msg = '사용중인 이메일입니다!';
+        if (json) {
+          msg = "사용중인 이메일입니다!";
         } else {
-          msg = '사용 가능한 이메일 입니다.';
+          msg = "사용 가능한 이메일 입니다.";
           flag = true;
         }
-        setUserValue({...userValue, email : email});
-        setMessage({...message, email: msg});
-        setCorrect({...correct, email: flag});
+        setUserValue({ ...userValue, email: email });
+        setMessage({ ...message, email: msg });
+        setCorrect({ ...correct, email: flag });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("서버 통신이 원활하지 않습니다.");
       });
   };
 
   // 이메일 입력창 핸들러
-  const emailHandler = e => {
-
+  const emailHandler = (e) => {
     const emailRegex = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
 
     // 입력값 상태변수에 저장
     const inputVal = e.target.value;
 
-    let msg, flag = false;
-    if(!inputVal) {
-      msg = '이메일은 필수값입니다.';
-    } else if(!emailRegex.test(inputVal)) {
-      msg = '유효하지 않은 이메일 형식입니다.';
+    let msg,
+      flag = false;
+    if (!inputVal) {
+      msg = "이메일은 필수값입니다.";
+    } else if (!emailRegex.test(inputVal)) {
+      msg = "유효하지 않은 이메일 형식입니다.";
     } else {
       // 이메일 중복체크
       // 버튼형식으로 교체 예정
@@ -151,64 +145,67 @@ const Join = () => {
     }
 
     saveInputState({
-      key : 'email',
+      key: "email",
       inputVal,
       msg,
-      flag
+      flag,
     });
   };
 
   //비밀번호 입력창 이벤트 핸들러
-  const passwordHandler = e => {
+  const passwordHandler = (e) => {
     // 패스워드가 변동되면 패스워드 확인란 비우기
-    document.getElementById('password-check').value = '';
-    document.getElementById('check-span').textContent = '';
+    document.getElementById("password-check").value = "";
+    document.getElementById("check-span").textContent = "";
 
-    setMessage({...message, passwordCheck : ''});
-    setMessage({...correct, passwordCheck : false});
+    setMessage({ ...message, passwordCheck: "" });
+    setMessage({ ...correct, passwordCheck: false });
 
     // 입력값 상태 변수에 저장
     const inputVal = e.target.value;
 
     // 비밀번호 체크 정규식
-    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+    const pwRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
 
     // 비밀번호 검증
-    let msg, flag = false;
-    if(!inputVal) {
-      msg = '비밀번호는 필수입니다.';
-    } else if(!pwRegex.test(inputVal)) {
-      msg = '8글자 이상의 영문, 숫자, 특수문자를 포함해 주세요.';
+    let msg,
+      flag = false;
+    if (!inputVal) {
+      msg = "비밀번호는 필수입니다.";
+    } else if (!pwRegex.test(inputVal)) {
+      msg = "8글자 이상의 영문, 숫자, 특수문자를 포함해 주세요.";
     } else {
-      msg = '사용가능한 비밀번호 입니다.';
+      msg = "사용가능한 비밀번호 입니다.";
       flag = true;
     }
 
     saveInputState({
-      key : 'password',
+      key: "password",
       inputVal,
       msg,
-      flag
+      flag,
     });
   };
 
   // 패스워드 확인 이벤트 핸들러
-  const pwChkHandler = e => {
-    let msg, flag = false;
-    if(e.target.value) {
-      msg = '비밀번호 확인란은 필수입니다.';
-    } else if(userValue.password !== e.target.value) {
-      msg = '비밀번호가 일치하지 않습니다.';
+  const pwChkHandler = (e) => {
+    let msg,
+      flag = false;
+    if (e.target.value) {
+      msg = "비밀번호 확인란은 필수입니다.";
+    } else if (userValue.password !== e.target.value) {
+      msg = "비밀번호가 일치하지 않습니다.";
     } else {
-      msg = '비밀번호가 일치합니다.';
+      msg = "비밀번호가 일치합니다.";
       flag = true;
     }
 
     saveInputState({
-      key : 'passwordCheck',
-      inputVal : 'pass',
+      key: "passwordCheck",
+      inputVal: "pass",
       msg,
-      flag
+      flag,
     });
   };
 
@@ -216,35 +213,44 @@ const Join = () => {
   const searchAddrClickHandler = () => {
     let flag = true;
     new window.daum.Postcode({
-        oncomplete: function (data) {
-            const { zonecode, roadAddress, buildingName, apartment } = data;
-            let extraRoadAddr = '';
-            console.log('zonecode: ', zonecode);
+      oncomplete: function (data) {
+        const { zonecode, roadAddress, buildingName, apartment } = data;
+        let extraRoadAddr = "";
+        console.log("zonecode: ", zonecode);
 
-            if (data.buildingName !== '' && data.apartment === 'Y') {
-                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-            }
-            if(zonecode) {
-                // flag = true;
-                setUserValue({...userValue, 'userPostcode': zonecode, 'userAddrBasic': roadAddress});
-                setCorrect({...correct, 'userPostcode': !correct.userPostcode, 'userAddrBasic' : !correct.userAddrBasic});
-            }            
-        },
-    }).open();      
+        if (data.buildingName !== "" && data.apartment === "Y") {
+          extraRoadAddr +=
+            extraRoadAddr !== "" ? ", " + data.buildingName : data.buildingName;
+        }
+        if (zonecode) {
+          // flag = true;
+          setUserValue({
+            ...userValue,
+            userPostcode: zonecode,
+            userAddrBasic: roadAddress,
+          });
+          setCorrect({
+            ...correct,
+            userPostcode: !correct.userPostcode,
+            userAddrBasic: !correct.userAddrBasic,
+          });
+        }
+      },
+    }).open();
   };
 
   //상세주소 입력 변수
-  const addrDetailHandler = e => {
+  const addrDetailHandler = (e) => {
     const inputValue = e.target.value;
     let flag = false;
-    if(inputValue) {
-        flag = true;
+    if (inputValue) {
+      flag = true;
     }
     setUserValue({
-        ...userValue,
-        'userAddrDetail': inputValue,
+      ...userValue,
+      userAddrDetail: inputValue,
     });
-    setCorrect({...correct, 'userAddrDetail' : !correct.userAddrDetail})
+    setCorrect({ ...correct, userAddrDetail: !correct.userAddrDetail });
   };
 
   const handlePostcodeComplete = (data) => {
@@ -260,198 +266,203 @@ const Join = () => {
       ...correct,
       address: true,
     });
-    
-    const element = document.getElementById('postcode');
-    if (element) {
-      element.style.display = 'none';
-    }
-  };   
 
+    const element = document.getElementById("postcode");
+    if (element) {
+      element.style.display = "none";
+    }
+  };
 
   // 입력칸이 모두 검증에 통과했는지 여부 검사
   const isValid = () => {
-    for(const key in correct) {
+    for (const key in correct) {
       const flag = correct[key];
-      if(!flag) return false;
+      if (!flag) return false;
     }
     return true;
   };
 
   // 회원가입 버튼 클릭 이벤트 핸들러
-  const joinButtonClickHandler = e => {
+  const joinButtonClickHandler = (e) => {
     e.preventDefalt();
     console.log(userValue);
 
     // 회원 가입 서버 요청
-    if(isValid()) {
+    if (isValid()) {
       fetchSignUpPost();
     } else {
-      alert('입력란을 다시 확인 해주세요.');
+      alert("입력란을 다시 확인 해주세요.");
     }
   };
 
   // 회원가입 처리 서버 요청
-  const fetchSignUpPost = () =>{
+  const fetchSignUpPost = () => {
     //JSON을 Blob 타입으로 변경 후 FormData에 넣기
-    const userJsonBlob = new Blob(
-      [JSON.stringify(userValue)],
-      {type : 'application/json'}
-    );
+    const userJsonBlob = new Blob([JSON.stringify(userValue)], {
+      type: "application/json",
+    });
 
     const userFormData = new FormData();
-    userFormData.append('user', userJsonBlob);
+    userFormData.append("user", userJsonBlob);
 
     fetch(API_BASE_URL, {
-      method : 'POST',
-      body : userFormData
-    })
-    .then(res => {
-      if(res.status === 200) {
-        alert('회원가입 되었습니다!');
+      method: "POST",
+      body: userFormData,
+    }).then((res) => {
+      if (res.status === 200) {
+        alert("회원가입 되었습니다!");
         // redirection('/login');
       } else {
-        alert('서버와의 통신이 원활하지 않습니다.');
+        alert("서버와의 통신이 원활하지 않습니다.");
       }
-    })
+    });
   };
-
 
   return (
     <>
-    <Container component="main" maxWidth="xs" style={{ margin: "200px auto" }}>
-          <form noValidate>
-              <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                      <Typography component="h1" variant="h5">
-                          회원 가입
-                      </Typography>
-                  </Grid>                  
+      <Container
+        component="main"
+        maxWidth="xs"
+        style={{ margin: "200px auto" }}
+      >
+        <form noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography component="h1" variant="h5">
+                회원 가입
+              </Typography>
+            </Grid>
 
-                  <Grid item xs={12}>
-                      <TextField
-                          autoComplete="fname"
-                          name="username"
-                          variant="outlined"
-                          required
-                          fullWidth
-                          id="username"
-                          label="유저 이름"
-                          autoFocus
-                          onChange={nameHandler}
-                      />
-                      <span></span>
-                  </Grid>
-                  <Grid item xs={12}>
-                      <TextField
-                          variant="outlined"
-                          required
-                          fullWidth
-                          id="email"
-                          label="이메일 주소"
-                          name="email"
-                          autoComplete="email"
-                          onChange={emailHandler}
-                      />
-                      <span></span>
-                  </Grid>
-                  <Grid item xs={12}>
-                      <TextField
-                          variant="outlined"
-                          required
-                          fullWidth
-                          name="password"
-                          label="패스워드"
-                          type="password"
-                          id="password"
-                          autoComplete="current-password"
-                          onChange={passwordHandler}                          
-                      />
-                      <span></span>
-                  </Grid>
-                  <Grid item xs={12}>
-                      <TextField
-                          variant="outlined"
-                          required
-                          fullWidth
-                          name="password-check"
-                          label="패스워드 확인"
-                          type="password"
-                          id="password-check"
-                          autoComplete="check-password" 
-                          onChange={pwChkHandler}                         
-                      />
-                      <span id='check-span'></span>
-                  </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="fname"
+                name="username"
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="유저 이름"
+                autoFocus
+                onChange={nameHandler}
+              />
+              <span></span>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="이메일 주소"
+                name="email"
+                autoComplete="email"
+                onChange={emailHandler}
+              />
+              <span></span>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="패스워드"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={passwordHandler}
+              />
+              <span></span>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password-check"
+                label="패스워드 확인"
+                type="password"
+                id="password-check"
+                autoComplete="check-password"
+                onChange={pwChkHandler}
+              />
+              <span id="check-span"></span>
+            </Grid>
 
-                  <Grid item xs={12} sm={8}>
-                    <TextField
-                        type="text"
-                        id="sample4_postcode"
-                        name="Postcode"
-                        placeholder="우편번호"                        
-                        value={userValue.userPostcode}
-                        fullWidth
-                        disabled
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                  <Button className='searchAddrBtn' 
-                          variant="contained" 
-                          fullWidth 
-                          onClick={searchAddrClickHandler}
-                  >
-                    주소검색
-                  </Button>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                        type="text"
-                        id="sample4_roadAddress"
-                        name="roadAddress"
-                        placeholder="도로명주소"
-                        value={userValue.userAddrBasic}
-                        fullWidth
-                        disabled                        
-                    />
-                  </Grid>
-              
-                  <Grid item xs={12}>
-                      <TextField                          
-                          name="detail-address"
-                          variant="outlined"
-                          fullWidth
-                          id="detail-address"
-                          label="상세주소"                          
-                          onClick={addrDetailHandler}
-                                                    
-                      />                    
-                  </Grid>
-                  <Grid item xs={12}>
-                      <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        style={{background: '#3159d1'}}
-                        onClick={joinButtonClickHandler}
-                      >
-                          계정 생성
-                      </Button>
-                  </Grid>
-              </Grid>
-              <Grid container justify="flex-end">
-                  <Grid item>
-                      {/* <Link href="/login" variant="body2">
-                          이미 계정이 있습니까? 로그인 하세요.
-                      </Link> */}
-                  </Grid>
-              </Grid>
-          </form>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                type="text"
+                id="sample4_postcode"
+                name="Postcode"
+                placeholder="우편번호"
+                value={userValue.userPostcode}
+                fullWidth
+                disabled
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Button
+                className="searchAddrBtn"
+                variant="contained"
+                fullWidth
+                onClick={searchAddrClickHandler}
+                style={{
+                  background: "#3159d1",
+                  height: "50px",
+                  fontSize: "18px",
+                }}
+              >
+                주소검색
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                id="sample4_roadAddress"
+                name="roadAddress"
+                placeholder="도로명주소"
+                value={userValue.userAddrBasic}
+                fullWidth
+                disabled
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                name="detail-address"
+                variant="outlined"
+                fullWidth
+                id="detail-address"
+                label="상세주소"
+                onClick={addrDetailHandler}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                style={{ background: "#3159d1", fontSize: "20px" }}
+                onClick={joinButtonClickHandler}
+              >
+                계정 생성
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid container justify="flex-end">
+            <Grid item>
+              {/* <Link href="/login" variant="body2">
+                이미 계정이 있습니까? 로그인 하세요.
+              </Link> */}
+            </Grid>
+          </Grid>
+        </form>
       </Container>
-      <div id='postcode' style={{display:'none'}}>
+      <div id="postcode" style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
-      </>
-  )
-}
+    </>
+  );
+};
 
-export default Join
+export default Join;
