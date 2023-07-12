@@ -1,26 +1,42 @@
 import { Button, Grid, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Container } from 'reactstrap'
-import './scss/Login.scss'
+import '../scss/Login.scss'
 import { useNavigate } from 'react-router'
+import AuthContext from '../../util/AuthContext'
+import { API_BASE_URL as BASE, USER } from '../../util/host-config'
 
 
 const Login = () => {
 
-  const redirection = useNavigate();
+  // const redirection = useNavigate();
 
   //AuthContext에서 onLogin 함수 가져오기
+  const { onLogin, isLoggedIn } = useContext(AuthContext);
+
+  // const [ open, setOpen ] = useState(false);
+
+  // useEffect(() => {
+  //   if(isLoggedIn) {
+  //     setOpen(true);
+  //     setTimeout(() => {
+  //       redirection('/');
+  //     }, 3000);
+  //   }
+  // }, [isLoggedIn, redirection]);
+
+  const REQUEST_URL = BASE + USER + '/signin';
   
 
   // 서버에 비동기 로그인 요청
-  const fectchLogin = async() => {
+  const fetchLogin = async() => { // 연결 후 로그인 요청 핸들러 주석 해제
     
     // 사용자가 입력한 이메일, 비밀번호 입력 태그 얻어오기
     const $email = document.getElementById('email');
     const $password = document.getElementById('password');
 
     
-    const res = await fetch('', { //백엔드 전달받고 ''에 경로 설정해야함
+    const res = await fetch(REQUEST_URL, { 
       method: 'POST',
       headers: { 'content-type' : 'application/json' },
       body : JSON.stringify({
@@ -36,35 +52,39 @@ const Login = () => {
       return;
     }
 
-    const { token, userName, eamil } = await res.json();
+    const { token, userName, email } = await res.json();
+
+    // 로그인 상태 업데이트
+    onLogin(token, userName);
 
     // 홈으로 리다이렉트
-    redirection('/');
+    // redirection('/');
 
   };
 
   // //로그인 요청 핸들러
-  // const loginHandler = e => {
-  //   e.preventDefault();
+  const loginHandler = e => {
+    e.preventDefault();
 
   //   // 서버로 로그인 요청 전송
   //   fetchLogin();
-  // }
+  }
 
   return (
     <>
       <Container component="main" maxWidth="xs" style={{ margin: "200px auto" }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography component="h1" variant="h5">
-              로그인
-            </Typography>
-          </Grid>
-        </Grid>
-        
-        <form noValidate>
-          {/* onSubmit={loginHandler}> */}
+        <form noValidate onSubmit={loginHandler}>
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography component="h1" variant="h5">
+                로그인
+              </Typography>
+            </Grid>
+          </Grid>
+
+          <br/>        
+          
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -104,5 +124,6 @@ const Login = () => {
     </>
   )
 }
+
 
 export default Login

@@ -11,4 +11,4 @@ if(clientHostName === 'localhost') { //개발중일때
 }
 
 export const API_BASE_URL = backEndHostName;
-export const USER = '/auth';
+export const USER = 'api/auth';
