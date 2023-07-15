@@ -6,16 +6,12 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import { sizing } from "@mui/system";
+import Icon from "@mdi/react";
+import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
+import "../scss/CSHeader.scss";
+import "../../solarsystem/img/Tip001Blue.png";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -24,11 +20,10 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(1),
     width: "auto",
   },
 }));
@@ -46,229 +41,100 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
+    // padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
     },
   },
 }));
 
-export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="15px" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="15px"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-
-      {/* 프로필 아이콘 */}
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="15px"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
-
+export default function SearchAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+    <Box
+      sx={{
+        flexGrow: 1,
+        //backgroundColor: "green",
+      }}
+    >
+      <div className="CSHeader">
+        <Toolbar className="header-menubar">
           <IconButton
-            size="large"
+            size="small"
             edge="start"
             color="inherit"
             aria-label="open drawer"
             sx={{
               mr: 2,
-              size: "10px",
-              marginRight: "10px",
+              marginLeft: "20px",
+              color: "black",
             }}
+            fontColor="black"
           >
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h4"
+            className="typography-cs"
+            variant="h6"
             noWrap
             component="div"
             sx={{
+              flexGrow: 1,
               display: { xs: "none", sm: "block" },
-              display: "flex",
-              alignItems: "center",
-              size: "10px",
-              marginRight: "10px",
+              //textAlign: "center",
+              color: "black",
+              marginLeft: "15px",
             }}
           >
             Astronomical News
           </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              //size: "10px",
-              marginRight: "20px",
-            }}
-          >
-            <IconButton
-              size="10%"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="20px"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="20px"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: "flex", md: "none" },
-            }}
-          >
-            <IconButton
-              size="20px"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
+          <Icon
+            path={mdiAccount}
+            title="User Profile"
+            size={2}
+            horizontal
+            vertical
+            rotate={180}
+            color="black"
+          />
+          <Icon
+            path={mdiLock}
+            title="lock"
+            size={2}
+            horizontal
+            vertical
+            rotate={180}
+            color="black"
+          />
+          <Icon
+            path={mdiLockOpen}
+            title="lockOpen"
+            size={2}
+            horizontal
+            vertical
+            rotate={180}
+            color="black"
+          />
         </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      </div>
+
       <Search>
         <SearchIconWrapper>
-          <SearchIcon
-            sx={{
-              padding: "6px",
-              display: "flex",
-              justifyItems: "center",
-              backgroundColor: "red",
-              // marginLeft: "50px",
-            }}
-          />
+          <SearchIcon />
         </SearchIconWrapper>
-
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
           sx={{
-            padding: "6px",
+            //backgroundColor: "red",
             display: "flex",
-            justifyContent: "center",
-            width: "auto",
-            backgroundColor: "yellowgreen",
-            // marginLeft: "50px",
+            padding: "3px",
           }}
         />
       </Search>

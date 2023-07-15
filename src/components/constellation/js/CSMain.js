@@ -78,7 +78,7 @@ function fixedHeaderContent() {
           key={column.dataKey}
           variant="head"
           align={column.numeric || false ? "right" : "left"}
-          style={{ width: column.width }}
+          //style={{ width: column.width }}
           sx={{
             backgroundColor: "background.paper",
           }}
@@ -109,7 +109,7 @@ export default function CSMain() {
   return (
     <div>
       <CSHeader />
-      <Paper style={{ height: 500, width: "100%" }}>
+      <Paper style={{ height: "330px", width: "100%" }}>
         <TableVirtuoso
           data={rows}
           components={VirtuosoTableComponents}
