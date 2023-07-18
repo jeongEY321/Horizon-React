@@ -7,9 +7,7 @@ const HeaderSolar = () => {
       <header className="menu">
         <div className="menuBtn">
           <button className="solarBtn">Solar System</button>
-          <button className="conBtn" Link to="/">
-            Constellation
-          </button>
+          <button className="conBtn">Constellation</button>
           <button className="horoscope">Horoscope</button>
           <button className="storeBtn">Store</button>
         </div>

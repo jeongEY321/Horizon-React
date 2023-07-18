@@ -60,73 +60,80 @@ export default function SearchAppBar() {
     <Box
       sx={{
         flexGrow: 1,
-        //backgroundColor: "green",
       }}
     >
       <div className="CSHeader">
         <Toolbar className="header-menubar">
           <IconButton
-            size="small"
+            className="hamburger"
+            //size="small"
             edge="start"
             color="inherit"
             aria-label="open drawer"
             sx={{
               mr: 2,
               marginLeft: "20px",
-              color: "black",
+              color: "white",
             }}
-            fontColor="black"
+            fontColor="white"
           >
             <MenuIcon />
           </IconButton>
           <Typography
             className="typography-cs"
-            variant="h6"
+            variant="h5"
             noWrap
             component="div"
             sx={{
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
               //textAlign: "center",
-              color: "black",
+              color: "white",
               marginLeft: "15px",
             }}
           >
             Astronomical News
           </Typography>
+
           <Icon
+            className="profile-icon"
             path={mdiAccount}
             title="User Profile"
             size={2}
             horizontal
             vertical
             rotate={180}
-            color="black"
+            color="white"
           />
           <Icon
+            className="locked"
             path={mdiLock}
             title="lock"
             size={2}
             horizontal
             vertical
             rotate={180}
-            color="black"
+            color="white"
           />
           <Icon
+            className="lock-open"
             path={mdiLockOpen}
             title="lockOpen"
             size={2}
             horizontal
             vertical
             rotate={180}
-            color="black"
+            color="white"
           />
         </Toolbar>
       </div>
-
       <Search>
         <SearchIconWrapper>
-          <SearchIcon />
+          <SearchIcon
+            sx={{
+              color: "black",
+            }}
+          />
         </SearchIconWrapper>
         <StyledInputBase
           placeholder="Search…"
@@ -135,6 +142,7 @@ export default function SearchAppBar() {
             //backgroundColor: "red",
             display: "flex",
             padding: "3px",
+            color: "black",
           }}
         />
       </Search>
