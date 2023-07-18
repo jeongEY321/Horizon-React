@@ -1,122 +1,58 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { TableVirtuoso } from "react-virtuoso";
-
+import React from "react";
 import CSHeader from "./CSHeader";
+import { Table } from "react-bootstrap";
+import CSMainTbody from "./CSMainTbody";
 
-const sample = [
-  ["", 159, 6.0, 24, 4.0],
-  ["", 237, 9.0, 37, 4.3],
-  ["", 262, 16.0, 24, 6.0],
-  ["", 305, 3.7, 67, 4.3],
-  ["", 356, 16.0, 49, 3.9],
-];
+const CSMain = () => {
+  //임시 데이터
+  const boardList = [
+    {
+      Photo: "사진1",
+      Title: "토성, 62개 위성 추가 발견을 통해 다시 '달의 왕' 등극",
+      Date: "2023.05.15",
+    },
+    {
+      Photo: "사진2",
+      Title: "태양계에서 달을 가장 많이 거느리고 있는 행성은?",
+      Date: "2023.02.20",
+    },
+    {
+      Photo: "사진3",
+      Title: "제임스 웹, 카멜레온 I 분자구름을 자세히 관측하다",
+      Date: "2023.02.06",
+    },
+    {
+      Photo: "사진4",
+      Title: "제임스 웹, NGC 346 산개성단을 자세히 관측하다",
+      Date: "2023.02.01",
+    },
+    {
+      Photo: "사진5",
+      Title: "망원경, 일상 속 '빛'으로 별을 본다",
+      Date: "2023.01.12",
+    },
+  ];
 
-function createData(photo, press, title, date) {
-  return { photo, press, title, date };
-}
-
-const columns = [
-  {
-    width: 150,
-    label: "Photo",
-    dataKey: "photo",
-  },
-  {
-    width: 70,
-    label: "Press",
-    dataKey: "press",
-    numeric: true,
-  },
-  {
-    width: 200,
-    label: "Title",
-    dataKey: "title",
-    numeric: true,
-  },
-  {
-    width: 110,
-    label: "Date",
-    dataKey: "date",
-    numeric: true,
-  },
-];
-
-const rows = Array.from({ length: 200 }, (_, index) => {
-  const randomSelection = sample[Math.floor(Math.random() * sample.length)];
-  return createData(index, ...randomSelection);
-});
-
-const VirtuosoTableComponents = {
-  Scroller: React.forwardRef((props, ref) => (
-    <TableContainer component={Paper} {...props} ref={ref} />
-  )),
-  Table: (props) => (
-    <Table
-      {...props}
-      sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
-    />
-  ),
-  TableHead,
-  TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
-  TableBody: React.forwardRef((props, ref) => (
-    <TableBody {...props} ref={ref} />
-  )),
+  return (
+    <section className="News-board">
+      <CSHeader />
+      <h3>News</h3>
+      <Table board hover border={1} className="News-table">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Title</th>
+            <th>date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {boardList.map((bo) => (
+            <CSMainTbody board={bo} />
+          ))}
+        </tbody>
+      </Table>
+    </section>
+  );
 };
 
-function fixedHeaderContent() {
-  return (
-    <TableRow>
-      {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          variant="head"
-          align={column.numeric || false ? "right" : "left"}
-          //style={{ width: column.width }}
-          sx={{
-            backgroundColor: "background.paper",
-          }}
-        >
-          {column.label}
-        </TableCell>
-      ))}
-    </TableRow>
-  );
-}
-
-function rowContent(_index, row) {
-  return (
-    <React.Fragment>
-      {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          align={column.numeric || false ? "right" : "left"}
-        >
-          {row[column.dataKey]}
-        </TableCell>
-      ))}
-    </React.Fragment>
-  );
-}
-
-export default function CSMain() {
-  return (
-    <div>
-      <CSHeader />
-      <Paper style={{ height: "330px", width: "100%" }}>
-        <TableVirtuoso
-          data={rows}
-          components={VirtuosoTableComponents}
-          fixedHeaderContent={fixedHeaderContent}
-          itemContent={rowContent}
-        />
-      </Paper>
-    </div>
-  );
-}
+export default CSMain;
