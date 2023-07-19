@@ -47,7 +47,7 @@
    //작은 메뉴 버튼(Horoscope, Store)
    .SmallBtn {
     margin-top: 3%;
-    margin-left: 10%;
+    margin-left: 8%;
     .hsMenu {
         border: 0;
         outline: 0;
@@ -76,10 +76,11 @@
    //이름 버튼
    .News-main-btn {
     cursor: pointer;
-    width: 240px;
-    height: 60px;
+    width: 75%;
+    height: 12%;
     font-size: 23px;
     margin-top: 10%;
+    margin-left: 8%;
     border: 0;
     outline: 0;
     background: url("../../../../public/assets/icon/blueframe/ScFi_Circle01Blue_bg.png") no-repeat;
@@ -90,10 +91,11 @@
 
    .Solar-main-btn {
     cursor: pointer;
-    width: 240px;
-    height: 60px;
+    width: 75%;
+    height: 9%;
     font-size: 23px;
     margin-top: 10%;
+    margin-left: 8%;
     border: 0;
     outline: 0;
     background: url("../../../../public/assets/icon/blueframe/ScFi_Circle01Blue_bg.png") no-repeat;
@@ -103,11 +105,11 @@
 
    .hs-main-btn {
     cursor: pointer;
-    width: 200px;
-    height: 50px;
+    width: 60%;
+    height: 17%;
     font-size: 23px;
-    margin-top: 15%;
-    margin-left: 5%;
+    margin-top: 18%;
+    margin-left: 18%;
     border: 0;
     outline: 0;
     background: url("../../../../public/assets/icon/blueframe/ScFi_Circle01Blue_bg.png") no-repeat;
@@ -117,11 +119,11 @@
 
    .store-main-btn {
     cursor: pointer;
-    width: 200px;
-    height: 50px;
+    width: 60%;
+    height: 17%;
     font-size: 23px;
-    margin-top: 15%;
-    margin-left: 5%;
+    margin-top: 18%;
+    margin-left: 18%;
     border: 0;
     outline: 0;
     background: url("../../../../public/assets/icon/blueframe/ScFi_Circle01Blue_bg.png") no-repeat;

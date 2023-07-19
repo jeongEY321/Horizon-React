@@ -13,14 +13,17 @@ const MainScreen = () => {
           </div>
           <div className="soalrMenu">
             <button className="Solar-main-btn">SolarSystem</button>
+            <img></img>
           </div>
         </div>
         <div className="SmallBtn">
           <div className="hsMenu">
             <button className="hs-main-btn">Horoscope</button>
+            <img></img>
           </div>
           <div className="storeMenu">
             <button className="store-main-btn">Store</button>
+            <img></img>
           </div>
         </div>
       </div>

@@ -102,6 +102,7 @@ export default function SearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              color="white"
             />
           </Search>
           <Icon
@@ -112,7 +113,6 @@ export default function SearchAppBar() {
             horizontal
             vertical
             rotate={180}
-            color="white"
           />
           <Icon
             className="locked"
@@ -122,7 +122,6 @@ export default function SearchAppBar() {
             horizontal
             vertical
             rotate={180}
-            color="white"
           />
           <Icon
             className="lock-open"
@@ -132,7 +131,6 @@ export default function SearchAppBar() {
             horizontal
             vertical
             rotate={180}
-            color="white"
           />
         </Toolbar>
       </div>
