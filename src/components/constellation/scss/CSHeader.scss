@@ -1,30 +1,37 @@
 //[헤더 배경]
 .CSHeader {
+    background-color: black;
+}
+
+.header-menubar {
     background-image: url("../../solarsystem/img/Tip001Blue.png");
     background-size: 100% 100%;
     height: 100px;
 
     //[Page-Title]
     .typography-cs {
-       margin-top: 25px;
+       margin-top: 10px;
     }
 
     //[아아콘 버튼]
     .hamburger {
-        margin-top: 25px;
+        margin-top: 10px;
         //임시적용
-        color: black;
+        color: white;
     }
 
     .profile-icon {
-        margin-top: 25px;
+        cursor: pointer;
+        margin-top: 5px;
     }
 
     .locked {
-        margin-top: 25px;
+        cursor: pointer;
+        margin-top: 5px;
     }
 
     .lock-open {
-        margin-top: 25px;
+        cursor: pointer;
+        margin-top: 5px;
     }
 }

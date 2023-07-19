@@ -92,9 +92,18 @@ export default function SearchAppBar() {
               marginLeft: "15px",
             }}
           >
-            Astronomical News
+            Over the Horizon
           </Typography>
 
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
           <Icon
             className="profile-icon"
             path={mdiAccount}
@@ -127,25 +136,6 @@ export default function SearchAppBar() {
           />
         </Toolbar>
       </div>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon
-            sx={{
-              color: "black",
-            }}
-          />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
-          sx={{
-            //backgroundColor: "red",
-            display: "flex",
-            padding: "3px",
-            color: "black",
-          }}
-        />
-      </Search>
     </Box>
   );
 }

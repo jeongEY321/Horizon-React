@@ -1,18 +1,30 @@
 import React from "react";
+import CSHeader from "../../constellation/js/CSHeader";
 import "../scss/MainScreen.scss";
 
 const MainScreen = () => {
   return (
-    <div className="MainMenu">
-      <div className="BigBtn">
-        <div className="NewsMenu"></div>
-        <div className="soalrMenu"></div>
+    <>
+      <CSHeader />
+      <div className="MainMenu">
+        <div className="BigBtn">
+          <div className="NewsMenu">
+            <button className="News-main-btn">News</button>
+          </div>
+          <div className="soalrMenu">
+            <button className="Solar-main-btn">SolarSystem</button>
+          </div>
+        </div>
+        <div className="SmallBtn">
+          <div className="hsMenu">
+            <button className="hs-main-btn">Horoscope</button>
+          </div>
+          <div className="storeMenu">
+            <button className="store-main-btn">Store</button>
+          </div>
+        </div>
       </div>
-      <div className="SmallBtn">
-        <div className="hsMenu"></div>
-        <div className="storeMenu"></div>
-      </div>
-    </div>
+    </>
   );
 };
 

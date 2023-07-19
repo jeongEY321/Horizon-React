@@ -36,9 +36,8 @@ const CSMain = () => {
   return (
     <section className="News-board">
       <CSHeader />
-      <h3>News</h3>
-      <Table board hover border={1} className="News-table">
-        <thead>
+      <Table board hover border={1} className="News-table" width="100%">
+        <thead className="mini-table">
           <tr>
             <th>Photo</th>
             <th>Title</th>
