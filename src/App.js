@@ -1,34 +1,20 @@
 import "./App.css";
-import Join from "./components/user/js/Join";
 import SolarSystemModel from "./components/solarsystem/js/SolarSystemModel";
-import HeaderSolar from "./components/solarsystem/js/HeaderSolar";
-import AuthContext, {
-  AuthContextProvider,
-} from "./components/util/AuthContext";
-import { Route, Routes } from "react-router-dom";
-import Login from "./components/user/js/Login";
+import CSMain from "./components/constellation/js/CSMain";
+import MainScreen from "./components/main/js/MainScreen";
 import StoreMain from "./components/store/js/StoreMain";
-import Mypage from "./components/user/js/Mypage";
-import Basket from "./components/store/js/Basket";
+import { Route } from "react-router";
+import { Routes } from "react-router";
 
 function App() {
   return (
     <>
-      <AuthContextProvider>
-        {/* <SolarSystemModel /> */}
-        {/* <HeaderSolar/> */}
-        {/* <Join /> */}
-        {/* <Login /> */}
-        {/* <Mypage /> */}
-        {/* <Routes>
-        <Route path='/login' element={ <Login /> } />
-      </Routes> */}
-        <StoreMain />
-        <Routes>
-          <Route path='/store' element={<StoreMain />} />
-          <Route path='/basket' element={<Basket />} />
-        </Routes>
-      </AuthContextProvider>
+      <Routes>
+        <Route path='/' element={<MainScreen />} />
+        <Route path='/SolarSystem' element={<SolarSystemModel />} />
+        <Route path='/News' element={<CSMain />} />
+        <Route path='/Store' element={<StoreMain />} />
+      </Routes>
     </>
   );
 }

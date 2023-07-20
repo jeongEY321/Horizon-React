@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import "../../store/scss/storemain.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const StoreMain = () => {
   const redirection = useNavigate();
@@ -26,13 +26,13 @@ const StoreMain = () => {
   };
 
   // 바로구매 버튼 클릭 실행 함수
-  // const purchaseHandle = () => {
-  //   // 페이지 이동
-  //   redirection("/basket");
-  // };
+  const purchaseHandle = () => {
+    // 페이지 이동
+    redirection("/basket");
+  };
 
-  // //장바구니 버튼 클릭 실행 함수
-  // const addToCartHandle = () => {};
+  //장바구니 버튼 클릭 실행 함수
+  const addToCartHandle = () => {};
 
   return (
     <>
@@ -53,7 +53,7 @@ const StoreMain = () => {
         </Toolbar>
       </AppBar>
 
-      <Container component='main' maxWidth='lg' style={{ margin: "50px auto" }}>
+      <Container component='main' maxWidth='xl' style={{ margin: "50px auto" }}>
         <Grid container spacing={4}>
           <Grid item xs={9} sm={6}>
             <Box
@@ -190,12 +190,12 @@ const StoreMain = () => {
 
           {/* 바로구매, 장바구니 버튼  */}
           <Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}>
-            <Button variant='outlined' sx={{ mr: 2 }}>
-              <Link to='/basket' 바로구매>
-                바로구매
-              </Link>
+            <Button variant='outlined' sx={{ mr: 2 }} onClick={purchaseHandle}>
+              바로구매
             </Button>
-            <Button variant='contained'>장바구니</Button>
+            <Button variant='contained' onClick={addToCartHandle}>
+              장바구니
+            </Button>
           </Box>
         </Box>
       </Modal>
