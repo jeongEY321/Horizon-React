@@ -2,6 +2,7 @@ import React from "react";
 import CSHeader from "./CSHeader";
 import { Table } from "react-bootstrap";
 import CSMainTbody from "./CSMainTbody";
+import "../scss/CSMain.scss";
 
 const CSMain = () => {
   //임시 데이터

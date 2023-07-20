@@ -10,9 +10,9 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<MainScreen />} />
         <Route path="/SolarSystem" element={<SolarSystemModel />} />
-        <Route path="/Constellaion" element={<CSMain />} />
-        <Route path="/Main" element={<MainScreen />} />
+        <Route path="/News" element={<CSMain />} />
       </Routes>
     </>
   );
