@@ -75,7 +75,7 @@ export default function SearchAppBar() {
               marginLeft: "20px",
               color: "white",
             }}
-            fontColor="white"
+            fontcolor="white"
           >
             <MenuIcon />
           </IconButton>
