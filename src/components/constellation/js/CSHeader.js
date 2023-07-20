@@ -62,28 +62,28 @@ export default function SearchAppBar() {
         flexGrow: 1,
       }}
     >
-      <div className="CSHeader">
-        <Toolbar className="header-menubar">
+      <div className='CSHeader'>
+        <Toolbar className='header-menubar'>
           <IconButton
-            className="hamburger"
+            className='hamburger'
             //size="small"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
+            edge='start'
+            color='inherit'
+            aria-label='open drawer'
             sx={{
               mr: 2,
               marginLeft: "20px",
               color: "white",
             }}
-            fontColor="white"
+            fontcolor='white'
           >
             <MenuIcon />
           </IconButton>
           <Typography
-            className="typography-cs"
-            variant="h5"
+            className='typography-cs'
+            variant='h5'
             noWrap
-            component="div"
+            component='div'
             sx={{
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
@@ -100,33 +100,33 @@ export default function SearchAppBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder='Search…'
               inputProps={{ "aria-label": "search" }}
-              color="white"
+              color='white'
             />
           </Search>
           <Icon
-            className="profile-icon"
+            className='profile-icon'
             path={mdiAccount}
-            title="User Profile"
+            title='User Profile'
             size={2}
             horizontal
             vertical
             rotate={180}
           />
           <Icon
-            className="locked"
+            className='locked'
             path={mdiLock}
-            title="lock"
+            title='lock'
             size={2}
             horizontal
             vertical
             rotate={180}
           />
           <Icon
-            className="lock-open"
+            className='lock-open'
             path={mdiLockOpen}
-            title="lockOpen"
+            title='lockOpen'
             size={2}
             horizontal
             vertical

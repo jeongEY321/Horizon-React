@@ -1,7 +1,19 @@
+.store-wrapper {
+    background: black;
+}
+
 .md {
-    border: 1px solid black;
+    border: 1px solid white;
 }
 
 .md-event {
-    border: 1px solid black;
+    border: 1px solid white;
+}
+
+.modal-md-img img {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

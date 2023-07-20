@@ -5,6 +5,7 @@ import MainScreen from "./components/main/js/MainScreen";
 import StoreMain from "./components/store/js/StoreMain";
 import { Route } from "react-router";
 import { Routes } from "react-router";
+import Basket from "./components/store/js/Basket";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/SolarSystem' element={<SolarSystemModel />} />
         <Route path='/News' element={<CSMain />} />
         <Route path='/Store' element={<StoreMain />} />
+        <Route path='/Basket' element={<Basket />} />
       </Routes>
     </>
   );
