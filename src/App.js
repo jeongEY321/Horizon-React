@@ -1,10 +1,8 @@
-import "./App.css";
-import SolarSystemModel from "./components/solarsystem/js/SolarSystemModel";
-import HeaderSolar from "./components/solarsystem/js/HeaderSolar";
-import CSMain from "./components/constellation/js/CSMain";
-import { Routes } from "react-router-dom";
-import { Route } from "react-router-dom";
-import MainScreen from "./components/main/js/MainScreen";
+import './App.css';
+import Join from './components/user/Join';
+import Login from './components/user/Login';
+import SolarSystemModel from './components/solarsystem/js/SolarSystemModel';
+import HeaderSolar from './components/solarsystem/js/HeaderSolar';
 
 function App() {
   return (
