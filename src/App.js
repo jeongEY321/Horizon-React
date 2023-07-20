@@ -25,7 +25,7 @@ function App() {
       </Routes> */}
         <StoreMain />
         <Routes>
-          <Route path='/login' element={<Login />} />
+          <Route path='/store' element={<StoreMain />} />
           <Route path='/basket' element={<Basket />} />
         </Routes>
       </AuthContextProvider>

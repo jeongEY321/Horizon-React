@@ -90,7 +90,7 @@ const Mypage = () => {
     }).then((res) => {
       if (res.status === 200) {
         alert("회원정보가 수정되었습니다!");
-        // redirection('/mypage')
+        redirection("/mypage");
       } else {
         alert("서버와의 통신이 원활하지 않습니다.");
       }
