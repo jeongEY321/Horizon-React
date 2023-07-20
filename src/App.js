@@ -1,16 +1,14 @@
-import './App.css';
-import Join from './components/user/Join';
-import Login from './components/user/Login';
-import SolarSystemModel from './components/solarsystem/js/SolarSystemModel';
-import HeaderSolar from './components/solarsystem/js/HeaderSolar';
+import "./App.css";
+import SolarSystemModel from "./components/solarsystem/js/SolarSystemModel";
+import HeaderSolar from "./components/solarsystem/js/HeaderSolar";
+import { AuthContextProvider } from "./util/AuthContext";
 
 function App() {
-
   return (
-    <>
+    <AuthContextProvider>
       <SolarSystemModel />
-      <HeaderSolar/>
-    </>
+      <HeaderSolar />
+    </AuthContextProvider>
   );
 }
 
