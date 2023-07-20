@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./components/user/js/Login";
 import StoreMain from "./components/store/js/StoreMain";
 import Mypage from "./components/user/js/Mypage";
+import Basket from "./components/store/js/Basket";
 
 function App() {
   return (
@@ -18,11 +19,15 @@ function App() {
         {/* <HeaderSolar/> */}
         {/* <Join /> */}
         {/* <Login /> */}
-        <Mypage />
+        {/* <Mypage /> */}
         {/* <Routes>
         <Route path='/login' element={ <Login /> } />
       </Routes> */}
-        {/* <StoreMain /> */}
+        <StoreMain />
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/basket' element={<Basket />} />
+        </Routes>
       </AuthContextProvider>
     </>
   );
