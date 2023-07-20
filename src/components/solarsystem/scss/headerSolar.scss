@@ -1,3 +1,4 @@
+//=========={Header}===========
 .MainHeader {
    width: 100%;
  }
@@ -11,7 +12,7 @@
     height: 130px;
  }
 
- //
+ //메뉴 버튼 집합체
  .menuBtn{
     display: flex;
     justify-content: space-evenly;
@@ -20,8 +21,8 @@
 
  }
 
-
- .menuBtn button {
+//버튼 각각의 속성
+ .menuBtn button{
     border: 0;
     outline: 0;
     cursor: pointer;
@@ -38,8 +39,31 @@
     line-height: 10%;
  }
 
-
+//메뉴 버튼 효과
  .menuBtn button:hover {
     opacity: 100%;
+ }
+
+ //로그인, 로그아웃, 회원가입 버튼
+
+ .logInBtn {
+   background: url("../img/Icon_Password.png") no-repeat;
+   background-size: cover;
+   // border: 0;
+   // outline: 0;
+ }
+
+ .logOutBtn {
+   background: url("../img/Icon_Locked.png") no-repeat;
+   background-size: cover;
+   // border: 0;
+   // outline: 0;
+ }
+
+ .JoinBtn {
+   background: url("../img/Icon_User-plus.png")no-repeat;
+   background-size: cover;
+   // border: 0;
+   // outline: 0;
  }
  
