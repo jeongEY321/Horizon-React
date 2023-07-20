@@ -37,7 +37,7 @@ const StoreMain = () => {
   return (
     <>
       <AppBar
-        position='static'
+        position="static"
         sx={{
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
@@ -47,30 +47,30 @@ const StoreMain = () => {
         }}
       >
         <Toolbar>
-          <Typography component='h2' variant='h4'>
+          <Typography component="h2" variant="h4">
             Horizon Store
           </Typography>
         </Toolbar>
       </AppBar>
 
-      <Container component='main' maxWidth='xl' style={{ margin: "50px auto" }}>
+      <Container component="main" maxWidth="xl" style={{ margin: "50px auto" }}>
         <Grid container spacing={4}>
           <Grid item xs={9} sm={6}>
             <Box
-              className='md-event'
+              className="md-event"
               p={18}
-              textAlign='center'
+              textAlign="center"
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
             >
-              <div className='md-img'>
-                <img src='#' alt='img' />
+              <div className="md-img">
+                <img src="#" alt="img" />
               </div>
             </Box>
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -80,7 +80,7 @@ const StoreMain = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -90,7 +90,7 @@ const StoreMain = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -100,7 +100,7 @@ const StoreMain = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -110,7 +110,7 @@ const StoreMain = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -120,7 +120,7 @@ const StoreMain = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -130,7 +130,7 @@ const StoreMain = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -140,7 +140,7 @@ const StoreMain = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -150,7 +150,7 @@ const StoreMain = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <Box
-              className='md'
+              className="md"
               p={18}
               style={{ cursor: "pointer" }}
               onClick={handleOpen}
@@ -164,8 +164,8 @@ const StoreMain = () => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='modal-title'
-        aria-describedby='modal-description'
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
       >
         <Box
           sx={{
@@ -181,19 +181,19 @@ const StoreMain = () => {
           }}
         >
           {/* 모달 상세사항은 수정해야함 */}
-          <Typography variant='h6' id='modal-title' gutterBottom>
+          <Typography variant="h6" id="modal-title" gutterBottom>
             모달 제목
           </Typography>
-          <Typography variant='body1' id='modal-description'>
+          <Typography variant="body1" id="modal-description">
             모달 내용
           </Typography>
 
           {/* 바로구매, 장바구니 버튼  */}
           <Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}>
-            <Button variant='outlined' sx={{ mr: 2 }} onClick={purchaseHandle}>
+            <Button variant="outlined" sx={{ mr: 2 }} onClick={purchaseHandle}>
               바로구매
             </Button>
-            <Button variant='contained' onClick={addToCartHandle}>
+            <Button variant="contained" onClick={addToCartHandle}>
               장바구니
             </Button>
           </Box>
@@ -208,10 +208,10 @@ const StoreMain = () => {
               : theme.palette.grey[800],
           p: 6,
         }}
-        component='footer'
+        component="footer"
       >
-        <Container maxWidth='sm'>
-          <Typography variant='body2' color='text.secondary' align='center'>
+        <Container maxWidth="sm">
+          <Typography variant="body2" color="text.secondary" align="center">
             {"Copyright © Over the Horizon "}
             {new Date().getFullYear()}
             {"."}

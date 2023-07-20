@@ -1,8 +1,11 @@
-import './App.css';
-import Join from './components/user/Join';
-import Login from './components/user/Login';
-import SolarSystemModel from './components/solarsystem/js/SolarSystemModel';
-import HeaderSolar from './components/solarsystem/js/HeaderSolar';
+import "./App.css";
+import SolarSystemModel from "./components/solarsystem/js/SolarSystemModel";
+import HeaderSolar from "./components/solarsystem/js/HeaderSolar";
+import CSMain from "./components/constellation/js/CSMain";
+import MainScreen from "./components/main/js/MainScreen";
+import StoreMain from "./components/store/js/StoreMain";
+import { Route } from "react-router";
+import { Routes } from "react-router";
 
 function App() {
   return (
@@ -11,6 +14,7 @@ function App() {
         <Route path="/" element={<MainScreen />} />
         <Route path="/SolarSystem" element={<SolarSystemModel />} />
         <Route path="/News" element={<CSMain />} />
+        <Route path="/Store" element={<StoreMain />} />
       </Routes>
     </>
   );
