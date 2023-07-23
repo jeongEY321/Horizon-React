@@ -2,7 +2,9 @@ import React from "react";
 import CSHeader from "../../constellation/js/CSHeader";
 import "../scss/MainScreen.scss";
 import { Link } from "react-router-dom";
-import reasonGoToTheMoon_03 from "../assets/reasonGoToTheMoon_03.png";
+import kindpng_5401205 from "../assets/kindpng_5401205.png";
+import blackHole from "../assets/blackHole.png";
+import Cosmos from "../assets/Cosmos.png";
 
 const MainScreen = () => {
   return (
@@ -15,15 +17,19 @@ const MainScreen = () => {
               <button className="News-main-btn">News</button>
               <img
                 className="News-image"
-                src={reasonGoToTheMoon_03}
+                src={kindpng_5401205}
                 alt="News Image"
               ></img>
             </div>
           </Link>
           <Link to="/SolarSystem">
-            <div className="soalrMenu">
+            <div className="solarMenu">
               <button className="Solar-main-btn">SolarSystem</button>
-              <img></img>
+              <img
+                className="Cosmos"
+                src={Cosmos}
+                alt="solarSystem Menu image"
+              />
             </div>
           </Link>
         </div>
@@ -36,7 +42,11 @@ const MainScreen = () => {
           <Link to="/Store">
             <div className="storeMenu">
               <button className="store-main-btn">Store</button>
-              <img></img>
+              <img
+                className="storeImage"
+                src={blackHole}
+                alt="Store Menu image"
+              />
             </div>
           </Link>
         </div>
