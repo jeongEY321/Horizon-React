@@ -34,10 +34,12 @@ const MainScreen = () => {
           </Link>
         </div>
         <div className="SmallBtn">
-          <div className="hsMenu">
-            <button className="hs-main-btn">Horoscope</button>
-            <img></img>
-          </div>
+          <Link to="/horoscope">
+            <div className="hsMenu">
+              <button className="hs-main-btn">Horoscope</button>
+              <img></img>
+            </div>
+          </Link>
 
           <Link to="/Store">
             <div className="storeMenu">
