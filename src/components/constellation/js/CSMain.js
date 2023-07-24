@@ -39,11 +39,13 @@ const CSMain = () => {
       <CSHeader />
       <Table board hover border={1} className="News-table" width="100%">
         <thead className="mini-table">
-          <tr>
-            <th>Photo</th>
-            <th>Title</th>
-            <th>date</th>
-          </tr>
+          <div className="small-table">
+            <tr>
+              <th>Photo</th>
+              <th>Title</th>
+              <th>date</th>
+            </tr>
+          </div>
         </thead>
         <tbody>
           {boardList.map((bo) => (

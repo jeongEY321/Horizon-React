@@ -1,6 +1,5 @@
 import "./App.css";
 import SolarSystemModel from "./components/solarsystem/js/SolarSystemModel";
-import HeaderSolar from "./components/solarsystem/js/HeaderSolar";
 import CSMain from "./components/constellation/js/CSMain";
 import MainScreen from "./components/main/js/MainScreen";
 import StoreMain from "./components/store/js/StoreMain";
