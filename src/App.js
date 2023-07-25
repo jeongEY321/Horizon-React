@@ -15,6 +15,7 @@ function App() {
         <Route path="/News" element={<CSMain />} />
         <Route path="/Store" element={<StoreMain />} />
         <Route path="/Basket" element={<Basket />} />
+        {/* <Route path='/horoscope' element={<HsMain />} /> */}
       </Routes>
     </>
   );
