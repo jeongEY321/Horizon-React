@@ -1,43 +1,43 @@
-import React, { useRef, useEffect, useState } from 'react';
-import '../scss/SolarSystemModel.scss';
-import * as THREE from 'three';
+import React, { useRef, useEffect, useState } from "react";
+import "../scss/SolarSystemModel.scss";
+import * as THREE from "three";
 import {
-    Scene,
-    MeshBasicMaterial,
-    Mesh,
-    PerspectiveCamera,
-    MOUSE,
-    Vector2,
-    Vector3,
-    Vector4,
-    Quaternion,
-    Matrix4,
-    Spherical,
-    Box3,
-    Sphere,
-    Raycaster,
-    MathUtils,
-    Clock,
-    SphereGeometry,
-    TextureLoader,
-    AmbientLight,
-    PointLight,
-    MeshStandardMaterial,
-    Object3D,
-    RingGeometry,
-    DoubleSide,
-    MeshPhongMaterial,
-    Line,
-    LineBasicMaterial,
-    CircleGeometry,
-    TorusGeometry,
-    WebGLRenderer
-} from 'three';
-import CameraControls from 'camera-controls';
-import ModelLoadingPage from './ModelLoadingPage';
-import Footer from '../../layout/js/Footer';
-import PlanetContext from '../../layout/js/PlanetContext';
-import HeaderSolar from './HeaderSolar';
+  Scene,
+  MeshBasicMaterial,
+  Mesh,
+  PerspectiveCamera,
+  MOUSE,
+  Vector2,
+  Vector3,
+  Vector4,
+  Quaternion,
+  Matrix4,
+  Spherical,
+  Box3,
+  Sphere,
+  Raycaster,
+  MathUtils,
+  Clock,
+  SphereGeometry,
+  TextureLoader,
+  AmbientLight,
+  PointLight,
+  MeshStandardMaterial,
+  Object3D,
+  RingGeometry,
+  DoubleSide,
+  MeshPhongMaterial,
+  Line,
+  LineBasicMaterial,
+  CircleGeometry,
+  TorusGeometry,
+  WebGLRenderer,
+} from "three";
+import CameraControls from "camera-controls";
+import ModelLoadingPage from "./ModelLoadingPage";
+import Footer from "../../layout/js/Footer";
+import PlanetContext from "../../layout/js/PlanetContext";
+import HeaderSolar from "./HeaderSolar";
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
@@ -45,14 +45,14 @@ const SolarSystemModel = () => {
   // 로딩중인지 아닌지 확인
   const [isLoading, setIsLoading] = useState(true);
   let count = 0;
-  
+
   // 버튼눌렀을 때 값 가져오기
-  const [change, setChange] = useState('all');
-  
+  const [change, setChange] = useState("all");
+
   const changeValue = (e) => {
     setChange(e.target.value);
-  }
-  
+  };
+
   // 값 변경되어도 아래거에서 적용이 안돼서 적용되게 작성
   const changeRef = useRef(change);
   useEffect(() => {
@@ -75,38 +75,38 @@ const SolarSystemModel = () => {
       const loader = new TextureLoader();
 
       const sunMaterial = new MeshBasicMaterial({
-          map: loader.load(require('../img/sun.jpeg'))
+        map: loader.load(require("../img/sun.jpeg")),
       });
       const mercuryMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/mercury.png'))
+        map: loader.load(require("../img/mercury.png")),
       });
       const venusMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/venus.jpeg'))
+        map: loader.load(require("../img/venus.jpeg")),
       });
       const earthMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/earth.jpeg'))
+        map: loader.load(require("../img/earth.jpeg")),
       });
       const moonMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/moon.jpg'))
+        map: loader.load(require("../img/moon.jpg")),
       });
       const marsMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/mars.jpeg'))
+        map: loader.load(require("../img/mars.jpeg")),
       });
       const jupiterMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/jupiter.jpg'))
+        map: loader.load(require("../img/jupiter.jpg")),
       });
       const saturnMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/saturn.jpg'))
+        map: loader.load(require("../img/saturn.jpg")),
       });
       const saturnRingMaterial = new MeshBasicMaterial({
-          map: loader.load(require('../img/saturn-ring.png')),
-          side: DoubleSide
+        map: loader.load(require("../img/saturn-ring.png")),
+        side: DoubleSide,
       });
       const uranusMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/uranus.jpg'))
+        map: loader.load(require("../img/uranus.jpg")),
       });
       const neptuneMaterial = new MeshStandardMaterial({
-          map: loader.load(require('../img/neptune.jpg'))
+        map: loader.load(require("../img/neptune.jpg")),
       });
 
       // 2.3 CREATION Mesh(geometry, Material) 행성 생성
@@ -117,8 +117,8 @@ const SolarSystemModel = () => {
 
       const mercury = new Mesh(sphereGeometry, mercuryMaterial);
       const mercuryObj = new Object3D();
-      mercury.name = 'mercury';
-      mercuryObj.name = 'mercuryObj';
+      mercury.name = "mercury";
+      mercuryObj.name = "mercuryObj";
       mercuryObj.add(mercury);
       mercuryObj.rotation.y = 5; // 시작 위치
       scene.add(mercuryObj);
@@ -127,8 +127,8 @@ const SolarSystemModel = () => {
 
       const venus = new Mesh(sphereGeometry, venusMaterial);
       const venusObj = new Object3D();
-      venus.name = 'venus';
-      venusObj.name = 'venusObj';
+      venus.name = "venus";
+      venusObj.name = "venusObj";
       venusObj.rotation.y = 2;
       venusObj.add(venus);
       scene.add(venusObj);
@@ -137,8 +137,8 @@ const SolarSystemModel = () => {
 
       const earth = new Mesh(sphereGeometry, earthMaterial);
       const earthObj = new Object3D();
-      earth.name = 'earth';
-      earthObj.name = 'earthObj';
+      earth.name = "earth";
+      earthObj.name = "earthObj";
       earthObj.add(earth);
       earthObj.rotation.y = 8;
       scene.add(earthObj);
@@ -147,8 +147,8 @@ const SolarSystemModel = () => {
 
       const moon = new Mesh(sphereGeometry, moonMaterial);
       const moonObj = new Object3D();
-      moon.name = 'moon';
-      moonObj.name = 'moonObj';
+      moon.name = "moon";
+      moonObj.name = "moonObj";
       moonObj.add(moon);
       moon.scale.set(0.3, 0.3, 0.3);
       moon.rotation.y = 8;
@@ -157,8 +157,8 @@ const SolarSystemModel = () => {
 
       const mars = new Mesh(sphereGeometry, marsMaterial);
       const marsObj = new Object3D();
-      mars.name = 'mars';
-      marsObj.name = 'marsObj';
+      mars.name = "mars";
+      marsObj.name = "marsObj";
       marsObj.rotation.y = 5;
       marsObj.add(mars);
       scene.add(marsObj);
@@ -167,8 +167,8 @@ const SolarSystemModel = () => {
 
       const jupiter = new Mesh(sphereGeometry, jupiterMaterial);
       const jupiterObj = new Object3D();
-      jupiter.name = 'jupiter';
-      jupiterObj.name = 'jupiterObj';
+      jupiter.name = "jupiter";
+      jupiterObj.name = "jupiterObj";
       jupiterObj.rotation.y = 34;
       jupiterObj.add(jupiter);
       scene.add(jupiterObj);
@@ -177,8 +177,8 @@ const SolarSystemModel = () => {
 
       const saturn = new Mesh(sphereGeometry, saturnMaterial);
       const saturnObj = new Object3D();
-      saturn.name = 'saturn';
-      saturnObj.name = 'saturnOBJ';
+      saturn.name = "saturn";
+      saturnObj.name = "saturnOBJ";
       saturnObj.rotation.y = 9;
       saturnObj.add(saturn);
       scene.add(saturnObj);
@@ -186,18 +186,17 @@ const SolarSystemModel = () => {
       saturn.position.x += 4;
 
       const saturnRing = new Mesh(ringGeometry, saturnRingMaterial);
-      saturnRing.name = 'saturnRing';
+      saturnRing.name = "saturnRing";
       saturnObj.add(saturnRing);
       saturnRing.scale.set(0.03, 0.03, 0.03);
       saturnRing.position.x += 4;
       saturnRing.rotateX(-1.57);
 
-
       const uranus = new Mesh(sphereGeometry, uranusMaterial);
       const uranusObj = new Object3D();
-      uranus.name = 'uranus';
-      uranusObj.name = 'uranus';
-      uranus.rotation.x = (Math.PI / 2);
+      uranus.name = "uranus";
+      uranusObj.name = "uranus";
+      uranus.rotation.x = Math.PI / 2;
       uranusObj.add(uranus);
       scene.add(uranusObj);
       uranus.scale.set(0.35, 0.35, 0.35);
@@ -205,16 +204,21 @@ const SolarSystemModel = () => {
 
       const neptune = new Mesh(sphereGeometry, neptuneMaterial);
       const neptuneObj = new Object3D();
-      neptune.name = 'neptune';
-      neptuneObj.name = 'neptune';
+      neptune.name = "neptune";
+      neptuneObj.name = "neptune";
       neptuneObj.rotation.y = 15;
       neptuneObj.add(neptune);
       scene.add(neptuneObj);
       neptune.scale.set(0.3, 0.3, 0.3);
-      neptune.position.x +=5.5;
+      neptune.position.x += 5.5;
 
       // 3 the camera 카메라
-      const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+      const camera = new PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        2000
+      );
       camera.position.z = 6; // 높을수록 멀리서 봄
       scene.add(camera);
 
@@ -224,7 +228,7 @@ const SolarSystemModel = () => {
       renderer.setSize(window.innerWidth, window.innerHeight, false);
 
       // 5 lights 명암
-      const pointLight = new PointLight(0xFFFFFF, 2, 300);
+      const pointLight = new PointLight(0xffffff, 2, 300);
       scene.add(pointLight);
 
       const ambientLight = new AmbientLight(0x333333);
@@ -233,18 +237,18 @@ const SolarSystemModel = () => {
       // 6.2 Starfield
       var starGeometry = new SphereGeometry(2000, 100, 100);
       var starMaterial = new MeshPhongMaterial({
-          map: loader.load(require('../img/stars_a.jpg')),
-          side: DoubleSide,
-          shininess: 1
+        map: loader.load(require("../img/stars_a.jpg")),
+        side: DoubleSide,
+        shininess: 1,
       });
       var starField = new Mesh(starGeometry, starMaterial);
       scene.add(starField);
 
       // 7 responsivity
-      window.addEventListener('resize', () => {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight, false);
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight, false);
       });
 
       // 8 Controls
@@ -265,24 +269,24 @@ const SolarSystemModel = () => {
         TorusGeometry,
         MeshBasicMaterial,
         Mesh,
-          MathUtils: {
-              DEG2RAD: MathUtils.DEG2RAD,
-              clamp: MathUtils.clamp
-          }
+        MathUtils: {
+          DEG2RAD: MathUtils.DEG2RAD,
+          clamp: MathUtils.clamp,
+        },
       };
 
       CameraControls.install({ THREE: subsetOfTHREE });
       const clock = new Clock();
       const cameraControls = new CameraControls(camera, canvas);
       cameraControls.dollyToCursor = true;
-      
+
       // 각 천체의 궤도를 그리는 함수
       function createOrbit(radius) {
-        const geometry = new THREE.TorusGeometry( radius, 0.01, 2, 64 );
-        const material = new THREE.MeshBasicMaterial( { color: 0xffffff } ); //궤도 색상
-        const torus = new THREE.Mesh( geometry, material );
+        const geometry = new THREE.TorusGeometry(radius, 0.01, 2, 64);
+        const material = new THREE.MeshBasicMaterial({ color: 0xffffff }); //궤도 색상
+        const torus = new THREE.Mesh(geometry, material);
         torus.rotation.x = Math.PI / 2; //궤도 수평으로 변경
-        scene.add( torus );
+        scene.add(torus);
       }
 
       // 행성들의 궤도 생성
@@ -299,10 +303,9 @@ const SolarSystemModel = () => {
       function animate() {
         const delta = clock.getDelta();
         cameraControls.update(delta);
-        
+
         // 행성을 기준으로 보기
-        if (changeRef.current !== 'all') {
-            
+        if (changeRef.current !== "all") {
           sun.rotation.y += 0.0009;
           earth.rotation.y += 0.008; //자전 속도
           earthObj.rotation.y += 0.0008; //공전 속도
@@ -323,69 +326,78 @@ const SolarSystemModel = () => {
           neptuneObj.rotation.y += 0.00002;
 
           switch (changeRef.current) {
-            case 'mercury': // 수성
-              const mercuryPosition = mercury.getWorldPosition(new THREE.Vector3());
+            case "mercury": // 수성
+              const mercuryPosition = mercury.getWorldPosition(
+                new THREE.Vector3()
+              );
               camera.position.copy(mercuryPosition);
               camera.position.z += 0.5;
               camera.lookAt(mercuryPosition); // 건들지 못하게 만들기
               break;
-            case 'venus': // 금성
+            case "venus": // 금성
               const venusPosition = venus.getWorldPosition(new THREE.Vector3());
               camera.position.copy(venusPosition);
               camera.position.z += 0.5;
               camera.lookAt(venusPosition);
               break;
-            case 'earth': // 지구
-              const earthPosition = earth.getWorldPosition(new THREE.Vector3());			
+            case "earth": // 지구
+              const earthPosition = earth.getWorldPosition(new THREE.Vector3());
               camera.position.copy(earthPosition);
               camera.position.z += 0.5;
               camera.lookAt(earthPosition);
               break;
-            case 'mars': // 화성
+            case "mars": // 화성
               const marsPosition = mars.getWorldPosition(new THREE.Vector3());
               camera.position.copy(marsPosition);
               camera.position.z += 0.5;
               camera.lookAt(marsPosition);
               break;
-            case 'jupiter': // 목성
-              const jupiterPosition = jupiter.getWorldPosition(new THREE.Vector3());
+            case "jupiter": // 목성
+              const jupiterPosition = jupiter.getWorldPosition(
+                new THREE.Vector3()
+              );
               camera.position.copy(jupiterPosition);
               camera.position.z += 0.5;
               camera.lookAt(jupiterPosition);
               break;
-            case 'saturn': // 토성
-              const saturnPosition = saturn.getWorldPosition(new THREE.Vector3());
+            case "saturn": // 토성
+              const saturnPosition = saturn.getWorldPosition(
+                new THREE.Vector3()
+              );
               camera.position.copy(saturnPosition);
               camera.position.z += 0.5;
               camera.lookAt(saturnPosition);
               break;
-            case 'uranus': // 천왕성
-              const uranusPosition = uranus.getWorldPosition(new THREE.Vector3());
+            case "uranus": // 천왕성
+              const uranusPosition = uranus.getWorldPosition(
+                new THREE.Vector3()
+              );
               camera.position.copy(uranusPosition);
               camera.position.z += 0.5;
               camera.lookAt(uranusPosition);
               break;
-            case 'neptune': // 해왕성
-              const neptunePosition = neptune.getWorldPosition(new THREE.Vector3());
+            case "neptune": // 해왕성
+              const neptunePosition = neptune.getWorldPosition(
+                new THREE.Vector3()
+              );
               camera.position.copy(neptunePosition);
               camera.position.z += 0.5;
               camera.lookAt(neptunePosition);
               break;
-            case 'moon': // 달
+            case "moon": // 달
               const moonPosition = moon.getWorldPosition(new THREE.Vector3());
               camera.position.copy(moonPosition);
               camera.position.z += 0.5;
               camera.lookAt(moonPosition);
               break;
-            case 'sun': // 태양
+            case "sun": // 태양
               const sunPosition = sun.getWorldPosition(new THREE.Vector3());
               camera.position.copy(sunPosition);
               camera.position.z += 1.3;
               camera.lookAt(sunPosition);
-            break;
-            }
+              break;
+          }
         } else {
-          
           sun.rotation.y += 0.0009;
           earth.rotation.y += 0.008; //자전 속도
           earthObj.rotation.y += 0.008; //공전 속도
@@ -404,23 +416,21 @@ const SolarSystemModel = () => {
           uranusObj.rotation.y += 0.0003;
           neptune.rotation.y += 0.0015;
           neptuneObj.rotation.y += 0.0002;
-
         }
 
         // 로딩중에도 애니메이션이 10~15번정도 작동을 해버려서 count 로 로딩 끝난 시점 확인.
-        if(count < 100) {
+        if (count < 100) {
           count++;
         } else {
           // 로딩 끝나면 false로 바꿔주기.
-          if(isLoading) {
+          if (isLoading) {
             setIsLoading(false);
           }
         }
-        
+
         // 렌더링, 애니메이션 다시 실행
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
-        
       }
       animate();
     };
@@ -429,13 +439,13 @@ const SolarSystemModel = () => {
 
   return (
     <>
-      <canvas ref={canvasRef} id="three-canvas" />
+      <canvas ref={canvasRef} id='three-canvas' />
       <HeaderSolar />
-      {isLoading && <ModelLoadingPage /> }
-      {change != 'all' ? <PlanetContext /> : ''}
+      {isLoading && <ModelLoadingPage />}
+      {change != "all" ? <PlanetContext /> : ""}
       <Footer change={changeValue} />
     </>
   );
-}
+};
 
 export default SolarSystemModel;
