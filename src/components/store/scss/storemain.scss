@@ -1,9 +1,17 @@
 .store-wrapper {
-    background: black;
+    width: 100%;
+    background: gray;
+    margin-right: 10px;
 }
 
 .md {
-    border: 1px solid white;
+    width: 500px;
+    height: 500px;
+    // border: 1px solid white;   
+    // cursor: pointer;
+    background: url(../../../../public/assets/panel/Popup007_Blue.png);
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .md-event {
