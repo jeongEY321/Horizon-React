@@ -1,4 +1,4 @@
-//=========={Header}===========
+//============={Header}==============
 .MainHeader {
    width: 100%;
    height: 100%;
@@ -14,56 +14,75 @@
 
  //메뉴 버튼 집합체
  .menuBtn{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100%;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   height: 100%;
 
  }
 
-//버튼 각각의 속성
- .menuBtn button{
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-    background: none;
-    color: white;
-    padding: 50px;
-    font-size: 25px;
-    margin-bottom: 5px;
-    background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
-    background-size: cover;
-    width: 14%;
-    height: 10%;
-    opacity: 50%;
-    line-height: 10%;
- }
+//{헤더 버튼들}
+.mainBtn button{
+   border: 0;
+   outline: 0;
+   cursor: pointer;
+   color: white;
+   padding: 50px;
+   font-size: 25px;
+   margin-bottom: 5px;
+   background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
+   background-size: 240px 100px; 
+   background-position: center;
+   width: 240px; 
+}
 
-//메뉴 버튼 효과
- .menuBtn button:hover {
-    opacity: 100%;
- }
+//{news 버튼}
+.newsBtn button{
+   border: 0;
+   outline: 0;
+   cursor: pointer;
+   color: white;
+   padding: 50px;
+   font-size: 25px;
+   margin-bottom: 5px;
+   background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
+   background-size: 240px 100px; 
+   background-position: center;
+   width: 240px;
+}
 
- //로그인, 로그아웃, 회원가입 버튼
+//{horoscope 버튼}
+.hsBtn button{
+   border: 0;
+   outline: 0;
+   cursor: pointer;
+   color: white;
+   padding: 50px;
+   font-size: 25px;
+   margin-bottom: 5px;
+   background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
+   background-size: 240px 100px; 
+   background-position: center;
+   width: 240px;
+}
 
- .logInBtn {
-   background: url("../img/Icon_Password.png") no-repeat;
-   background-size: cover;
-   // border: 0;
-   // outline: 0;
- }
+//{store 버튼}
+.storeBtn button{
+   border: 0;
+   outline: 0;
+   cursor: pointer;
+   color: white;
+   padding: 50px;
+   font-size: 25px;
+   margin-bottom: 5px;
+   background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
+   background-size: 240px 100px; 
+   background-position: center;
+   width: 240px;
+}
 
- .logOutBtn {
-   background: url("../img/Icon_Locked.png") no-repeat;
-   background-size: cover;
-   // border: 0;
-   // outline: 0;
- }
+//-------------logBtn-------------
 
- .JoinBtn {
-   background: url("../img/Icon_User-plus.png")no-repeat;
-   background-size: cover;
-   // border: 0;
-   // outline: 0;
- }
+
+
  

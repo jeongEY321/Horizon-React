@@ -1,6 +1,29 @@
 //전체 배경화면
-.News-board {
+body {
     background-color: black;
     color: white;
     height: 100%;
 }
+
+.News-board {
+    text-align: center;
+
+    .News-table {
+        flex-direction: column;
+        font-size: large;
+        padding: 5%;
+        border: none;
+    
+        th {
+            border: none;
+        }
+
+        td {
+            padding: 2%;
+        }
+    
+        
+    }
+}
+
+

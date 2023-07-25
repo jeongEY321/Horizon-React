@@ -2,6 +2,9 @@ import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Drawer, { drawerClasses } from "@mui/material/Drawer";
+import List from "@mui/material/List";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -12,6 +15,7 @@ import Icon from "@mdi/react";
 import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
 import "../scss/CSHeader.scss";
 import "../../solarsystem/img/Tip001Blue.png";
+import { useTheme } from "@emotion/react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -56,34 +60,43 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handlerDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handlerDrawerClose = () => {
+    setOpen(false);
+  };
   return (
     <Box
       sx={{
         flexGrow: 1,
       }}
     >
-      <div className='CSHeader'>
-        <Toolbar className='header-menubar'>
+      <div className="CSHeader">
+        <Toolbar className="header-menubar">
           <IconButton
-            className='hamburger'
-            //size="small"
-            edge='start'
-            color='inherit'
-            aria-label='open drawer'
+            className="hamburger"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
             sx={{
               mr: 2,
               marginLeft: "20px",
               color: "white",
             }}
-            fontcolor='white'
+            fontcolor="white"
           >
             <MenuIcon />
           </IconButton>
           <Typography
-            className='typography-cs'
-            variant='h5'
+            className="typography-cs"
+            variant="h5"
             noWrap
-            component='div'
+            component="div"
             sx={{
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
@@ -100,33 +113,33 @@ export default function SearchAppBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder='Search…'
+              placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
-              color='white'
+              color="white"
             />
           </Search>
           <Icon
-            className='profile-icon'
+            className="profile-icon"
             path={mdiAccount}
-            title='User Profile'
+            title="User Profile"
             size={2}
             horizontal
             vertical
             rotate={180}
           />
           <Icon
-            className='locked'
+            className="locked"
             path={mdiLock}
-            title='lock'
+            title="lock"
             size={2}
             horizontal
             vertical
             rotate={180}
           />
           <Icon
-            className='lock-open'
+            className="lock-open"
             path={mdiLockOpen}
-            title='lockOpen'
+            title="lockOpen"
             size={2}
             horizontal
             vertical
