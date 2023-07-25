@@ -3,8 +3,7 @@ import SolarSystemModel from "./components/solarsystem/js/SolarSystemModel";
 import CSMain from "./components/constellation/js/CSMain";
 import MainScreen from "./components/main/js/MainScreen";
 import StoreMain from "./components/store/js/StoreMain";
-import { Route } from "react-router";
-import { Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import Basket from "./components/store/js/Basket";
 
 function App() {

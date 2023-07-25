@@ -28,12 +28,16 @@ const StoreMain = () => {
 
   // 바로구매 버튼 클릭 실행 함수
   const purchaseHandle = () => {
+    // 장바구니 리스트 추가 로직
+
     // 페이지 이동
     redirection("/basket");
   };
 
   //장바구니 버튼 클릭 실행 함수
-  const addToCartHandle = () => {};
+  const addToCartHandle = () => {
+    // 장바구니 리스트만 추가 로직
+  };
 
   return (
     <>
@@ -55,96 +59,38 @@ const StoreMain = () => {
           </Toolbar>
         </AppBar>
 
-        <Container component='main' maxWidth='xl' style={{ padding: "50px 0" }}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                textAlign='center'
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
+        <Container component='main' maxWidth='xl' style={{ padding: "50px" }}>
+          <Grid container spacing={10}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Box className='md' onClick={handleOpen}>
+                <div>
+                  <img
+                    src={require("../img/planet_set.jpg")}
+                    alt='이미지입니다'
+                  />
+                </div>
+              </Box>
             </Grid>
-            <Grid item xs={12} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Box className='md' onClick={handleOpen}></Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Box className='md' onClick={handleOpen}></Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Box className='md' onClick={handleOpen}></Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Box className='md' onClick={handleOpen}></Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Box className='md' onClick={handleOpen}></Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Box className='md' onClick={handleOpen}></Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              ></Box>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Box className='md' onClick={handleOpen}></Box>
             </Grid>
           </Grid>
         </Container>
