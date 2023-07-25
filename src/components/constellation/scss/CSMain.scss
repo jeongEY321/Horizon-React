@@ -5,6 +5,7 @@ body {
     height: 100%;
 }
 
+//테이블 세부사항
 .News-board {
     text-align: center;
 
@@ -13,17 +14,41 @@ body {
         font-size: large;
         padding: 5%;
         border: none;
-    
+
         th {
             border: none;
         }
 
-        td {
+        thead,tr,td {
             padding: 2%;
+            border-collapse: collapse;
+            border: none;
+        }
+
+        .News-tbody {
+            cursor: pointer;
         }
     
         
+        .News-tbody:nth-child(even) {
+            background-color: #ffffff;
+            color: #1976d2;
+        }
+
+        .News-tbody:nth-child(odd) {
+            background-color: black;
+            color: 
+            #b3c9ef;
+        }
+
+    
+        
     }
+}
+
+//표 칸 (사진 칸 조정)
+.td-photo {
+    width: 450px;
 }
 
 

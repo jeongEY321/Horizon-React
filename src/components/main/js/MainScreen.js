@@ -1,5 +1,5 @@
 import React from "react";
-import CSHeader from "../../constellation/js/CSHeader";
+import CSHeader from "../js/CSHeader";
 import "../scss/MainScreen.scss";
 import { Link } from "react-router-dom";
 import kindpng_5401205 from "../assets/kindpng_5401205.png";

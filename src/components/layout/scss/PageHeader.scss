@@ -51,6 +51,21 @@
    width: 240px;
 }
 
+//{SolarSystem 버튼}
+.solarBtn button{
+   border: 0;
+   outline: 0;
+   cursor: pointer;
+   color: white;
+   padding: 50px;
+   font-size: 25px;
+   margin-bottom: 5px;
+   background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
+   background-size: 240px 100px; 
+   background-position: center;
+   width: 240px;
+}
+
 //{horoscope 버튼}
 .hsBtn button{
    border: 0;

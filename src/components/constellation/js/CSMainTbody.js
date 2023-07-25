@@ -6,7 +6,7 @@ const CSMainTbody = (board) => {
   return (
     <>
       <tr className="News-tbody">
-        <td>{Photo}</td>
+        <td className="td-photo">{Photo}</td>
         <td>{Title}</td>
         <td>{Date}</td>
       </tr>
