@@ -56,19 +56,23 @@ const StoreMain = () => {
         </AppBar>
 
         <Container component='main' maxWidth='xl' style={{ padding: "50px 0" }}>
-          <Grid container spacing={4}>
-            <Grid item xs={6} sm={3}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={3}>
               <Box
-                className='md-event'
+                className='md'
                 p={18}
                 textAlign='center'
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                <div className='md-img'>
-                  <img src='#' alt='img' />
-                </div>
-              </Box>
+              ></Box>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <Box
+                className='md'
+                p={18}
+                style={{ cursor: "pointer" }}
+                onClick={handleOpen}
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -76,9 +80,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                3
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -86,9 +88,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                4
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -96,9 +96,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                5
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -106,9 +104,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                6
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -116,9 +112,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                7
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -126,9 +120,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                8
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -136,9 +128,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                9
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -146,9 +136,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                10
-              </Box>
+              ></Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box
@@ -156,19 +144,7 @@ const StoreMain = () => {
                 p={18}
                 style={{ cursor: "pointer" }}
                 onClick={handleOpen}
-              >
-                11
-              </Box>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <Box
-                className='md'
-                p={18}
-                style={{ cursor: "pointer" }}
-                onClick={handleOpen}
-              >
-                12
-              </Box>
+              ></Box>
             </Grid>
           </Grid>
         </Container>
