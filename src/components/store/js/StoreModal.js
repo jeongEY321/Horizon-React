@@ -2,21 +2,67 @@ import { Box, Button, Modal, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
+
 const StoreModal = ({ open, setOpen, item }) => {
   const redirection = useNavigate();
 
   const { id, name, content } = item;
 
+  // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
+  const API_SHOP_URL = BASE + SHOP;
+  const API_USER_URL = BASE + USER;
+
+  // 요청 헤더 설정
+  const requestHeader = {
+    "content-type": "application/json",
+    Authorization:
+      "Bearer " +
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTAzMzczMzEsImV4cCI6MTY5MDQyMzczMSwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.SWO6JbXmbemVrIgmNCxAgW51bsgvl38Rkv2qX9zXTAzhb_XEqoejr5w1vw5Vfin5qArb3g9fwbwXTvyRWiI76g",
+  };
+
+  const newProduct = {
+    name: name,
+    count: 1,
+  };
+
   // 바로구매 버튼 클릭 실행 함수
   const purchaseHandle = () => {
-    // 페이지 이동
+    fetch(API_SHOP_URL, {
+      method: "POST",
+      headers: requestHeader,
+      body: JSON.stringify(newProduct),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        error = "이미 장바구니에 추가하셨습니다.";
+        alert("Error: " + error);
+      });
+
     redirection("/basket");
   };
 
   //장바구니 버튼 클릭 실행 함수
   const addToCartHandle = () => {
     // 장바구니 리스트만 추가 로직
-    setOpen(false);
+    fetch(API_SHOP_URL, {
+      method: "POST",
+      headers: requestHeader,
+      body: JSON.stringify(newProduct),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        error = "이미 장바구니에 추가하셨습니다.";
+        alert("Error: " + error);
+      });
+
+    setOpen(!open);
   };
 
   return (
