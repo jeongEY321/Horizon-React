@@ -1,21 +1,25 @@
 .store-wrapper {
     width: 100%;
-    background: gray;
-    margin-right: 10px;
+    height: 100vh;
 }
 
 .md {
-    width: 500px;
+    width: 400px;
     height: 500px;
     // border: 1px solid white;   
-    // cursor: pointer;
     background: url(../../../../public/assets/panel/Popup007_Blue.png);
     background-repeat: no-repeat;
-    background-size: contain;
-}
+    background-size: 100% 100%;
 
-.md-event {
-    border: 1px solid white;
+    .md-img {
+        width: 300px;
+        height: 450px; 
+        cursor: pointer;
+
+        img {
+            width: inherit;
+        }
+    }  
 }
 
 .modal-md-img img {
