@@ -1,174 +1,64 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Grid,
-  Modal,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
+import { Container, Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import "../../store/scss/storemain.scss";
-import { useNavigate } from "react-router-dom";
-import SecondFooter from "../../layout/js/SecondFooter";
+import StoreItem from "./StoreItem";
+import StoreModal from "./StoreModal";
+
+import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
 
 const StoreMain = () => {
-  const redirection = useNavigate();
+  // 요청 헤더 설정
+  const requestHeader = {
+    "content-type": "application/json",
+    Authorization:
+      "Bearer " +
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTAzMzczMzEsImV4cCI6MTY5MDQyMzczMSwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.SWO6JbXmbemVrIgmNCxAgW51bsgvl38Rkv2qX9zXTAzhb_XEqoejr5w1vw5Vfin5qArb3g9fwbwXTvyRWiI76g",
+  };
+
+  // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
+  const API_SHOP_URL = BASE + SHOP;
+  const API_USER_URL = BASE + USER;
+
+  const [list, setList] = useState([]);
+  const [selectedItem, setSelectedItem] = useState([]); // 클릭한 아이템 정보를 저장할 상태변수
+
+  useEffect(() => {
+    // 페이지가 렌더링 됨과 동시에 할 일 목록을 요청해서 뿌려주기.
+    fetch(API_SHOP_URL + "/list", {
+      method: "GET",
+      headers: requestHeader,
+    })
+      .then((response) => response.json()) // JSON 형식으로 변환
+      .then((data) => {
+        // console.log(data);
+
+        // fetch를 통해 받아온 데이터를 상태 변수에 할당
+        if (data) setList(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   const [open, setOpen] = useState(false); // 모달 상태를 관리하기 위한 상태변수
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  // 바로구매 버튼 클릭 실행 함수
-  const purchaseHandle = () => {
-    // 장바구니 리스트 추가 로직
-
-    // 페이지 이동
-    redirection("/basket");
-  };
-
-  //장바구니 버튼 클릭 실행 함수
-  const addToCartHandle = () => {
-    // 장바구니 리스트만 추가 로직
+  const handleOpen = (item) => {
+    setSelectedItem(item);
+    setOpen(!open);
   };
 
   return (
     <>
-      <div className='store-wrapper'>
-        <AppBar
-          position='static'
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[200]
-                : theme.palette.grey[800],
-            p: 3,
-          }}
-        >
-          <Toolbar>
-            <Typography component='h2' variant='h4'>
-              Horizon Store
-            </Typography>
-          </Toolbar>
-        </AppBar>
-
-        <Container component='main' maxWidth='xl' style={{ padding: "50px" }}>
+      <div className="store-wrapper">
+        <Container component="main" maxWidth="xl" style={{ padding: "50px" }}>
           <Grid container spacing={10}>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Box className='md' onClick={handleOpen}>
-                <div>
-                  <img
-                    src={require("../img/planet_set.jpg")}
-                    alt='이미지입니다'
-                  />
-                </div>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Box className='md' onClick={handleOpen}></Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Box className='md' onClick={handleOpen}></Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Box className='md' onClick={handleOpen}></Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Box className='md' onClick={handleOpen}></Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Box className='md' onClick={handleOpen}></Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Box className='md' onClick={handleOpen}></Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Box className='md' onClick={handleOpen}></Box>
-            </Grid>
+            {list.map((product) => (
+              <StoreItem open={handleOpen} key={product.id} item={product} />
+            ))}
           </Grid>
         </Container>
-
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby='modal-title'
-          aria-describedby='modal-description'
-          sx={{ border: "none" }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 800,
-              height: 750,
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              overflow: "auto",
-            }}
-          >
-            {/* 모달 상세사항은 수정해야함 */}
-            <Typography variant='h6' id='modal-title' gutterBottom>
-              모달 제목
-            </Typography>
-
-            <Box className='modal-md-img' sx={{ textAlign: "center", mt: 3 }}>
-              <img src='#' alt=''></img>
-            </Box>
-
-            <Typography variant='body1' id='modal-description' sx={{ mt: 3 }}>
-              What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
-              printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an
-              unknown printer took a galley of type and scrambled it to make a
-              type specimen book. It has survived not only five centuries, but
-              also the leap into electronic typesetting, remaining essentially
-              unchanged. It was popularised in the 1960s with the release of
-              Letraset sheets containing Lorem Ipsum passages, and more recently
-              with desktop publishing software like Aldus PageMaker including
-              versions of Lorem Ipsum.
-            </Typography>
-
-            {/* 바로구매, 장바구니 버튼  */}
-            <Box
-              sx={{
-                mt: 3,
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Button
-                variant='outlined'
-                sx={{ mr: 2, width: 150, height: 60, fontSize: 20 }}
-                onClick={purchaseHandle}
-              >
-                바로구매
-              </Button>
-              <Button
-                variant='contained'
-                sx={{ width: 150, height: 60, fontSize: 20 }}
-                onClick={addToCartHandle}
-              >
-                장바구니
-              </Button>
-            </Box>
-          </Box>
-        </Modal>
-
-        <SecondFooter />
       </div>
+      <StoreModal open={open} setOpen={setOpen} item={selectedItem} />
     </>
   );
 };

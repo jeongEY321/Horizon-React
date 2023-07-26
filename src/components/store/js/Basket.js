@@ -85,18 +85,18 @@ const Basket = () => {
   return (
     <>
       <HeaderSolar />
-      <Typography variant='h4' align='center' marginTop={5}>
+      <Typography variant="h4" align="center" marginTop={5}>
         장바구니
       </Typography>
       <Container
-        component='main'
-        className='basket-main-wrapper'
-        maxWidth='xl'
+        component="main"
+        className="basket-main-wrapper"
+        maxWidth="xl"
         sx={{ padding: "50px", display: "flex" }}
       >
         <Grid container spacing={4}>
           <Box
-            className='list-box'
+            className="list-box"
             sx={{
               // border: "1px solid black",
               width: "70%",
@@ -110,17 +110,17 @@ const Basket = () => {
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow sx={{ align: "center" }}>
-                  <TableCell align='center' style={{ width: "40%" }}>
+                  <TableCell align="center" style={{ width: "40%" }}>
                     상품
                   </TableCell>
-                  <TableCell align='center' style={{ width: "20%" }}>
+                  <TableCell align="center" style={{ width: "20%" }}>
                     가격
                   </TableCell>
-                  <TableCell align='center' style={{ width: "20%" }}>
+                  <TableCell align="center" style={{ width: "20%" }}>
                     수량
                   </TableCell>
                   <TableCell
-                    align='center'
+                    align="center"
                     style={{ width: "10%" }}
                   ></TableCell>
                 </TableRow>
@@ -129,16 +129,16 @@ const Basket = () => {
                 {productList.map((product) => (
                   <TableRow key={product.id}>
                     <TableCell
-                      align='center'
+                      align="center"
                       style={{ cursor: "pointer" }}
                       onClick={() => handleOpenModal(product)}
                     >
                       {product.name}
                     </TableCell>
-                    <TableCell align='center'>
+                    <TableCell align="center">
                       {calculatePrice(product.quantity, product.price)}원
                     </TableCell>
-                    <TableCell align='center'>
+                    <TableCell align="center">
                       {/* 수량 감소 버튼 */}
                       <Button onClick={() => decreaseQuantity(product.id)}>
                         -
@@ -150,7 +150,7 @@ const Basket = () => {
                         +
                       </Button>
                     </TableCell>
-                    <TableCell align='center'>
+                    <TableCell align="center">
                       <Button>X</Button>
                     </TableCell>
                   </TableRow>
@@ -159,7 +159,7 @@ const Basket = () => {
             </Table>
 
             <Box
-              className='cal-pay-wrapper'
+              className="cal-pay-wrapper"
               sx={{
                 marginTop: "auto",
                 display: "flex",
@@ -168,7 +168,7 @@ const Basket = () => {
               }}
             >
               <Box
-                class='calculate-box'
+                className="calculate-box"
                 sx={{
                   padding: "10px",
                   // margin: "20px 20px",
@@ -179,15 +179,15 @@ const Basket = () => {
                 </div>
               </Box>
               <Box
-                class='payment-btn-box'
+                class="payment-btn-box"
                 sx={{
                   width: "100%",
                   height: "25%",
                 }}
               >
                 <Button
-                  className='payment-btn'
-                  variant='contained'
+                  className="payment-btn"
+                  variant="contained"
                   sx={{
                     width: 100,
                     height: 40,
@@ -205,8 +205,8 @@ const Basket = () => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='modal-title'
-        aria-describedby='modal-description'
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
         sx={{ border: "none" }}
       >
         <Box
@@ -227,15 +227,15 @@ const Basket = () => {
           }}
         >
           {/* 모달 상세사항은 수정해야함 */}
-          <Typography variant='h6' id='modal-title' gutterBottom>
+          <Typography variant="h6" id="modal-title" gutterBottom>
             {selectedProduct ? selectedProduct.name : ""}
           </Typography>
 
-          <Box className='modal-md-img' sx={{ textAlign: "center", mt: 3 }}>
-            <img src='#' alt=''></img>
+          <Box className="modal-md-img" sx={{ textAlign: "center", mt: 3 }}>
+            <img src="#" alt=""></img>
           </Box>
 
-          <Typography variant='body1' id='modal-description' sx={{ mt: 3 }}>
+          <Typography variant="body1" id="modal-description" sx={{ mt: 3 }}>
             {selectedProduct ? selectedProduct.description : ""}
             What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
             printing and typesetting industry. Lorem Ipsum has been the

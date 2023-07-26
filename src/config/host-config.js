@@ -9,5 +9,5 @@ if (clientHostName === "localhost") {
 }
 
 export const API_BASE_URL = backEndHostName;
-export const TODO = "/shop/products";
+export const SHOP = "/shop";
 export const USER = "/user/auth";
