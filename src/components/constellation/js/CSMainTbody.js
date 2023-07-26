@@ -7,8 +7,8 @@ const CSMainTbody = (board) => {
     <>
       <tr className="News-tbody">
         <td className="td-photo">{Photo}</td>
-        <td>{Title}</td>
-        <td>{Date}</td>
+        <td className="td-title">{Title}</td>
+        <td className="td-date">{Date}</td>
       </tr>
     </>
   );

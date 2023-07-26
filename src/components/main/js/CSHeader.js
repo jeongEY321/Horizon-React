@@ -86,8 +86,9 @@ export default function SearchAppBar() {
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
               //textAlign: "center",
-              color: "white",
+              color: "#2196F3",
               marginLeft: "15px",
+              fontFamily: "Orbitron-Bold",
             }}
           >
             Over the Horizon

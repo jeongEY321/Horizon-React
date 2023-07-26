@@ -5,6 +5,7 @@ import MainScreen from "./components/main/js/MainScreen";
 import StoreMain from "./components/store/js/StoreMain";
 import HsMain from "./components/horoscope/js/HsMain";
 import { Route, Routes } from "react-router";
+import CSNewsPage from "./components/constellation/js/CSNewsPage";
 
 function App() {
   return (

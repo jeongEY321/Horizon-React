@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Orbitron-Bold";
+    src: url("../../../../public/assets/fonts/Orbitron-Bold.woff2");
+    font-style: normal;
+ }
+
 //전체 영역
 .MainMenu {
     width: 100%;
@@ -10,7 +16,7 @@
    .BigBtn {
     display: flex;
     margin-top: 5%;
-    margin-left: 40px;
+    margin-left: 3%;
 
     .NewsMenu {
         position: relative;
@@ -19,6 +25,7 @@
         margin-left: 40px;
         overflow: hidden;
         background-repeat: no-repeat;
+        
     }
     
     .NewsMenu {
@@ -31,10 +38,10 @@
     .solarMenu {
         position: relative;
         width: 550px;
-        height: 100vh;
+        height: 800px;
         overflow: hidden;
         background-repeat: no-repeat;
-        margin-left: 50px;
+        margin-left: 85px;
     }
     
     .solarMenu {
@@ -47,7 +54,7 @@
    //작은 메뉴 버튼(Horoscope, Store)
    .SmallBtn {
     margin-top: 3%;
-    margin-left: 8%;
+    margin-left: 6%;
     .hsMenu {
         border: 0;
         outline: 0;
@@ -76,7 +83,7 @@
    //이름 버튼
    .News-main-btn {
     cursor: pointer;
-    width: 75%;
+    width: 70%;
     height: 12%;
     font-size: 23px;
     margin-top: 10%;
@@ -86,14 +93,15 @@
     background: url("../../../../public/assets/icon/blueframe/ScFi_Circle01Blue_bg.png") no-repeat;
     background-size: cover;
     color: white;
+    font-family: 'Orbitron-Bold' !important;
    }
    
 
    .Solar-main-btn {
     cursor: pointer;
-    width: 75%;
-    height: 9%;
-    font-size: 23px;
+    width: 70%;
+    height: 12%;
+    font-size: 20px;
     margin-top: 10%;
     margin-left: 8%;
     border: 0;
@@ -101,13 +109,14 @@
     background: url("../../../../public/assets/icon/blueframe/ScFi_Circle01Blue_bg.png") no-repeat;
     background-size: cover;
     color: white;
+    font-family: 'Orbitron-Bold' !important;
    }
 
    .hs-main-btn {
     cursor: pointer;
     width: 60%;
     height: 17%;
-    font-size: 23px;
+    font-size: 18px;
     margin-top: 18%;
     margin-left: 18%;
     border: 0;
@@ -115,13 +124,14 @@
     background: url("../../../../public/assets/icon/blueframe/ScFi_Circle01Blue_bg.png") no-repeat;
     background-size: cover;
     color: white;
+    font-family: 'Orbitron-Bold' !important;
    }
 
    .store-main-btn {
     cursor: pointer;
     width: 60%;
     height: 17%;
-    font-size: 23px;
+    font-size: 20px;
     margin-top: 18%;
     margin-left: 18%;
     border: 0;
@@ -129,6 +139,7 @@
     background: url("../../../../public/assets/icon/blueframe/ScFi_Circle01Blue_bg.png") no-repeat;
     background-size: cover;
     color: white;
+    font-family: 'Orbitron-Bold' !important;
    }
 
    //이미지

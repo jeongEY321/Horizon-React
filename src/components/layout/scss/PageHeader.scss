@@ -1,4 +1,12 @@
 //============={Header}==============
+
+//폰트
+@font-face {
+   font-family: "Orbitron-Bold";
+   src: url("../../../../public/assets/fonts/Orbitron-Bold.woff2");
+   font-style: normal;
+}
+
 .MainHeader {
    width: 100%;
    height: 100%;
@@ -10,6 +18,7 @@
     background-image: url("../../solarsystem/img/Tip001Blue.png");
     background-size: 100% 100%;
     height: 130px;
+    font-family: 'Orbitron-Bold' !important;
  }
 
  //메뉴 버튼 집합체
@@ -28,12 +37,13 @@
    cursor: pointer;
    color: white;
    padding: 50px;
-   font-size: 25px;
+   font-size: 22px;
    margin-bottom: 5px;
    background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
    background-size: 240px 100px; 
    background-position: center;
    width: 240px; 
+   font-family: 'Orbitron-Bold' !important;
 }
 
 //{news 버튼}
@@ -43,12 +53,13 @@
    cursor: pointer;
    color: white;
    padding: 50px;
-   font-size: 25px;
+   font-size: 22px;
    margin-bottom: 5px;
    background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
    background-size: 240px 100px; 
    background-position: center;
    width: 240px;
+   font-family: 'Orbitron-Bold' !important;
 }
 
 //{SolarSystem 버튼}
@@ -58,12 +69,13 @@
    cursor: pointer;
    color: white;
    padding: 50px;
-   font-size: 25px;
+   font-size: 20px;
    margin-bottom: 5px;
    background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
    background-size: 240px 100px; 
    background-position: center;
    width: 240px;
+   font-family: 'Orbitron-Bold' !important;
 }
 
 //{horoscope 버튼}
@@ -73,12 +85,13 @@
    cursor: pointer;
    color: white;
    padding: 50px;
-   font-size: 25px;
+   font-size: 22px;
    margin-bottom: 5px;
    background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
    background-size: 240px 100px; 
    background-position: center;
    width: 240px;
+   font-family: 'Orbitron-Bold' !important;
 }
 
 //{store 버튼}
@@ -88,12 +101,13 @@
    cursor: pointer;
    color: white;
    padding: 50px;
-   font-size: 25px;
+   font-size: 22px;
    margin-bottom: 5px;
    background: url("../../solarsystem/img/Btn07Blue_p.png") no-repeat;
    background-size: 240px 100px; 
    background-position: center;
    width: 240px;
+   font-family: 'Orbitron-Bold' !important;
 }
 
 //-------------logBtn-------------

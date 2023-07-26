@@ -3,6 +3,7 @@ import PageHeader from "../../layout/js/PageHeader";
 import { Table } from "react-bootstrap";
 import CSMainTbody from "./CSMainTbody";
 import "../../constellation/scss/CSMain.scss";
+import CSNewsPage from "./CSNewsPage";
 
 const CSMain = () => {
   //임시 데이터
@@ -42,7 +43,7 @@ const CSMain = () => {
           <tr className="tbl">
             <th>Photo</th>
             <th>Title</th>
-            <th>date</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +52,7 @@ const CSMain = () => {
           ))}
         </tbody>
       </Table>
+      <CSNewsPage />
     </section>
   );
 };

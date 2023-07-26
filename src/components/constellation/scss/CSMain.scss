@@ -1,3 +1,10 @@
+//폰트
+@font-face {
+    font-family: "Orbitron-Bold";
+    src: url("../../../../public/assets/fonts/Orbitron-Bold.woff2");
+    font-style: normal;
+ }
+
 //전체 배경화면
 body {
     background-color: black;
@@ -5,24 +12,29 @@ body {
     height: 100%;
 }
 
+//검색창
+
 //테이블 세부사항
 .News-board {
     text-align: center;
 
     .News-table {
         flex-direction: column;
-        font-size: large;
+        font-size: 12px;
         padding: 5%;
         border: none;
 
         th {
             border: none;
+            font-family: 'Orbitron-Bold' !important;
+            font-size: 15px;
         }
 
         thead,tr,td {
             padding: 2%;
             border-collapse: collapse;
             border: none;
+            font-family: 'Orbitron-Bold';
         }
 
         .News-tbody {
@@ -46,9 +58,17 @@ body {
     }
 }
 
-//표 칸 (사진 칸 조정)
+//각 테이블 속성 (가로 크기 조정)
 .td-photo {
-    width: 450px;
+    width: 400px;
+}
+
+.td-title {
+    font-size: 17px;
+}
+
+.td-date {
+    width: 150px;
 }
 
 
