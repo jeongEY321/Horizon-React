@@ -53,7 +53,7 @@ const SolarSystemModel = () => {
     setChange(e.target.value);
   };
 
-  // 값 변경되어도 아래거에서 적용이 안돼서 적용되게 작성
+  // 값 변경되어도 useEffect에서 적용이 안돼서 적용되게 작성
   const changeRef = useRef(change);
   useEffect(() => {
     changeRef.current = change;
@@ -439,7 +439,7 @@ const SolarSystemModel = () => {
 
   return (
     <>
-      <canvas ref={canvasRef} id='three-canvas' />
+      <canvas ref={canvasRef} id="three-canvas" />
       <HeaderSolar />
       {isLoading && <ModelLoadingPage />}
       {change != "all" ? <PlanetContext /> : ""}

@@ -10,11 +10,11 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<MainScreen />} />
-        <Route path='/SolarSystem' element={<SolarSystemModel />} />
-        <Route path='/News' element={<CSMain />} />
-        <Route path='/Store' element={<StoreMain />} />
-        <Route path='/Basket' element={<Basket />} />
+        <Route path="/" element={<MainScreen />} />
+        <Route path="/SolarSystem" element={<SolarSystemModel />} />
+        <Route path="/News" element={<CSMain />} />
+        <Route path="/Store" element={<StoreMain />} />
+        <Route path="/Basket" element={<Basket />} />
         {/* <Route path='/horoscope' element={<HsMain />} /> */}
       </Routes>
     </>
