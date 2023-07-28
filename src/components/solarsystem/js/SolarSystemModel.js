@@ -37,7 +37,7 @@ import CameraControls from "camera-controls";
 import ModelLoadingPage from "./ModelLoadingPage";
 import Footer from "../../layout/js/Footer";
 import PlanetContext from "../../layout/js/PlanetContext";
-import HeaderSolar from "./HeaderSolar";
+import PageHeader from "../../layout/js/PageHeader";
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
@@ -439,8 +439,8 @@ const SolarSystemModel = () => {
 
   return (
     <>
-      <canvas ref={canvasRef} id='three-canvas' />
-      <HeaderSolar />
+      <canvas ref={canvasRef} id="three-canvas" />
+      <PageHeader />
       {isLoading && <ModelLoadingPage />}
       {change != "all" ? <PlanetContext /> : ""}
       <Footer change={changeValue} />

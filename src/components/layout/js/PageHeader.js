@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../solarsystem/scss/headerSolar.scss";
+import "../scss/PageHeader.scss";
 
-const HeaderSolar = () => {
+const PageHeader = () => {
   return (
     <div className="MainHeader">
       <header className="menu">
@@ -13,8 +13,8 @@ const HeaderSolar = () => {
           <Link to="/News" className="newsBtn">
             <button>News</button>
           </Link>
-          <Link to="/1" className="hsBtn">
-            <button>Horoscope</button>
+          <Link to="/SolarSystem" className="solarBtn">
+            <button>SolarSystem</button>
           </Link>
           <Link to="/Store" className="storeBtn">
             <button>Store</button>
@@ -30,4 +30,4 @@ const HeaderSolar = () => {
   );
 };
 
-export default HeaderSolar;
+export default PageHeader;

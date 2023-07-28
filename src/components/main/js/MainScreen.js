@@ -1,5 +1,5 @@
 import React from "react";
-import CSHeader from "../../constellation/js/CSHeader";
+import CSHeader from "../js/CSHeader";
 import "../scss/MainScreen.scss";
 import { Link } from "react-router-dom";
 import kindpng_5401205 from "../assets/kindpng_5401205.png";
@@ -32,15 +32,6 @@ const MainScreen = () => {
               />
             </div>
           </Link>
-        </div>
-        <div className="SmallBtn">
-          <Link to="/horoscope">
-            <div className="hsMenu">
-              <button className="hs-main-btn">Horoscope</button>
-              <img></img>
-            </div>
-          </Link>
-
           <Link to="/Store">
             <div className="storeMenu">
               <button className="store-main-btn">Store</button>
@@ -52,6 +43,7 @@ const MainScreen = () => {
             </div>
           </Link>
         </div>
+        <div className="SmallBtn"></div>
       </div>
     </>
   );

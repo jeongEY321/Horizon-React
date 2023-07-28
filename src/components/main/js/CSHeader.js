@@ -1,10 +1,6 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Drawer, { drawerClasses } from "@mui/material/Drawer";
-import List from "@mui/material/List";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -13,9 +9,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
-import "../scss/CSHeader.scss";
+import "../../main/scss/CSHeader.scss";
 import "../../solarsystem/img/Tip001Blue.png";
-import { useTheme } from "@emotion/react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,16 +55,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handlerDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handlerDrawerClose = () => {
-    setOpen(false);
-  };
   return (
     <Box
       sx={{
@@ -101,8 +86,9 @@ export default function SearchAppBar() {
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
               //textAlign: "center",
-              color: "white",
+              color: "#2196F3",
               marginLeft: "15px",
+              fontFamily: "Orbitron-Bold",
             }}
           >
             Over the Horizon
