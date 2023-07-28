@@ -8,7 +8,7 @@ const CSNewsPage = ({ page, count, setPage }) => {
     <Pagination
       activePage={page}
       itemsCountPerPage={5}
-      totalItemsCount={400}
+      totalItemsCount={50}
       pageRangeDisplayed={5}
       prevPageText={"<"}
       nextPageText={">"}

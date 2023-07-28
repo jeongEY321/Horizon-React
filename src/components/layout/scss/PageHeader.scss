@@ -46,8 +46,13 @@
    font-family: 'Orbitron-Bold' !important;
 }
 
+.mainBtn button:hover {
+   color: #039BE5;
+   opacity: 80%;
+ }
+
 //{news 버튼}
-.newsBtn button{
+.newsBtn button { 
    border: 0;
    outline: 0;
    cursor: pointer;
@@ -62,8 +67,13 @@
    font-family: 'Orbitron-Bold' !important;
 }
 
+.newsBtn button:hover {
+   color: #29B6F6;
+   opacity: 80%;
+ }
+
 //{SolarSystem 버튼}
-.solarBtn button{
+.solarBtn button {
    border: 0;
    outline: 0;
    cursor: pointer;
@@ -78,8 +88,13 @@
    font-family: 'Orbitron-Bold' !important;
 }
 
+.solarBtn button:hover {
+   color: #29B6F6;
+   opacity: 80%;
+ }
+
 //{horoscope 버튼}
-.hsBtn button{
+.hsBtn button {
    border: 0;
    outline: 0;
    cursor: pointer;
@@ -93,9 +108,14 @@
    width: 240px;
    font-family: 'Orbitron-Bold' !important;
 }
+
+.hsBtn button:hover {
+   color: #29B6F6;
+   opacity: 80%;
+ }
 
 //{store 버튼}
-.storeBtn button{
+.storeBtn button {
    border: 0;
    outline: 0;
    cursor: pointer;
@@ -110,6 +130,10 @@
    font-family: 'Orbitron-Bold' !important;
 }
 
+.storeBtn button:hover {
+  color: #29B6F6;
+  opacity: 80%;
+}
 //-------------logBtn-------------
 
 

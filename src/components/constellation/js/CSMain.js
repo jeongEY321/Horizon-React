@@ -4,6 +4,7 @@ import { Table } from "react-bootstrap";
 import CSMainTbody from "./CSMainTbody";
 import "../../constellation/scss/CSMain.scss";
 import CSNewsPage from "./CSNewsPage";
+import CSMainNews from "./CSMainNews";
 
 const CSMain = () => {
   //임시 데이터
@@ -38,6 +39,7 @@ const CSMain = () => {
   return (
     <section className="News-board">
       <PageHeader />
+      <CSMainNews />
       <Table board hover border={1} className="News-table" width="100%">
         <thead className="mini-table">
           <tr className="tbl">

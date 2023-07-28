@@ -1,11 +1,12 @@
 import React from "react";
 
 const CSMainTbody = (board) => {
-  const { Photo, Title, Date } = board.board;
+  const { category, Photo, Title, Date } = board.board;
 
   return (
     <>
-      <tr className="News-tbody">
+      <tr id="News-tbody">
+        {/* <td>[{category}]</td> */}
         <td className="td-photo">{Photo}</td>
         <td className="td-title">{Title}</td>
         <td className="td-date">{Date}</td>

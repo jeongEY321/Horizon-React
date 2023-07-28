@@ -16,9 +16,6 @@ const PageHeader = () => {
           <Link to="/SolarSystem" className="solarBtn">
             <button>SolarSystem</button>
           </Link>
-          <Link to="/1" className="hsBtn">
-            <button>Horoscope</button>
-          </Link>
           <Link to="/Store" className="storeBtn">
             <button>Store</button>
           </Link>

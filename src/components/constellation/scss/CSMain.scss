@@ -39,20 +39,20 @@ body {
 
         td {
             border-top: 1px solid white;
-            border-bottom: 1px solid white;
+            border-bottom: 2px solid white;
         }
 
-        .News-tbody {
+        #News-tbody {
             cursor: pointer;
         }
     
         
-        .News-tbody:nth-child(even) {
+        #News-tbody:nth-child(even) {
             background-color: #ffffff;
             color: #1976d2;
         }
 
-        .News-tbody:nth-child(odd) {
+        #News-tbody:nth-child(odd) {
             background-color: black;
             color: 
             #b3c9ef;

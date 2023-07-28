@@ -32,15 +32,6 @@ const MainScreen = () => {
               />
             </div>
           </Link>
-        </div>
-        <div className="SmallBtn">
-          <Link to="/horoscope">
-            <div className="hsMenu">
-              <button className="hs-main-btn">Horoscope</button>
-              <img></img>
-            </div>
-          </Link>
-
           <Link to="/Store">
             <div className="storeMenu">
               <button className="store-main-btn">Store</button>
@@ -52,6 +43,7 @@ const MainScreen = () => {
             </div>
           </Link>
         </div>
+        <div className="SmallBtn"></div>
       </div>
     </>
   );
