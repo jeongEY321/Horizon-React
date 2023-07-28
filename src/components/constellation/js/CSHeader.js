@@ -80,6 +80,7 @@ export default function SearchAppBar() {
         <Toolbar className="header-menubar">
           <IconButton
             className="hamburger"
+            //size="small"
             edge="start"
             color="inherit"
             aria-label="open drawer"
