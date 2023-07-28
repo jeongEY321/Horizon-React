@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import SecondFooter from "../../layout/js/SecondFooter";
+import React, { useEffect, useState } from "react";
+import PageHeader from "../../layout/js/PageHeader";
+import BasketItem from "./BasketItem";
+import BasketModal from "./BasketModal";
+
+import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
 import {
   Box,
-  Button,
-  Container,
   Grid,
-  Modal,
   Table,
   TableBody,
   TableCell,
@@ -13,74 +14,132 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import PageHeader from "../../layout/js/PageHeader";
+import { Button, Container } from "react-bootstrap";
 
 const Basket = () => {
+  // 요청 헤더 설정
+  const requestHeader = {
+    "content-type": "application/json",
+    Authorization:
+      "Bearer " +
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTAzMzczMzEsImV4cCI6MTY5MDQyMzczMSwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.SWO6JbXmbemVrIgmNCxAgW51bsgvl38Rkv2qX9zXTAzhb_XEqoejr5w1vw5Vfin5qArb3g9fwbwXTvyRWiI76g",
+  };
+
+  // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
+  const API_SHOP_URL = BASE + SHOP;
+  const [basketList, setBasketList] = useState([]);
+  const [selectedItem, setSelectedItem] = useState([]);
+
+  useEffect(() => {
+    // 페이지가 렌더링 됨과 동시에 할 일 목록을 요청해서 뿌려주기.
+    fetch(API_SHOP_URL + "/products", {
+      method: "GET",
+      headers: requestHeader,
+    })
+      .then((response) => response.json()) // JSON 형식으로 변환
+      .then((data) => {
+        // fetch를 통해 받아온 데이터를 상태 변수에 할당
+        console.log(data);
+        if (Array.isArray(data.products)) {
+          // data.products를 가공하여 필요한 속성만 추출하여 객체로 만듦
+          const basketItems = data.products.map((product) => ({
+            id: product.id,
+            count: product.count,
+            name: product.name.name,
+            price: product.name.price,
+          }));
+          setBasketList(basketItems);
+          console.log(basketItems);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   const [open, setOpen] = useState(false); // 모달 상태를 관리하기 위한 상태변수
-  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const handleOpenModal = (product) => {
-    setSelectedProduct(product);
-    setOpen(true);
+  const handleOpenModal = () => {
+    setOpen(!open);
   };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  // 장바구니 리스트 상태 관리 변수
-  const [productList, setPorductList] = useState([
-    // 더미데이터, 나중에 DB에서 불러와야함
-    { id: 1, name: "상품1", quantity: 1, price: 20000 },
-    { id: 2, name: "상품2", quantity: 3, price: 30000 },
-    { id: 3, name: "상품3", quantity: 2, price: 20000 },
-    { id: 4, name: "상품4", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-    { id: 5, name: "상품5", quantity: 1, price: 10000 },
-  ]);
 
   // 수량 증가 함수
-  const increaseQuntity = (productId) => {
-    setPorductList((prevList) =>
-      prevList.map((product) =>
-        product.id === productId
-          ? { ...product, quantity: product.quantity + 1 }
-          : product
-      )
-    );
+  const increaseQuntity = (count, id) => {
+    fetch(API_SHOP_URL, {
+      method: "PUT",
+      headers: requestHeader,
+      body: JSON.stringify({
+        count: count + 1,
+        id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (Array.isArray(json.products)) {
+          // data.products를 가공하여 필요한 속성만 추출하여 객체로 만듦
+          const basketItems = json.products.map((product) => ({
+            id: product.id,
+            count: product.count,
+            name: product.name.name,
+            price: product.name.price,
+          }));
+          setBasketList(basketItems);
+        }
+      });
   };
 
   // 수량 감수 함수
-  const decreaseQuantity = (productId) => {
-    setPorductList((prevList) =>
-      prevList.map((product) =>
-        product.id === productId
-          ? { ...product, quantity: Math.max(product.quantity - 1, 0) }
-          : product
-      )
-    );
+  const decreaseQuantity = (count, id) => {
+    fetch(API_SHOP_URL, {
+      method: "PUT",
+      headers: requestHeader,
+      body: JSON.stringify({
+        count: count - 1,
+        id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (Array.isArray(json.products)) {
+          // data.products를 가공하여 필요한 속성만 추출하여 객체로 만듦
+          const basketItems = json.products.map((product) => ({
+            id: product.id,
+            count: product.count,
+            name: product.name.name,
+            price: product.name.price,
+          }));
+          setBasketList(basketItems);
+        }
+      });
   };
 
-  // 가격 계산 함수
-  const calculatePrice = (quantity, price) => {
-    return quantity * price;
+  // 삭제
+  const deleteProduct = (id) => {
+    fetch(API_SHOP_URL + "/products/" + id, {
+      method: "DELETE",
+      headers: requestHeader,
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        // 서버가 업데이트된 장바구니 데이터를 응답으로 보낼 경우
+        if (Array.isArray(json.products)) {
+          // data.products를 가공하여 필요한 속성만 추출하여 객체로 만듦
+          const basketItems = json.products.map((product) => ({
+            id: product.id,
+            count: product.count,
+            name: product.name.name,
+            price: product.name.price,
+          }));
+          setBasketList(basketItems);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting product:", error);
+      });
   };
 
   // 총 가격 계산 함수
-  const totalPrice = () => {
-    return productList.reduce(
-      (total, product) =>
-        total + calculatePrice(product.quantity, product.price),
-      0
-    );
-  };
+  const totalPrice = () => {};
 
   return (
     <>
@@ -125,35 +184,16 @@ const Basket = () => {
                   ></TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                {productList.map((product) => (
-                  <TableRow key={product.id}>
-                    <TableCell
-                      align="center"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleOpenModal(product)}
-                    >
-                      {product.name}
-                    </TableCell>
-                    <TableCell align="center">
-                      {calculatePrice(product.quantity, product.price)}원
-                    </TableCell>
-                    <TableCell align="center">
-                      {/* 수량 감소 버튼 */}
-                      <Button onClick={() => decreaseQuantity(product.id)}>
-                        -
-                      </Button>
-                      {product.quantity}
-
-                      {/* 수량 증가 버튼 */}
-                      <Button onClick={() => increaseQuntity(product.id)}>
-                        +
-                      </Button>
-                    </TableCell>
-                    <TableCell align="center">
-                      <Button>X</Button>
-                    </TableCell>
-                  </TableRow>
+              <TableBody style={{ color: "white" }}>
+                {basketList.map((products) => (
+                  <BasketItem
+                    open={handleOpenModal}
+                    increase={increaseQuntity}
+                    decrease={decreaseQuantity}
+                    deleteProduct={deleteProduct}
+                    key={products.id}
+                    item={products}
+                  />
                 ))}
               </TableBody>
             </Table>
@@ -168,18 +208,18 @@ const Basket = () => {
               }}
             >
               <Box
-                class="calculate-box"
+                className="calculate-box"
                 sx={{
                   padding: "10px",
                   // margin: "20px 20px",
                 }}
               >
                 <div>
-                  <strong>총 가격: {totalPrice()}원</strong>
+                  <strong>총 가격: 1원</strong>
                 </div>
               </Box>
               <Box
-                class="payment-btn-box"
+                className="payment-btn-box"
                 sx={{
                   width: "100%",
                   height: "25%",
@@ -202,55 +242,13 @@ const Basket = () => {
         </Grid>
       </Container>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-        sx={{ border: "none" }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 800,
-            height: 750,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            overflow: "auto",
-          }}
-        >
-          {/* 모달 상세사항은 수정해야함 */}
-          <Typography variant="h6" id="modal-title" gutterBottom>
-            {selectedProduct ? selectedProduct.name : ""}
-          </Typography>
-
-          <Box className="modal-md-img" sx={{ textAlign: "center", mt: 3 }}>
-            <img src="#" alt=""></img>
-          </Box>
-
-          <Typography variant="body1" id="modal-description" sx={{ mt: 3 }}>
-            {selectedProduct ? selectedProduct.description : ""}
-            What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
-            printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown
-            printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the
-            leap into electronic typesetting, remaining essentially unchanged.
-            It was popularised in the 1960s with the release of Letraset sheets
-            containing Lorem Ipsum passages, and more recently with desktop
-            publishing software like Aldus PageMaker including versions of Lorem
-            Ipsum.
-          </Typography>
-        </Box>
-      </Modal>
-      <SecondFooter />
+      {open && (
+        <BasketModal
+          open={open}
+          setOpen={setOpen}
+          handleOpen={handleOpenModal}
+        />
+      )}
     </>
   );
 };
