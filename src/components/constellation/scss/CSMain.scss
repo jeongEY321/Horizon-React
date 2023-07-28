@@ -37,6 +37,11 @@ body {
             font-family: 'Orbitron-Bold';
         }
 
+        td {
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+        }
+
         .News-tbody {
             cursor: pointer;
         }
