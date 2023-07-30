@@ -22,7 +22,7 @@ const Basket = () => {
     "content-type": "application/json",
     Authorization:
       "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTAzMzczMzEsImV4cCI6MTY5MDQyMzczMSwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.SWO6JbXmbemVrIgmNCxAgW51bsgvl38Rkv2qX9zXTAzhb_XEqoejr5w1vw5Vfin5qArb3g9fwbwXTvyRWiI76g",
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTA2OTIwNzgsImV4cCI6MTY5MDc3ODQ3OCwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.0ALRMhi5T7WWB3zWVp4hyN8LPKcXR-5yHBeaBfUTbO-gXpkIShjAALCbvFdalWLu4jNgTmsPpqyrQpDvPtkgYQ",
   };
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
