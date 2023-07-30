@@ -13,7 +13,7 @@ const StoreMain = () => {
     "content-type": "application/json",
     Authorization:
       "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImFhYTExMTFAYWFhLmNvbSIsImlzcyI6IuuUuOq4sOqyheuTgCIsImlhdCI6MTY5MDY5NTM4OSwiZXhwIjoxNjkwNzgxNzg5LCJzdWIiOiJhYWExMTExQGFhYS5jb20ifQ.7O9D2PtK-LpS1EaCn6KhgUlVyiaS_p31xUTGbRr1C5FMvb6FwaY04s5bLFPTstTflizNUZoW1Ox2lQIU6z-i3A",
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTA2OTIwNzgsImV4cCI6MTY5MDc3ODQ3OCwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.0ALRMhi5T7WWB3zWVp4hyN8LPKcXR-5yHBeaBfUTbO-gXpkIShjAALCbvFdalWLu4jNgTmsPpqyrQpDvPtkgYQ",
   };
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
@@ -50,8 +50,8 @@ const StoreMain = () => {
   return (
     <>
       <HeaderSolar />
-      <div className='store-wrapper'>
-        <Container component='main' maxWidth='xl' style={{ padding: "50px" }}>
+      <div className="store-wrapper">
+        <Container component="main" maxWidth="xl" style={{ padding: "50px" }}>
           <Grid container spacing={4}>
             {list.map((product) => (
               <StoreItem open={handleOpen} key={product.id} item={product} />
