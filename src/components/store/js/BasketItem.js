@@ -1,5 +1,6 @@
 import { Button, TableCell, TableRow } from "@mui/material";
 import React from "react";
+import "../scss/basket.scss";
 
 const BasketItem = ({ open, item, increase, decrease, deleteProduct }) => {
   const { id, name, count, price } = item;
@@ -13,7 +14,9 @@ const BasketItem = ({ open, item, increase, decrease, deleteProduct }) => {
   };
 
   const decreaseCount = () => {
-    decrease(count, id);
+    if (count > 1) {
+      decrease(count, id);
+    }
   };
 
   return (
@@ -32,6 +35,7 @@ const BasketItem = ({ open, item, increase, decrease, deleteProduct }) => {
           <Button onClick={() => increaseCount()}>+</Button>
         </TableCell>
         <TableCell align='center'>
+          {/* 삭제 버튼 */}
           <Button onClick={() => deleteOnClick()}>X</Button>
         </TableCell>
       </TableRow>

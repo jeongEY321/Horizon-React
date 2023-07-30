@@ -7,7 +7,7 @@ import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
 const StoreModal = ({ open, setOpen, item }) => {
   const redirection = useNavigate();
 
-  const { id, name, content } = item;
+  const { id, name, content, count } = item;
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
   const API_SHOP_URL = BASE + SHOP;
@@ -18,12 +18,12 @@ const StoreModal = ({ open, setOpen, item }) => {
     "content-type": "application/json",
     Authorization:
       "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTAzMzczMzEsImV4cCI6MTY5MDQyMzczMSwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.SWO6JbXmbemVrIgmNCxAgW51bsgvl38Rkv2qX9zXTAzhb_XEqoejr5w1vw5Vfin5qArb3g9fwbwXTvyRWiI76g",
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImFhYTExMTFAYWFhLmNvbSIsImlzcyI6IuuUuOq4sOqyheuTgCIsImlhdCI6MTY5MDY5NTM4OSwiZXhwIjoxNjkwNzgxNzg5LCJzdWIiOiJhYWExMTExQGFhYS5jb20ifQ.7O9D2PtK-LpS1EaCn6KhgUlVyiaS_p31xUTGbRr1C5FMvb6FwaY04s5bLFPTstTflizNUZoW1Ox2lQIU6z-i3A",
   };
 
   const newProduct = {
     name: name,
-    count: 1,
+    count: count,
   };
 
   // 바로구매 버튼 클릭 실행 함수
@@ -65,6 +65,11 @@ const StoreModal = ({ open, setOpen, item }) => {
     setOpen(!open);
   };
 
+  // 닫기 버튼 클릭 실행 함수
+  const handleClose = () => {
+    setOpen(!open);
+  };
+
   return (
     <Modal
       open={open}
@@ -89,6 +94,17 @@ const StoreModal = ({ open, setOpen, item }) => {
           overflow: "auto",
         }}
       >
+        {/* 우측 상단에 닫기 버튼 추가 */}
+        <Button
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+          }}
+          onClick={handleClose}
+        >
+          X
+        </Button>
         <Typography
           variant='h6'
           id='modal-title'

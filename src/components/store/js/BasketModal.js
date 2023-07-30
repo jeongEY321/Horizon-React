@@ -1,13 +1,18 @@
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import React from "react";
 
 const BasketModal = ({ open, setOpen, handleOpen }) => {
+  // 닫기 버튼 클릭 실행 함수
+  const handleClose = () => {
+    setOpen(!open);
+  };
+
   return (
     <Modal
       open={open}
       onClose={handleOpen}
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
+      aria-labelledby='modal-title'
+      aria-describedby='modal-description'
       sx={{ border: "none" }}
     >
       <Box
@@ -25,6 +30,7 @@ const BasketModal = ({ open, setOpen, handleOpen }) => {
           flexDirection: "column",
           alignItems: "center",
           overflow: "auto",
+          color: "black",
         }}
       >
         {/* 모달 상세사항은 수정해야함 */}
@@ -32,11 +38,23 @@ const BasketModal = ({ open, setOpen, handleOpen }) => {
           {selectedProduct ? selectedProduct.name : ""}
         </Typography> */}
 
-        <Box className="modal-md-img" sx={{ textAlign: "center", mt: 3 }}>
-          <img src="#" alt=""></img>
+        {/* 우측 상단에 닫기 버튼 추가 */}
+        <Button
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+          }}
+          onClick={handleClose}
+        >
+          X
+        </Button>
+
+        <Box className='modal-md-img' sx={{ textAlign: "center", mt: 3 }}>
+          <img src='#' alt=''></img>
         </Box>
 
-        <Typography variant="body1" id="modal-description" sx={{ mt: 3 }}>
+        <Typography variant='body1' id='modal-description' sx={{ mt: 3 }}>
           {/* {selectedProduct ? selectedProduct.description : ""} */}
           What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing
           and typesetting industry. Lorem Ipsum has been the industry's standard
