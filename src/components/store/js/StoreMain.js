@@ -5,6 +5,7 @@ import StoreItem from "./StoreItem";
 import StoreModal from "./StoreModal";
 
 import { API_BASE_URL as BASE, SHOP } from "../../../config/host-config";
+import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 
 const StoreMain = () => {
   // 요청 헤더 설정
@@ -12,7 +13,7 @@ const StoreMain = () => {
     "content-type": "application/json",
     Authorization:
       "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTAzMzczMzEsImV4cCI6MTY5MDQyMzczMSwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.SWO6JbXmbemVrIgmNCxAgW51bsgvl38Rkv2qX9zXTAzhb_XEqoejr5w1vw5Vfin5qArb3g9fwbwXTvyRWiI76g",
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImFhYTExMTFAYWFhLmNvbSIsImlzcyI6IuuUuOq4sOqyheuTgCIsImlhdCI6MTY5MDY5NTM4OSwiZXhwIjoxNjkwNzgxNzg5LCJzdWIiOiJhYWExMTExQGFhYS5jb20ifQ.7O9D2PtK-LpS1EaCn6KhgUlVyiaS_p31xUTGbRr1C5FMvb6FwaY04s5bLFPTstTflizNUZoW1Ox2lQIU6z-i3A",
   };
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
@@ -48,9 +49,10 @@ const StoreMain = () => {
 
   return (
     <>
-      <div className="store-wrapper">
-        <Container component="main" maxWidth="x1" style={{ padding: "50px" }}>
-          <Grid container spacing={10}>
+      <HeaderSolar />
+      <div className='store-wrapper'>
+        <Container component='main' maxWidth='xl' style={{ padding: "50px" }}>
+          <Grid container spacing={4}>
             {list.map((product) => (
               <StoreItem open={handleOpen} key={product.id} item={product} />
             ))}
