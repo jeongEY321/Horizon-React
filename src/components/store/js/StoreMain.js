@@ -5,6 +5,7 @@ import StoreItem from "./StoreItem";
 import StoreModal from "./StoreModal";
 
 import { API_BASE_URL as BASE, SHOP } from "../../../config/host-config";
+import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 
 const StoreMain = () => {
   // 요청 헤더 설정
@@ -48,9 +49,10 @@ const StoreMain = () => {
 
   return (
     <>
+      <HeaderSolar />
       <div className="store-wrapper">
-        <Container component="main" maxWidth="x1" style={{ padding: "50px" }}>
-          <Grid container spacing={10}>
+        <Container component="main" maxWidth="xl" style={{ padding: "50px" }}>
+          <Grid container spacing={4}>
             {list.map((product) => (
               <StoreItem open={handleOpen} key={product.id} item={product} />
             ))}

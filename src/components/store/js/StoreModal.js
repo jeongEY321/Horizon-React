@@ -69,6 +69,11 @@ const StoreModal = ({ open, setOpen, item }) => {
     setOpen(!open);
   };
 
+  // 닫기 버튼 클릭 실행 함수
+  const handleClose = () => {
+    setOpen(!open);
+  };
+
   return (
     <Modal
       open={open}
@@ -93,6 +98,17 @@ const StoreModal = ({ open, setOpen, item }) => {
           overflow: "auto",
         }}
       >
+        {/* 우측 상단에 닫기 버튼 추가 */}
+        <Button
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+          }}
+          onClick={handleClose}
+        >
+          X
+        </Button>
         <Typography
           variant="h6"
           id="modal-title"
