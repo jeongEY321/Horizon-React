@@ -2,9 +2,9 @@ import { Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Container } from "reactstrap";
 import "../scss/Login.scss";
-import { useNavigate } from "react-router";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import { AuthContext } from "../../../util/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const redirection = useNavigate();
@@ -67,11 +67,11 @@ const Login = () => {
     <>
       <Container
         component="main"
-        maxwidth="xs"
+        maxWidth="xs"
         style={{ margin: "200px auto" }}
       >
         <form noValidate onSubmit={loginHandler}>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} maxWidth="xs">
             <Grid item xs={12}>
               <Typography component="h1" variant="h5">
                 로그인
@@ -91,6 +91,10 @@ const Login = () => {
                 label="email address"
                 name="email"
                 autoComplete="email"
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12}>

@@ -5,6 +5,7 @@ import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import { Color } from "three";
 import { getLoginUserInfo } from "../../../util/login-utils";
 import { useNavigate } from "react-router-dom";
+import "../scss/Mypage.scss";
 
 const Mypage = () => {
   const API_USER_URL = BASE + USER;
@@ -151,7 +152,7 @@ const Mypage = () => {
                 disabled
                 fullWidth
                 id="email"
-                label="이메일 주소(계정)"
+                label="이메일(계정)"
                 name="email"
                 value={user.email}
               />
@@ -171,13 +172,14 @@ const Mypage = () => {
 
             <Grid item xs={12} sm={8}>
               <TextField
-                type="text"
-                id="sample4_postcode"
-                name="postCode"
-                placeholder="우편번호"
-                value={user.postCode}
+                variant="outlined"
                 fullWidth
                 disabled
+                id="sample4_postcode"
+                name="postCode"
+                label="우편번호"
+                value={user.postCode}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -192,25 +194,27 @@ const Mypage = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                type="text"
-                id="sample4_roadAddress"
-                name="roadAddress"
-                placeholder="도로명주소"
-                value={user.address1}
+                variant="outlined"
                 fullWidth
                 disabled
+                id="sample4_roadAddress"
+                name="roadAddress"
+                label="도로명주소"
+                value={user.address1}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                name="address2"
                 variant="outlined"
                 fullWidth
                 id="detail-address"
+                name="detail-address"
                 label="상세주소"
                 value={user.address2}
                 onClick={addrDetailHandler}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12}>

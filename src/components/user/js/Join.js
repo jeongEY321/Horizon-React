@@ -345,6 +345,10 @@ const Join = () => {
                 label="유저 이름"
                 autoFocus
                 onChange={nameHandler}
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
+                InputProps={{ style: { color: "white" } }}
               />
               <span></span>
             </Grid>
@@ -358,6 +362,10 @@ const Join = () => {
                 name="email"
                 autoComplete="email"
                 onChange={emailHandler}
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
+                InputProps={{ style: { color: "white" } }}
               />
               <span></span>
             </Grid>
@@ -372,6 +380,10 @@ const Join = () => {
                 id="password"
                 autoComplete="current-password"
                 onChange={passwordHandler}
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
+                InputProps={{ style: { color: "white" } }}
               />
               <span></span>
             </Grid>
@@ -386,6 +398,10 @@ const Join = () => {
                 id="password-check"
                 autoComplete="check-password"
                 onChange={pwChkHandler}
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
+                InputProps={{ style: { color: "white" } }}
               />
               <span id="check-span"></span>
             </Grid>
@@ -399,6 +415,10 @@ const Join = () => {
                 value={userValue.postCode}
                 fullWidth
                 disabled
+                InputPlaceholderProps={{
+                  style: { color: "white" },
+                }}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -425,6 +445,10 @@ const Join = () => {
                 value={userValue.address1}
                 fullWidth
                 disabled
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
 
@@ -436,6 +460,10 @@ const Join = () => {
                 id="detail-address"
                 label="상세주소"
                 onClick={addrDetailHandler}
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={4}>

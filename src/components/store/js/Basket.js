@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { getLoginUserInfo } from "../../../util/login-utils";
 import { AuthContext } from "../../../util/AuthContext";
 import PayModal from "./PayModal";
+import { BorderBottom } from "@mui/icons-material";
 
 const Basket = () => {
   // 로그인 인증 토큰 얻어오기
@@ -189,7 +190,8 @@ const Basket = () => {
               margin: "auto",
               display: "flex",
               flexDirection: "column",
-              overflow: "auto",
+              overflowY: "auto",
+              maxHeight: "50vh",
             }}
           >
             <Table
@@ -231,10 +233,15 @@ const Basket = () => {
             className="cal-pay-wrapper"
             sx={{
               marginTop: "20px",
+              position: "fixed",
+              bottom: "0",
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
               width: "100%",
+              height: "100px",
+              borderTop: "1px solid white",
+              borderBottom: "1px solid white",
             }}
           >
             <Box
