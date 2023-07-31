@@ -10,10 +10,23 @@ import { getLoginUserInfo } from "../../../util/login-utils";
 
 const Join = () => {
   const API_BASE_URL = BASE + USER;
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    passwordCheck: "",
+    postCode: "",
+    address1: "",
+    address2: "",
+  });
   const [token, setToken] = useState(getLoginUserInfo().token);
 
   const redirection = useNavigate();
+
+  const requestHeader = {
+    "content-type": "multipart/form-data",
+    Authorization: "Bearer " + token,
+  };
 
   const { isLoggedIn } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
@@ -41,6 +54,8 @@ const Join = () => {
     password: false,
     passwordCheck: false,
     email: false,
+    address1: false,
+    postCode: false,
   });
 
   // 검증 데이터 상태변수에 저장
@@ -182,7 +197,7 @@ const Join = () => {
   const pwChkHandler = (e) => {
     let msg,
       flag = false;
-    if (e.target.value) {
+    if (!e.target.value) {
       msg = "비밀번호 확인란은 필수입니다.";
     } else if (user.password !== e.target.value) {
       msg = "비밀번호가 일치하지 않습니다.";
@@ -212,7 +227,7 @@ const Join = () => {
             extraRoadAddr !== "" ? ", " + data.buildingName : data.buildingName;
         }
         if (zonecode) {
-          // flag = true;
+          flag = true;
           setUser({
             ...user,
             postCode: zonecode,
@@ -248,12 +263,14 @@ const Join = () => {
 
     setUser({
       ...user,
-      address2: roadAddress,
+      postCode: zonecode,
+      address1: roadAddress,
     });
 
     setCorrect({
       ...correct,
-      address: true,
+      postCode: true,
+      address1: true,
     });
 
     const element = document.getElementById("postcode");
@@ -283,21 +300,22 @@ const Join = () => {
 
   // 회원가입 처리 서버 요청
   const fetchSignUpPost = () => {
-    //JSON을 Blob 타입으로 변경 후 FormData에 넣기
-    const userJsonBlob = new Blob([JSON.stringify(user)], {
-      type: "application/json",
-    });
-
+    // FormData에 바로 데이터를 넣기
     const userFormData = new FormData();
-    userFormData.append("user", userJsonBlob);
-    console.log(userFormData);
+    userFormData.append("email", user.email);
+    userFormData.append("password", user.password);
+    userFormData.append("userName", user.userName);
+    userFormData.append("postCode", user.postCode);
+    userFormData.append("address1", user.address1);
+    userFormData.append("address2", user.address2);
+
     fetch(API_BASE_URL, {
       method: "POST",
       body: userFormData,
     }).then((res) => {
       if (res.status === 200) {
         alert("회원가입 되었습니다!");
-        // redirection("/login");
+        redirection("/login");
       } else {
         alert("서버와의 통신이 원활하지 않습니다.");
       }
@@ -333,9 +351,13 @@ const Join = () => {
                 InputLabelProps={{
                   style: { color: "white" },
                 }}
-                InputProps={{ style: { color: "white" } }}
+                inputProps={{ style: { color: "white" } }}
               />
-              <span></span>
+              <span
+                style={correct.userName ? { color: "green" } : { color: "red" }}
+              >
+                {message.userName}
+              </span>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -352,7 +374,11 @@ const Join = () => {
                 }}
                 InputProps={{ style: { color: "white" } }}
               />
-              <span></span>
+              <span
+                style={correct.email ? { color: "green" } : { color: "red" }}
+              >
+                {message.email}
+              </span>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -370,7 +396,11 @@ const Join = () => {
                 }}
                 InputProps={{ style: { color: "white" } }}
               />
-              <span></span>
+              <span
+                style={correct.password ? { color: "green" } : { color: "red" }}
+              >
+                {message.password}
+              </span>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -388,14 +418,21 @@ const Join = () => {
                 }}
                 InputProps={{ style: { color: "white" } }}
               />
-              <span id="check-span"></span>
+              <span
+                id="check-span"
+                style={
+                  correct.passwordCheck ? { color: "green" } : { color: "red" }
+                }
+              >
+                {message.passwordCheck}
+              </span>
             </Grid>
 
             <Grid item xs={12} sm={8}>
               <TextField
                 type="text"
                 id="sample4_postcode"
-                name="Postcode"
+                name="postCode"
                 placeholder="우편번호"
                 value={user.postCode}
                 fullWidth
@@ -425,7 +462,7 @@ const Join = () => {
               <TextField
                 type="text"
                 id="sample4_roadAddress"
-                name="roadAddress"
+                name="address1"
                 placeholder="도로명주소"
                 value={user.address1}
                 fullWidth
@@ -439,7 +476,7 @@ const Join = () => {
 
             <Grid item xs={12}>
               <TextField
-                name="detail-address"
+                name="address2"
                 variant="outlined"
                 fullWidth
                 id="detail-address"
