@@ -193,7 +193,7 @@ const Join = () => {
   const pwChkHandler = (e) => {
     let msg,
       flag = false;
-    if (e.target.value) {
+    if (!e.target.value) {
       msg = "비밀번호 확인란은 필수입니다.";
     } else if (userValue.password !== e.target.value) {
       msg = "비밀번호가 일치하지 않습니다.";
@@ -322,27 +322,27 @@ const Join = () => {
   return (
     <>
       <Container
-        component="main"
-        maxWidth="xs"
+        component='main'
+        maxWidth='xs'
         style={{ margin: "200px auto" }}
       >
         <form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography component="h1" variant="h5">
+              <Typography component='h1' variant='h5'>
                 회원 가입
               </Typography>
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
-                name="username"
-                variant="outlined"
+                autoComplete='fname'
+                name='username'
+                variant='outlined'
                 required
                 fullWidth
-                id="username"
-                label="유저 이름"
+                id='username'
+                label='유저 이름'
                 autoFocus
                 onChange={nameHandler}
                 InputLabelProps={{
@@ -350,68 +350,87 @@ const Join = () => {
                 }}
                 InputProps={{ style: { color: "white" } }}
               />
-              <span></span>
+              <span
+                style={correct.userName ? { color: "green" } : { color: "red" }}
+              >
+                {message.userName}
+              </span>
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 required
                 fullWidth
-                id="email"
-                label="이메일 주소"
-                name="email"
-                autoComplete="email"
+                id='email'
+                label='이메일 주소'
+                name='email'
+                autoComplete='email'
                 onChange={emailHandler}
                 InputLabelProps={{
                   style: { color: "white" },
                 }}
                 InputProps={{ style: { color: "white" } }}
               />
-              <span></span>
+              <span
+                style={correct.email ? { color: "green" } : { color: "red" }}
+              >
+                {message.email}
+              </span>
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 required
                 fullWidth
-                name="password"
-                label="패스워드"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                name='password'
+                label='패스워드'
+                type='password'
+                id='password'
+                autoComplete='current-password'
                 onChange={passwordHandler}
                 InputLabelProps={{
                   style: { color: "white" },
                 }}
                 InputProps={{ style: { color: "white" } }}
               />
-              <span></span>
+              <span
+                style={correct.password ? { color: "green" } : { color: "red" }}
+              >
+                {message.password}
+              </span>
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 required
                 fullWidth
-                name="password-check"
-                label="패스워드 확인"
-                type="password"
-                id="password-check"
-                autoComplete="check-password"
+                name='password-check'
+                label='패스워드 확인'
+                type='password'
+                id='password-check'
+                autoComplete='check-password'
                 onChange={pwChkHandler}
                 InputLabelProps={{
                   style: { color: "white" },
                 }}
                 InputProps={{ style: { color: "white" } }}
               />
-              <span id="check-span"></span>
+              <span
+                id='check-span'
+                style={
+                  correct.passwordCheck ? { color: "green" } : { color: "red" }
+                }
+              >
+                {message.passwordCheck}
+              </span>
             </Grid>
 
             <Grid item xs={12} sm={8}>
               <TextField
-                type="text"
-                id="sample4_postcode"
-                name="Postcode"
-                placeholder="우편번호"
+                type='text'
+                id='sample4_postcode'
+                name='Postcode'
+                placeholder='우편번호'
                 value={userValue.postCode}
                 fullWidth
                 disabled
@@ -423,8 +442,8 @@ const Join = () => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Button
-                className="searchAddrBtn"
-                variant="contained"
+                className='searchAddrBtn'
+                variant='contained'
                 fullWidth
                 onClick={searchAddrClickHandler}
                 style={{
@@ -438,10 +457,10 @@ const Join = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                type="text"
-                id="sample4_roadAddress"
-                name="roadAddress"
-                placeholder="도로명주소"
+                type='text'
+                id='sample4_roadAddress'
+                name='roadAddress'
+                placeholder='도로명주소'
                 value={userValue.address1}
                 fullWidth
                 disabled
@@ -454,11 +473,11 @@ const Join = () => {
 
             <Grid item xs={12}>
               <TextField
-                name="detail-address"
-                variant="outlined"
+                name='detail-address'
+                variant='outlined'
                 fullWidth
-                id="detail-address"
-                label="상세주소"
+                id='detail-address'
+                label='상세주소'
                 onClick={addrDetailHandler}
                 InputLabelProps={{
                   style: { color: "white" },
@@ -468,9 +487,9 @@ const Join = () => {
             </Grid>
             <Grid item xs={4}>
               <Button
-                type="submit"
+                type='submit'
                 fullWidth
-                variant="contained"
+                variant='contained'
                 style={{ background: "#3159d1", fontSize: "20px" }}
                 onClick={joinButtonClickHandler}
               >
@@ -478,7 +497,7 @@ const Join = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid container justify="flex-end">
+          <Grid container justify='flex-end'>
             <Grid item>
               {/* <Link href="/login" variant="body2">
                 이미 계정이 있습니까? 로그인 하세요.
@@ -487,7 +506,7 @@ const Join = () => {
           </Grid>
         </form>
       </Container>
-      <div id="postcode" style={{ display: "none" }}>
+      <div id='postcode' style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
     </>

@@ -172,18 +172,18 @@ const Basket = () => {
   return (
     <>
       <HeaderSolar />
-      <Typography variant="h4" align="center" marginTop={5}>
+      <Typography variant='h4' align='center' marginTop={5}>
         장바구니
       </Typography>
       <Container
-        component="main"
-        className="basket-main-wrapper"
+        component='main'
+        className='basket-main-wrapper'
         sx={{ padding: "50px", display: "flex" }}
         style={{ marginTop: "30px" }}
       >
         <Grid container spacing={4}>
           <Box
-            className="list-box"
+            className='list-box'
             sx={{
               width: "90%",
               maxWidth: "900px",
@@ -200,17 +200,17 @@ const Basket = () => {
             >
               <TableHead>
                 <TableRow sx={{ align: "center" }}>
-                  <TableCell align="center" style={{ width: "20%" }}>
+                  <TableCell align='center' style={{ width: "20%" }}>
                     상품
                   </TableCell>
-                  <TableCell align="center" style={{ width: "20%" }}>
+                  <TableCell align='center' style={{ width: "20%" }}>
                     가격
                   </TableCell>
-                  <TableCell align="center" style={{ width: "15%" }}>
+                  <TableCell align='center' style={{ width: "15%" }}>
                     수량
                   </TableCell>
                   <TableCell
-                    align="center"
+                    align='center'
                     style={{ width: "10%" }}
                   ></TableCell>
                 </TableRow>
@@ -230,10 +230,11 @@ const Basket = () => {
             </Table>
           </Box>
           <Box
-            className="cal-pay-wrapper"
+            className='cal-pay-wrapper'
             sx={{
               marginTop: "20px",
               position: "fixed",
+              left: "0",
               bottom: "0",
               display: "flex",
               justifyContent: "flex-end",
@@ -245,7 +246,7 @@ const Basket = () => {
             }}
           >
             <Box
-              className="calculate-box"
+              className='calculate-box'
               sx={{
                 padding: "10px",
               }}
@@ -256,8 +257,8 @@ const Basket = () => {
             </Box>
 
             <Button
-              className="payment-btn"
-              variant="contained"
+              className='payment-btn'
+              variant='contained'
               sx={{
                 width: 100,
                 height: 40,

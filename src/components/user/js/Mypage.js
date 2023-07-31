@@ -1,4 +1,12 @@
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  InputLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
@@ -79,6 +87,14 @@ const Mypage = () => {
     if (inputValue) {
       flag = true;
     }
+    // setUser((prevUser) => ({
+    //   ...prevUser,
+    //   address2: inputValue,
+    // }));
+    // setCorrect((prevCorrect) => ({
+    //   ...prevCorrect,
+    //   address2: !prevCorrect.address2,
+    // }));
     setUser({
       ...user,
       address2: inputValue,
@@ -134,104 +150,137 @@ const Mypage = () => {
   return (
     <>
       <Container
-        component="main"
-        maxWidth="xs"
+        component='main'
+        maxWidth='xs'
         style={{ margin: "200px auto" }}
       >
         <form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography component="h1" variant="h5">
+              <Typography component='h1' variant='h5'>
                 마이페이지
               </Typography>
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel>이메일(계정)</InputLabel>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 disabled
                 fullWidth
-                id="email"
-                label="이메일(계정)"
-                name="email"
+                id='email'
+                name='email'
                 value={user.email}
               />
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel>이름</InputLabel>
               <TextField
-                name="name"
-                variant="outlined"
+                name='name'
+                variant='outlined'
                 disabled
                 fullWidth
-                id="name"
-                label="유저 이름"
+                id='name'
                 value={user.userName}
               />
             </Grid>
 
             <Grid item xs={12} sm={8}>
+              <InputLabel>우편번호</InputLabel>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 fullWidth
                 disabled
-                id="sample4_postcode"
-                name="postCode"
-                label="우편번호"
+                id='sample4_postcode'
+                name='postCode'
                 value={user.postCode}
                 InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Button
-                className="searchAddrBtn"
-                variant="contained"
+                className='searchAddrBtn'
+                variant='contained'
                 fullWidth
                 onClick={searchAddrClickHandler}
+                style={{
+                  background: "#3159d1",
+                  height: "55px",
+                  fontSize: "18px",
+                  marginTop: "23px",
+                }}
               >
                 주소검색
               </Button>
             </Grid>
             <Grid item xs={12}>
+              <InputLabel>도로명주소</InputLabel>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 fullWidth
                 disabled
-                id="sample4_roadAddress"
-                name="roadAddress"
-                label="도로명주소"
+                id='sample4_roadAddress'
+                name='roadAddress'
                 value={user.address1}
                 InputProps={{ style: { color: "white" } }}
               />
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel>상세주소</InputLabel>
               <TextField
-                variant="outlined"
+                type='text'
+                variant='outlined'
                 fullWidth
-                id="detail-address"
-                name="detail-address"
-                label="상세주소"
+                id='detail-address'
+                name='detail-address'
                 value={user.address2}
-                onClick={addrDetailHandler}
+                onChange={addrDetailHandler}
                 InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12}>
               <Button
-                type="submit"
+                type='submit'
                 fullWidth
-                variant="contained"
+                variant='contained'
                 style={{ background: "#3159d1" }}
                 onClick={modifyClickHandler}
               >
                 정보수정
               </Button>
             </Grid>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  marginTop: "25px",
+                }}
+              >
+                <Button
+                  type='submit'
+                  variant='contained'
+                  style={{ background: "#3159d1" }}
+                  // onClick={modifyClickHandler}
+                >
+                  장바구니
+                </Button>
+                <Button
+                  type='submit'
+                  variant='contained'
+                  style={{ background: "#3159d1" }}
+                  // onClick={modifyClickHandler}
+                >
+                  결제내역
+                </Button>
+              </Box>
+            </Grid>
           </Grid>
         </form>
       </Container>
-      <div id="postcode" style={{ display: "none" }}>
+      <div id='postcode' style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
     </>
