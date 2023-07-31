@@ -1,25 +1,43 @@
-import {
-  Button,
-  Container,
-  Grid,
-  InputLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
+import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
-import { API_BASE_URL } from "../../util/host-config";
+import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
+import { Color } from "three";
+import { getLoginUserInfo } from "../../../util/login-utils";
+import { useNavigate } from "react-router-dom";
 import "../scss/Mypage.scss";
 
 const Mypage = () => {
-  // 상태변수로 회원정보 관리
-  const [userValue, setUserValue] = useState({
-    userName: "",
-    password: "",
-    email: "",
-    addr: "",
-    detailAddr: "",
-  });
+  const API_USER_URL = BASE + USER;
+  const [user, setUser] = useState([]);
+  const [token, setToken] = useState(getLoginUserInfo().token);
+
+  const redirection = useNavigate();
+
+  // 요청 헤더 설정
+  const requestHeader = {
+    Authorization: "Bearer " + token,
+  };
+
+  const requestHeader2 = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + token,
+  };
+
+  useEffect(() => {
+    fetch(API_USER_URL + "/user", {
+      method: "GET",
+      headers: requestHeader,
+    })
+      .then((response) => response.json()) // JSON 형식으로 변환
+      .then((data) => {
+        // fetch를 통해 받아온 데이터를 상태 변수에 할당
+        if (data) setUser(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   const [correct, setCorrect] = useState({
     userName: false,
@@ -39,15 +57,15 @@ const Mypage = () => {
 
         if (zonecode) {
           // flag = true;
-          setUserValue({
-            ...userValue,
-            userPostcode: zonecode,
-            userAddrBasic: roadAddress,
+          setUser({
+            ...user,
+            postCode: zonecode,
+            address1: roadAddress,
           });
           setCorrect({
             ...correct,
-            userPostcode: !correct.userPostcode,
-            userAddrBasic: !correct.userAddrBasic,
+            postCode: !correct.postCode,
+            address1: !correct.userAddress1,
           });
         }
       },
@@ -61,25 +79,25 @@ const Mypage = () => {
     if (inputValue) {
       flag = true;
     }
-    setUserValue({
-      ...userValue,
-      userAddrDetail: inputValue,
+    setUser({
+      ...user,
+      address2: inputValue,
     });
-    setCorrect({ ...correct, userAddrDetail: !correct.userAddrDetail });
+    setCorrect({ ...correct, address2: !correct.address2 });
   };
 
   const handlePostcodeComplete = (data) => {
     // 다음 주소 검색 완료 시 호출되는 콜백 함수
     const { zonecode, roadAddress } = data;
 
-    setUserValue({
-      ...userValue,
-      address: roadAddress,
+    setUser({
+      ...user,
+      address1: roadAddress,
     });
 
     setCorrect({
       ...correct,
-      address: true,
+      address1: true,
     });
 
     const element = document.getElementById("postcode");
@@ -92,13 +110,21 @@ const Mypage = () => {
   const modifyClickHandler = (e) => {
     e.preventDefault();
 
-    fetch(API_BASE_URL, {
+    const userData = {
+      postCode: user.postCode,
+      address1: user.address1,
+      address2: user.address2,
+    };
+
+    fetch(API_USER_URL, {
       method: "PUT",
-      body: JSON.stringify(userValue),
+      headers: requestHeader2,
+      body: JSON.stringify(userData),
     }).then((res) => {
+      console.log(userData);
       if (res.status === 200) {
         alert("회원정보가 수정되었습니다!");
-        // redirection("/mypage");
+        redirection("/mypage");
       } else {
         alert("서버와의 통신이 원활하지 않습니다.");
       }
@@ -108,58 +134,58 @@ const Mypage = () => {
   return (
     <>
       <Container
-        component='main'
-        maxWidth='xs'
+        component="main"
+        maxWidth="xs"
         style={{ margin: "200px auto" }}
       >
         <form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography component='h1' variant='h5'>
+              <Typography component="h1" variant="h5">
                 마이페이지
               </Typography>
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
-                fullWidth
+                variant="outlined"
                 disabled
-                id='email'
-                name='email'
-                label='이메일(계정)'
-                value='.'
+                fullWidth
+                id="email"
+                label="이메일(계정)"
+                name="email"
+                value={user.email}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
-                fullWidth
+                name="name"
+                variant="outlined"
                 disabled
-                id='username'
-                name='username'
-                label='유저 이름'
-                value='.'
+                fullWidth
+                id="name"
+                label="유저 이름"
+                value={user.userName}
               />
             </Grid>
 
             <Grid item xs={12} sm={8}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 fullWidth
                 disabled
-                id='sample4_postcode'
-                name='Postcode'
-                label='우편번호'
-                value={userValue.userPostcode}
+                id="sample4_postcode"
+                name="postCode"
+                label="우편번호"
+                value={user.postCode}
                 InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Button
-                className='searchAddrBtn'
-                variant='contained'
+                className="searchAddrBtn"
+                variant="contained"
                 fullWidth
                 onClick={searchAddrClickHandler}
               >
@@ -168,33 +194,34 @@ const Mypage = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 fullWidth
                 disabled
-                id='sample4_roadAddress'
-                name='roadAddress'
-                label='도로명주소'
-                value={userValue.userAddrBasic}
+                id="sample4_roadAddress"
+                name="roadAddress"
+                label="도로명주소"
+                value={user.address1}
                 InputProps={{ style: { color: "white" } }}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 fullWidth
-                id='detail-address'
-                name='detail-address'
-                label='상세주소'
+                id="detail-address"
+                name="detail-address"
+                label="상세주소"
+                value={user.address2}
                 onClick={addrDetailHandler}
                 InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12}>
               <Button
-                type='submit'
+                type="submit"
                 fullWidth
-                variant='contained'
+                variant="contained"
                 style={{ background: "#3159d1" }}
                 onClick={modifyClickHandler}
               >
@@ -204,7 +231,7 @@ const Mypage = () => {
           </Grid>
         </form>
       </Container>
-      <div id='postcode' style={{ display: "none" }}>
+      <div id="postcode" style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
     </>

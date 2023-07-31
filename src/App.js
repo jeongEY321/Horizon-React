@@ -7,24 +7,26 @@ import { Route, Routes } from "react-router";
 import Basket from "./components/store/js/Basket";
 import History from "./components/store/js/History";
 import Login from "./components/user/js/Login";
-import Join from "./components/user/js/Join";
 import Mypage from "./components/user/js/Mypage";
+import { AuthContextProvider } from "./util/AuthContext";
+import Join from "./components/user/js/Join";
+
 function App() {
   return (
-    <>
+    <AuthContextProvider>
       <Routes>
-        <Route path='/' element={<MainScreen />} />
-        <Route path='/SolarSystem' element={<SolarSystemModel />} />
-        <Route path='/News' element={<CSMain />} />
-        <Route path='/Store' element={<StoreMain />} />
-        <Route path='/Basket' element={<Basket />} />
-        <Route path='/history' element={<History />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/join' element={<Join />} />
-        <Route path='/mypage' element={<Mypage />} />
+        <Route path="/" element={<MainScreen />} />
+        <Route path="/SolarSystem" element={<SolarSystemModel />} />
+        <Route path="/News" element={<CSMain />} />
+        <Route path="/Store" element={<StoreMain />} />
+        <Route path="/Basket" element={<Basket />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/join" element={<Join />} />
         {/* <Route path='/horoscope' element={<HsMain />} /> */}
       </Routes>
-    </>
+    </AuthContextProvider>
   );
 }
 
