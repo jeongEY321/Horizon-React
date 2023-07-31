@@ -33,8 +33,9 @@ const Join = () => {
     userName: "",
     password: "",
     email: "",
-    addr: "",
-    detailAddr: "",
+    postCode: "",
+    address1: "",
+    address2: "",
   });
 
   // 검증 메세지 상태변수 관리
@@ -226,13 +227,13 @@ const Join = () => {
           // flag = true;
           setUserValue({
             ...userValue,
-            userPostcode: zonecode,
-            userAddrBasic: roadAddress,
+            postCode: zonecode,
+            address1: roadAddress,
           });
           setCorrect({
             ...correct,
-            userPostcode: !correct.userPostcode,
-            userAddrBasic: !correct.userAddrBasic,
+            postCode: !correct.postCode,
+            address1: !correct.address1,
           });
         }
       },
@@ -248,9 +249,9 @@ const Join = () => {
     }
     setUserValue({
       ...userValue,
-      userAddrDetail: inputValue,
+      address2: inputValue,
     });
-    setCorrect({ ...correct, userAddrDetail: !correct.userAddrDetail });
+    setCorrect({ ...correct, address2: !correct.address2 });
   };
 
   const handlePostcodeComplete = (data) => {
@@ -321,27 +322,27 @@ const Join = () => {
   return (
     <>
       <Container
-        component='main'
-        maxWidth='xs'
+        component="main"
+        maxWidth="xs"
         style={{ margin: "200px auto" }}
       >
         <form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography component='h1' variant='h5'>
+              <Typography component="h1" variant="h5">
                 회원 가입
               </Typography>
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                autoComplete='fname'
-                name='username'
-                variant='outlined'
+                autoComplete="fname"
+                name="username"
+                variant="outlined"
                 required
                 fullWidth
-                id='username'
-                label='유저 이름'
+                id="username"
+                label="유저 이름"
                 autoFocus
                 onChange={nameHandler}
               />
@@ -349,61 +350,61 @@ const Join = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                id='email'
-                label='이메일 주소'
-                name='email'
-                autoComplete='email'
+                id="email"
+                label="이메일 주소"
+                name="email"
+                autoComplete="email"
                 onChange={emailHandler}
               />
               <span></span>
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                name='password'
-                label='패스워드'
-                type='password'
-                id='password'
-                autoComplete='current-password'
+                name="password"
+                label="패스워드"
+                type="password"
+                id="password"
+                autoComplete="current-password"
                 onChange={passwordHandler}
               />
               <span></span>
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                name='password-check'
-                label='패스워드 확인'
-                type='password'
-                id='password-check'
-                autoComplete='check-password'
+                name="password-check"
+                label="패스워드 확인"
+                type="password"
+                id="password-check"
+                autoComplete="check-password"
                 onChange={pwChkHandler}
               />
-              <span id='check-span'></span>
+              <span id="check-span"></span>
             </Grid>
 
             <Grid item xs={12} sm={8}>
               <TextField
-                type='text'
-                id='sample4_postcode'
-                name='Postcode'
-                placeholder='우편번호'
-                value={userValue.userPostcode}
+                type="text"
+                id="sample4_postcode"
+                name="Postcode"
+                placeholder="우편번호"
+                value={userValue.postCode}
                 fullWidth
                 disabled
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Button
-                className='searchAddrBtn'
-                variant='contained'
+                className="searchAddrBtn"
+                variant="contained"
                 fullWidth
                 onClick={searchAddrClickHandler}
                 style={{
@@ -417,11 +418,11 @@ const Join = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                type='text'
-                id='sample4_roadAddress'
-                name='roadAddress'
-                placeholder='도로명주소'
-                value={userValue.userAddrBasic}
+                type="text"
+                id="sample4_roadAddress"
+                name="roadAddress"
+                placeholder="도로명주소"
+                value={userValue.address1}
                 fullWidth
                 disabled
               />
@@ -429,19 +430,19 @@ const Join = () => {
 
             <Grid item xs={12}>
               <TextField
-                name='detail-address'
-                variant='outlined'
+                name="detail-address"
+                variant="outlined"
                 fullWidth
-                id='detail-address'
-                label='상세주소'
+                id="detail-address"
+                label="상세주소"
                 onClick={addrDetailHandler}
               />
             </Grid>
             <Grid item xs={4}>
               <Button
-                type='submit'
+                type="submit"
                 fullWidth
-                variant='contained'
+                variant="contained"
                 style={{ background: "#3159d1", fontSize: "20px" }}
                 onClick={joinButtonClickHandler}
               >
@@ -449,7 +450,7 @@ const Join = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid container justify='flex-end'>
+          <Grid container justify="flex-end">
             <Grid item>
               {/* <Link href="/login" variant="body2">
                 이미 계정이 있습니까? 로그인 하세요.
@@ -458,7 +459,7 @@ const Join = () => {
           </Grid>
         </form>
       </Container>
-      <div id='postcode' style={{ display: "none" }}>
+      <div id="postcode" style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
     </>

@@ -1,7 +1,7 @@
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
-import { API_BASE_URL } from "../../util/host-config";
+import { API_BASE_URL } from "../../../config/host-config";
 
 const Mypage = () => {
   // 상태변수로 회원정보 관리
@@ -100,48 +100,48 @@ const Mypage = () => {
   return (
     <>
       <Container
-        component='main'
-        maxWidth='xs'
+        component="main"
+        maxWidth="xs"
         style={{ margin: "200px auto" }}
       >
         <form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography component='h1' variant='h5'>
+              <Typography component="h1" variant="h5">
                 마이페이지
               </Typography>
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 disabled
                 fullWidth
-                id='email'
-                label='이메일 주소(계정)'
-                name='email'
+                id="email"
+                label="이메일 주소(계정)"
+                name="email"
                 // value={}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                name='username'
-                variant='outlined'
+                name="username"
+                variant="outlined"
                 disabled
                 fullWidth
-                id='username'
-                label='유저 이름'
+                id="username"
+                label="유저 이름"
                 // value={}
               />
             </Grid>
 
             <Grid item xs={12} sm={8}>
               <TextField
-                type='text'
-                id='sample4_postcode'
-                name='Postcode'
-                placeholder='우편번호'
+                type="text"
+                id="sample4_postcode"
+                name="Postcode"
+                placeholder="우편번호"
                 value={userValue.userPostcode}
                 fullWidth
                 disabled
@@ -149,8 +149,8 @@ const Mypage = () => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Button
-                className='searchAddrBtn'
-                variant='contained'
+                className="searchAddrBtn"
+                variant="contained"
                 fullWidth
                 onClick={searchAddrClickHandler}
               >
@@ -159,10 +159,10 @@ const Mypage = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                type='text'
-                id='sample4_roadAddress'
-                name='roadAddress'
-                placeholder='도로명주소'
+                type="text"
+                id="sample4_roadAddress"
+                name="roadAddress"
+                placeholder="도로명주소"
                 value={userValue.userAddrBasic}
                 fullWidth
                 disabled
@@ -171,19 +171,19 @@ const Mypage = () => {
 
             <Grid item xs={12}>
               <TextField
-                name='detail-address'
-                variant='outlined'
+                name="detail-address"
+                variant="outlined"
                 fullWidth
-                id='detail-address'
-                label='상세주소'
+                id="detail-address"
+                label="상세주소"
                 onClick={addrDetailHandler}
               />
             </Grid>
             <Grid item xs={12}>
               <Button
-                type='submit'
+                type="submit"
                 fullWidth
-                variant='contained'
+                variant="contained"
                 style={{ background: "#3159d1" }}
                 onClick={modifyClickHandler}
               >
@@ -193,7 +193,7 @@ const Mypage = () => {
           </Grid>
         </form>
       </Container>
-      <div id='postcode' style={{ display: "none" }}>
+      <div id="postcode" style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
     </>

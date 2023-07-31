@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
+import { getLoginUserInfo } from "../../../util/login-utils";
 
 const StoreModal = ({ open, setOpen, item }) => {
   const redirection = useNavigate();
@@ -13,12 +14,11 @@ const StoreModal = ({ open, setOpen, item }) => {
   const API_SHOP_URL = BASE + SHOP;
   const API_USER_URL = BASE + USER;
 
+  const [token, setToken] = useState(getLoginUserInfo().token);
   // 요청 헤더 설정
   const requestHeader = {
     "content-type": "application/json",
-    Authorization:
-      "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTA2OTIwNzgsImV4cCI6MTY5MDc3ODQ3OCwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.0ALRMhi5T7WWB3zWVp4hyN8LPKcXR-5yHBeaBfUTbO-gXpkIShjAALCbvFdalWLu4jNgTmsPpqyrQpDvPtkgYQ",
+    Authorization: "Bearer " + token,
   };
 
   const newProduct = {
@@ -38,9 +38,7 @@ const StoreModal = ({ open, setOpen, item }) => {
       body: JSON.stringify(newProduct),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => {})
       .catch((error) => {
         error = "이미 장바구니에 추가하셨습니다.";
         alert("Error: " + error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 import BasketItem from "./BasketItem";
 import BasketModal from "./BasketModal";
@@ -17,22 +17,34 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { getLoginUserInfo } from "../../../util/login-utils";
+import { AuthContext } from "../../../util/AuthContext";
 
 const Basket = () => {
+  // 로그인 인증 토큰 얻어오기
+  const { isLoggedIn } = useContext(AuthContext);
+  const [token, setToken] = useState(getLoginUserInfo().token);
+
   // 요청 헤더 설정
   const requestHeader = {
     "content-type": "application/json",
-    Authorization:
-      "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTA2OTIwNzgsImV4cCI6MTY5MDc3ODQ3OCwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.0ALRMhi5T7WWB3zWVp4hyN8LPKcXR-5yHBeaBfUTbO-gXpkIShjAALCbvFdalWLu4jNgTmsPpqyrQpDvPtkgYQ",
+    Authorization: "Bearer " + token,
   };
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
   const API_SHOP_URL = BASE + SHOP;
   const [basketList, setBasketList] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
+  const [isRendered, setIsRendered] = useState(false);
+
+  const redirection = useNavigate();
 
   useEffect(() => {
+    if (!isRendered) {
+      setIsRendered(!isRendered);
+    }
+
     // 페이지가 렌더링 됨과 동시에 할 일 목록을 요청해서 뿌려주기.
     fetch(API_SHOP_URL + "/products", {
       method: "GET",
@@ -41,7 +53,6 @@ const Basket = () => {
       .then((response) => response.json()) // JSON 형식으로 변환
       .then((data) => {
         // fetch를 통해 받아온 데이터를 상태 변수에 할당
-        console.log(data);
         if (Array.isArray(data.products)) {
           // data.products를 가공하여 필요한 속성만 추출하여 객체로 만듦
           const basketItems = data.products.map((product) => ({
@@ -51,13 +62,13 @@ const Basket = () => {
             price: product.name.price,
           }));
           setBasketList(basketItems);
-          console.log(basketItems);
+          // console.log(basketItems);
         }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [basketList]);
+  }, [isRendered, isLoggedIn]);
 
   const [open, setOpen] = useState(false); // 모달 상태를 관리하기 위한 상태변수
 
