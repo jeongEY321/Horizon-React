@@ -43,7 +43,6 @@ const MainScreen = () => {
             </div>
           </Link>
         </div>
-        <div className="SmallBtn"></div>
       </div>
     </>
   );

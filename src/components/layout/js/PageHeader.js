@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../scss/PageHeader.scss";
+import Icon from "@mdi/react";
+import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
 
 const PageHeader = () => {
   return (
@@ -20,9 +22,33 @@ const PageHeader = () => {
             <button>Store</button>
           </Link>
           <div className="logBtn">
-            <button className="logInBtn"></button>
-            <button className="logOutBtn"></button>
-            <button className="JoinBtn"></button>
+            <Icon
+              className="profile-icon"
+              path={mdiAccount}
+              title="User Profile"
+              size={2}
+              horizontal
+              vertical
+              rotate={180}
+            />
+            <Icon
+              className="locked"
+              path={mdiLock}
+              title="lock"
+              size={2}
+              horizontal
+              vertical
+              rotate={180}
+            />
+            <Icon
+              className="lock-open"
+              path={mdiLockOpen}
+              title="lockOpen"
+              size={2}
+              horizontal
+              vertical
+              rotate={180}
+            />
           </div>
         </div>
       </header>

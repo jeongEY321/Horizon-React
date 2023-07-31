@@ -3,10 +3,8 @@ import SolarSystemModel from "./components/solarsystem/js/SolarSystemModel";
 import CSMain from "./components/constellation/js/CSMain";
 import MainScreen from "./components/main/js/MainScreen";
 import StoreMain from "./components/store/js/StoreMain";
-import { Route, Routes } from "react-router";
 import Basket from "./components/store/js/Basket";
 import { Route, Routes } from "react-router";
-import CSNewsPage from "./components/constellation/js/CSNewsPage";
 
 function App() {
   return (
