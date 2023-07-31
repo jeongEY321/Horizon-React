@@ -20,6 +20,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { getLoginUserInfo } from "../../../util/login-utils";
 import { AuthContext } from "../../../util/AuthContext";
+import PayModal from "./PayModal";
 
 const Basket = () => {
   // 로그인 인증 토큰 얻어오기
@@ -72,8 +73,15 @@ const Basket = () => {
 
   const [open, setOpen] = useState(false); // 모달 상태를 관리하기 위한 상태변수
 
+  //결제하기 버튼 모달
+  const [payOpen, setPayOpen] = useState(false);
+
   const handleOpenModal = () => {
     setOpen(!open);
+  };
+
+  const handleOpenPayModal = () => {
+    setPayOpen(!payOpen);
   };
 
   // 수량 증가 함수
@@ -101,7 +109,7 @@ const Basket = () => {
       });
   };
 
-  // 수량 감수 함수
+  // 수량 감소 함수
   const decreaseQuantity = (count, id) => {
     fetch(API_SHOP_URL, {
       method: "PUT",
@@ -176,7 +184,7 @@ const Basket = () => {
           <Box
             className="list-box"
             sx={{
-              width: "80%",
+              width: "90%",
               maxWidth: "900px",
               margin: "auto",
               display: "flex",
@@ -190,13 +198,13 @@ const Basket = () => {
             >
               <TableHead>
                 <TableRow sx={{ align: "center" }}>
-                  <TableCell align="center" style={{ width: "35%" }}>
+                  <TableCell align="center" style={{ width: "20%" }}>
                     상품
                   </TableCell>
                   <TableCell align="center" style={{ width: "20%" }}>
                     가격
                   </TableCell>
-                  <TableCell align="center" style={{ width: "20%" }}>
+                  <TableCell align="center" style={{ width: "15%" }}>
                     수량
                   </TableCell>
                   <TableCell
@@ -248,6 +256,7 @@ const Basket = () => {
                 height: 40,
                 margin: "50px",
               }}
+              onClick={handleOpenPayModal}
             >
               결제하기
             </Button>
@@ -260,6 +269,14 @@ const Basket = () => {
           open={open}
           setOpen={setOpen}
           handleOpen={handleOpenModal}
+        />
+      )}
+
+      {payOpen && (
+        <PayModal
+          open={payOpen}
+          setPayOpen={setPayOpen}
+          handleOpen={handleOpenPayModal}
         />
       )}
     </>
