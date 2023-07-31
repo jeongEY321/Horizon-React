@@ -213,7 +213,7 @@ const Mypage = () => {
                 name="detail-address"
                 label="상세주소"
                 value={user.address2}
-                onClick={addrDetailHandler}
+                onChange={addrDetailHandler}
                 InputProps={{ style: { color: "white" } }}
               />
             </Grid>

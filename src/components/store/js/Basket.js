@@ -234,6 +234,7 @@ const Basket = () => {
             sx={{
               marginTop: "20px",
               position: "fixed",
+              left: "0",
               bottom: "0",
               display: "flex",
               justifyContent: "flex-end",

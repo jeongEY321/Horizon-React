@@ -3,40 +3,29 @@ import React, { useContext, useEffect, useState } from "react";
 import { Container } from "reactstrap";
 import "../scss/Join.scss";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../../../util/AuthContext";
+import { AuthContext } from "../../../util/AuthContext";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import DaumPostcode from "react-daum-postcode";
+import { getLoginUserInfo } from "../../../util/login-utils";
 
 const Join = () => {
-  //베이스 URL
   const API_BASE_URL = BASE + USER;
+  const [user, setUser] = useState([]);
+  const [token, setToken] = useState(getLoginUserInfo().token);
 
-  //리다이렉트
   const redirection = useNavigate();
 
-  //로그인 확인 설정 authcontext
-  // const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
 
-  // const [open, setOpen] = useState(false);
-
-  // useEffect(() => {
-  //   if(isLoggedIn) {
-  //     setOpen(true);
-  //     setTimeout(() => {
-  //       redirection('/');
-  //     }, 2000);
-  //   }
-  // }, [isLoggedIn, redirection]);
-
-  // 상태변수로 회원가입 입력값 관리
-  const [userValue, setUserValue] = useState({
-    userName: "",
-    password: "",
-    email: "",
-    postCode: "",
-    address1: "",
-    address2: "",
-  });
+  useEffect(() => {
+    if (isLoggedIn) {
+      setOpen(true);
+      setTimeout(() => {
+        redirection("/");
+      }, 2000);
+    }
+  }, [isLoggedIn, redirection]);
 
   // 검증 메세지 상태변수 관리
   const [message, setMessage] = useState({
@@ -57,8 +46,8 @@ const Join = () => {
   // 검증 데이터 상태변수에 저장
   const saveInputState = ({ key, inputVal, flag, msg }) => {
     inputVal !== "pass" &&
-      setUserValue({
-        ...userValue,
+      setUser({
+        ...user,
         [key]: inputVal,
       });
 
@@ -116,7 +105,7 @@ const Join = () => {
           msg = "사용 가능한 이메일 입니다.";
           flag = true;
         }
-        setUserValue({ ...userValue, email: email });
+        setUser({ ...user, email: email });
         setMessage({ ...message, email: msg });
         setCorrect({ ...correct, email: flag });
       })
@@ -195,7 +184,7 @@ const Join = () => {
       flag = false;
     if (e.target.value) {
       msg = "비밀번호 확인란은 필수입니다.";
-    } else if (userValue.password !== e.target.value) {
+    } else if (user.password !== e.target.value) {
       msg = "비밀번호가 일치하지 않습니다.";
     } else {
       msg = "비밀번호가 일치합니다.";
@@ -217,7 +206,6 @@ const Join = () => {
       oncomplete: function (data) {
         const { zonecode, roadAddress, buildingName, apartment } = data;
         let extraRoadAddr = "";
-        console.log("zonecode: ", zonecode);
 
         if (data.buildingName !== "" && data.apartment === "Y") {
           extraRoadAddr +=
@@ -225,8 +213,8 @@ const Join = () => {
         }
         if (zonecode) {
           // flag = true;
-          setUserValue({
-            ...userValue,
+          setUser({
+            ...user,
             postCode: zonecode,
             address1: roadAddress,
           });
@@ -247,8 +235,8 @@ const Join = () => {
     if (inputValue) {
       flag = true;
     }
-    setUserValue({
-      ...userValue,
+    setUser({
+      ...user,
       address2: inputValue,
     });
     setCorrect({ ...correct, address2: !correct.address2 });
@@ -258,8 +246,8 @@ const Join = () => {
     // 다음 주소 검색 완료 시 호출되는 콜백 함수
     const { zonecode, roadAddress } = data;
 
-    setUserValue({
-      ...userValue,
+    setUser({
+      ...user,
       address2: roadAddress,
     });
 
@@ -285,9 +273,6 @@ const Join = () => {
 
   // 회원가입 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = (e) => {
-    e.preventDefalt();
-    console.log(userValue);
-
     // 회원 가입 서버 요청
     if (isValid()) {
       fetchSignUpPost();
@@ -299,20 +284,20 @@ const Join = () => {
   // 회원가입 처리 서버 요청
   const fetchSignUpPost = () => {
     //JSON을 Blob 타입으로 변경 후 FormData에 넣기
-    const userJsonBlob = new Blob([JSON.stringify(userValue)], {
+    const userJsonBlob = new Blob([JSON.stringify(user)], {
       type: "application/json",
     });
 
     const userFormData = new FormData();
     userFormData.append("user", userJsonBlob);
-
+    console.log(userFormData);
     fetch(API_BASE_URL, {
       method: "POST",
       body: userFormData,
     }).then((res) => {
       if (res.status === 200) {
         alert("회원가입 되었습니다!");
-        redirection("/login");
+        // redirection("/login");
       } else {
         alert("서버와의 통신이 원활하지 않습니다.");
       }
@@ -323,7 +308,7 @@ const Join = () => {
     <>
       <Container
         component="main"
-        maxWidth="xs"
+        maxwidth="xs"
         style={{ margin: "200px auto" }}
       >
         <form noValidate>
@@ -412,10 +397,10 @@ const Join = () => {
                 id="sample4_postcode"
                 name="Postcode"
                 placeholder="우편번호"
-                value={userValue.postCode}
+                value={user.postCode}
                 fullWidth
                 disabled
-                InputPlaceholderProps={{
+                inputplaceholderprops={{
                   style: { color: "white" },
                 }}
                 InputProps={{ style: { color: "white" } }}
@@ -442,7 +427,7 @@ const Join = () => {
                 id="sample4_roadAddress"
                 name="roadAddress"
                 placeholder="도로명주소"
-                value={userValue.address1}
+                value={user.address1}
                 fullWidth
                 disabled
                 InputLabelProps={{
