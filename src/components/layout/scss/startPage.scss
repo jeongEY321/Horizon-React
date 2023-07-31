@@ -1,8 +1,67 @@
 //전체 배경화면
 body {
     background: black;
+
+//폰트
+@font-face {
+    font-family: "Orbitron-Bold";
+    src: url("../../../../public/assets/fonts/Orbitron-Bold.woff2");
+    font-style: normal;
+ }
 }
 
 //Welcome 글씨
+.welcome-img {
+    width: 50%;
+    padding: 1.5%;
+}
+
 
 //버튼 집합들
+.setBtn {
+    border: 0;
+    outline: 0;
+    padding: 20px;
+    margin-left: 20px;
+    margin-top: 20%;
+
+    .start-btn {
+        border: 0;
+        outline: 0;
+        background: none;
+        background-image: url("../../../../public/assets/button/Btn05Blue_p.png");
+        background-size: cover;
+        font-family: 'Orbitron-Bold' !important;
+        font-size: 20px;
+        color: white;
+        width: 10%;
+        height: 65px;
+        cursor: pointer;
+    }
+
+    .start-btn:hover {
+        opacity: 80%;
+        color: #E91E63;
+    }
+    
+    .join-btn {
+        border: 0;
+        outline: 0;
+        background: none;
+        background-image: url("../../../../public/assets/button/Btn05Blue_p.png");
+        background-size: cover;
+        font-family: 'Orbitron-Bold' !important;
+        font-size: 20px;
+        color: white;
+        width: 10%;
+        height: 65px;
+        cursor: pointer;
+        margin-left: 2%;
+    }
+
+    .join-btn:hover {
+        opacity: 80%;
+        color: #E91E63;
+    }
+
+}

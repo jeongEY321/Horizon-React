@@ -8,7 +8,13 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Icon from "@mdi/react";
-import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
+import {
+  mdiAccount,
+  mdiLock,
+  mdiLockOpen,
+  AccountCircleIcon,
+  mdiAccountCircle,
+} from "@mdi/js";
 import "../../main/scss/CSHeader.scss";
 import "../../solarsystem/img/Tip001Blue.png";
 
@@ -109,6 +115,15 @@ export default function SearchAppBar() {
             className="profile-icon"
             path={mdiAccount}
             title="User Profile"
+            size={2}
+            horizontal
+            vertical
+            rotate={180}
+          />
+          <Icon
+            className="join-icon"
+            path={mdiAccountCircle}
+            title="join"
             size={2}
             horizontal
             vertical

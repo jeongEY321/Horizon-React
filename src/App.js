@@ -6,6 +6,7 @@ import StoreMain from "./components/store/js/StoreMain";
 import Basket from "./components/store/js/Basket";
 import History from "./components/store/js/History";
 import { Route, Routes } from "react-router-dom";
+import StartPage from "./components/layout/js/StartPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Store" element={<StoreMain />} />
         <Route path="/Basket" element={<Basket />} />
         <Route path="/history" element={<History />} />
+        <Route path="/start" element={<StartPage />} />
       </Routes>
     </>
   );
