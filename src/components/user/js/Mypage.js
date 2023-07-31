@@ -1,7 +1,15 @@
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Grid,
+  InputLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { API_BASE_URL } from "../../util/host-config";
+import "../scss/Mypage.scss";
 
 const Mypage = () => {
   // 상태변수로 회원정보 관리
@@ -115,36 +123,37 @@ const Mypage = () => {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                disabled
                 fullWidth
+                disabled
                 id='email'
-                label='이메일 주소(계정)'
                 name='email'
-                // value={}
+                label='이메일(계정)'
+                value='.'
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                name='username'
                 variant='outlined'
-                disabled
                 fullWidth
+                disabled
                 id='username'
+                name='username'
                 label='유저 이름'
-                // value={}
+                value='.'
               />
             </Grid>
 
             <Grid item xs={12} sm={8}>
               <TextField
-                type='text'
-                id='sample4_postcode'
-                name='Postcode'
-                placeholder='우편번호'
-                value={userValue.userPostcode}
+                variant='outlined'
                 fullWidth
                 disabled
+                id='sample4_postcode'
+                name='Postcode'
+                label='우편번호'
+                value={userValue.userPostcode}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -159,24 +168,26 @@ const Mypage = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                type='text'
-                id='sample4_roadAddress'
-                name='roadAddress'
-                placeholder='도로명주소'
-                value={userValue.userAddrBasic}
+                variant='outlined'
                 fullWidth
                 disabled
+                id='sample4_roadAddress'
+                name='roadAddress'
+                label='도로명주소'
+                value={userValue.userAddrBasic}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                name='detail-address'
                 variant='outlined'
                 fullWidth
                 id='detail-address'
+                name='detail-address'
                 label='상세주소'
                 onClick={addrDetailHandler}
+                InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12}>
