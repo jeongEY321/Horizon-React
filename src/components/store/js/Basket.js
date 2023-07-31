@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import PageHeader from "../../layout/js/PageHeader";
 import BasketItem from "./BasketItem";
 import BasketModal from "./BasketModal";
+import "../scss/basket.scss";
 
 import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
 import {
   Box,
+  Button,
+  Container,
   Grid,
   Table,
   TableBody,
@@ -14,7 +17,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Button, Container } from "react-bootstrap";
+import PayModal from "./PayModal";
 
 const Basket = () => {
   // 요청 헤더 설정
@@ -22,7 +25,7 @@ const Basket = () => {
     "content-type": "application/json",
     Authorization:
       "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTAzMzczMzEsImV4cCI6MTY5MDQyMzczMSwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.SWO6JbXmbemVrIgmNCxAgW51bsgvl38Rkv2qX9zXTAzhb_XEqoejr5w1vw5Vfin5qArb3g9fwbwXTvyRWiI76g",
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImFhYTExMTFAYWFhLmNvbSIsImlzcyI6IuuUuOq4sOqyheuTgCIsImlhdCI6MTY5MDY5NTM4OSwiZXhwIjoxNjkwNzgxNzg5LCJzdWIiOiJhYWExMTExQGFhYS5jb20ifQ.7O9D2PtK-LpS1EaCn6KhgUlVyiaS_p31xUTGbRr1C5FMvb6FwaY04s5bLFPTstTflizNUZoW1Ox2lQIU6z-i3A",
   };
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
@@ -59,8 +62,15 @@ const Basket = () => {
 
   const [open, setOpen] = useState(false); // 모달 상태를 관리하기 위한 상태변수
 
+  //결제하기 버튼 모달
+  const [payOpen, setPayOpen] = useState(false);
+
   const handleOpenModal = () => {
     setOpen(!open);
+  };
+
+  const handleOpenPayModal = () => {
+    setPayOpen(!payOpen);
   };
 
   // 수량 증가 함수
@@ -88,7 +98,7 @@ const Basket = () => {
       });
   };
 
-  // 수량 감수 함수
+  // 수량 감소 함수
   const decreaseQuantity = (count, id) => {
     fetch(API_SHOP_URL, {
       method: "PUT",
@@ -139,7 +149,13 @@ const Basket = () => {
   };
 
   // 총 가격 계산 함수
-  const totalPrice = () => {};
+  const totalPrice = () => {
+    let total = 0;
+    for (const item of basketList) {
+      total += item.price * item.count;
+    }
+    return total;
+  };
 
   return (
     <>
@@ -150,32 +166,34 @@ const Basket = () => {
       <Container
         component="main"
         className="basket-main-wrapper"
-        maxWidth="xl"
         sx={{ padding: "50px", display: "flex" }}
+        style={{ marginTop: "30px" }}
       >
         <Grid container spacing={4}>
           <Box
             className="list-box"
             sx={{
-              // border: "1px solid black",
-              width: "70%",
-              height: "65vh",
+              width: "90%",
+              maxWidth: "900px",
               margin: "auto",
               display: "flex",
               flexDirection: "column",
               overflow: "auto",
             }}
           >
-            <Table sx={{ tableLayout: "fixed" }}>
+            <Table
+              sx={{ tableLayout: "fixed" }}
+              style={{ border: "1px solid white" }}
+            >
               <TableHead>
                 <TableRow sx={{ align: "center" }}>
-                  <TableCell align="center" style={{ width: "40%" }}>
+                  <TableCell align="center" style={{ width: "20%" }}>
                     상품
                   </TableCell>
                   <TableCell align="center" style={{ width: "20%" }}>
                     가격
                   </TableCell>
-                  <TableCell align="center" style={{ width: "20%" }}>
+                  <TableCell align="center" style={{ width: "15%" }}>
                     수량
                   </TableCell>
                   <TableCell
@@ -184,7 +202,7 @@ const Basket = () => {
                   ></TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody style={{ color: "white" }}>
+              <TableBody>
                 {basketList.map((products) => (
                   <BasketItem
                     open={handleOpenModal}
@@ -197,47 +215,40 @@ const Basket = () => {
                 ))}
               </TableBody>
             </Table>
-
+          </Box>
+          <Box
+            className="cal-pay-wrapper"
+            sx={{
+              marginTop: "20px",
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
             <Box
-              className="cal-pay-wrapper"
+              className="calculate-box"
               sx={{
-                marginTop: "auto",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
+                padding: "10px",
               }}
             >
-              <Box
-                className="calculate-box"
-                sx={{
-                  padding: "10px",
-                  // margin: "20px 20px",
-                }}
-              >
-                <div>
-                  <strong>총 가격: 1원</strong>
-                </div>
-              </Box>
-              <Box
-                className="payment-btn-box"
-                sx={{
-                  width: "100%",
-                  height: "25%",
-                }}
-              >
-                <Button
-                  className="payment-btn"
-                  variant="contained"
-                  sx={{
-                    width: 100,
-                    height: 40,
-                    margin: "50px",
-                  }}
-                >
-                  결제하기
-                </Button>
+              <Box>
+                <strong>총 가격: {totalPrice()}원</strong>
               </Box>
             </Box>
+
+            <Button
+              className="payment-btn"
+              variant="contained"
+              sx={{
+                width: 100,
+                height: 40,
+                margin: "50px",
+              }}
+              onClick={handleOpenPayModal}
+            >
+              결제하기
+            </Button>
           </Box>
         </Grid>
       </Container>
@@ -247,6 +258,14 @@ const Basket = () => {
           open={open}
           setOpen={setOpen}
           handleOpen={handleOpenModal}
+        />
+      )}
+
+      {payOpen && (
+        <PayModal
+          open={payOpen}
+          setPayOpen={setPayOpen}
+          handleOpen={handleOpenPayModal}
         />
       )}
     </>

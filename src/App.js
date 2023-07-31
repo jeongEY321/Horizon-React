@@ -4,7 +4,8 @@ import CSMain from "./components/constellation/js/CSMain";
 import MainScreen from "./components/main/js/MainScreen";
 import StoreMain from "./components/store/js/StoreMain";
 import Basket from "./components/store/js/Basket";
-import { Route, Routes } from "react-router";
+import History from "./components/store/js/History";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/News" element={<CSMain />} />
         <Route path="/Store" element={<StoreMain />} />
         <Route path="/Basket" element={<Basket />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </>
   );

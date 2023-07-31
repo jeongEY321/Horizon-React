@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
+import { Padding } from "@mui/icons-material";
 
 const StoreItem = ({ open, item }) => {
   const { id, name, content } = item;
@@ -10,27 +11,37 @@ const StoreItem = ({ open, item }) => {
 
   return (
     <>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <Box className="md" sx={{ position: "relative" }}>
+      <Grid item xs={12} md={5} lg={4}>
+        <Box className='md' sx={{ position: "relative" }}>
           <Box
-            className="md-img"
+            className='md-img'
             sx={{ position: "absolute", top: 30, left: 50, paddingTop: 3 }}
-            onClick={handleClick}
           >
-            <img src={require("../img/planet_set.jpg")} alt="이미지입니다" />
+            <img
+              src={require("../img/planet_set.jpg")}
+              alt='이미지입니다'
+              onClick={handleClick}
+            />
           </Box>
           <Box
-            className="md-name"
+            className='md-name'
             sx={{
               position: "absolute",
               bottom: 60,
               display: "flex",
               justifyContent: "center",
               width: "100%",
-              fontSize: 50,
+              fontSize: 30,
             }}
           >
-            {name}
+            <ul>
+              <li
+                onClick={handleClick}
+                style={{ cursor: "pointer", listStyle: "none" }}
+              >
+                {name}
+              </li>
+            </ul>
           </Box>
         </Box>
       </Grid>

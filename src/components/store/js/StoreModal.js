@@ -7,7 +7,7 @@ import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
 const StoreModal = ({ open, setOpen, item }) => {
   const redirection = useNavigate();
 
-  const { id, name, content } = item;
+  const { id, name, content, price } = item;
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
   const API_SHOP_URL = BASE + SHOP;
@@ -18,11 +18,15 @@ const StoreModal = ({ open, setOpen, item }) => {
     "content-type": "application/json",
     Authorization:
       "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImdhbmcxMjM0NUBuYXZlci5jb20iLCJpc3MiOiLrlLjquLDqsoXrk4AiLCJpYXQiOjE2OTAzMzczMzEsImV4cCI6MTY5MDQyMzczMSwic3ViIjoiZ2FuZzEyMzQ1QG5hdmVyLmNvbSJ9.SWO6JbXmbemVrIgmNCxAgW51bsgvl38Rkv2qX9zXTAzhb_XEqoejr5w1vw5Vfin5qArb3g9fwbwXTvyRWiI76g",
+      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImFhYTExMTFAYWFhLmNvbSIsImlzcyI6IuuUuOq4sOqyheuTgCIsImlhdCI6MTY5MDY5NTM4OSwiZXhwIjoxNjkwNzgxNzg5LCJzdWIiOiJhYWExMTExQGFhYS5jb20ifQ.7O9D2PtK-LpS1EaCn6KhgUlVyiaS_p31xUTGbRr1C5FMvb6FwaY04s5bLFPTstTflizNUZoW1Ox2lQIU6z-i3A",
   };
 
   const newProduct = {
-    name: name,
+    name: {
+      name: name,
+      content: content,
+      price: price,
+    },
     count: 1,
   };
 
@@ -65,11 +69,16 @@ const StoreModal = ({ open, setOpen, item }) => {
     setOpen(!open);
   };
 
+  // 닫기 버튼 클릭 실행 함수
+  const handleClose = () => {
+    setOpen(!open);
+  };
+
   return (
     <Modal
       open={open}
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
+      aria-labelledby='modal-title'
+      aria-describedby='modal-description'
       sx={{ border: "none" }}
     >
       <Box
@@ -89,22 +98,33 @@ const StoreModal = ({ open, setOpen, item }) => {
           overflow: "auto",
         }}
       >
+        {/* 우측 상단에 닫기 버튼 추가 */}
+        <Button
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+          }}
+          onClick={handleClose}
+        >
+          X
+        </Button>
         <Typography
-          variant="h6"
-          id="modal-title"
+          variant='h6'
+          id='modal-title'
           gutterBottom
           sx={{ color: "black" }}
         >
           {name}
         </Typography>
 
-        <Box className="modal-md-img" sx={{ textAlign: "center", mt: 3 }}>
-          <img src="#" alt=""></img>
+        <Box className='modal-md-img' sx={{ textAlign: "center", mt: 3 }}>
+          <img src='#' alt=''></img>
         </Box>
 
         <Typography
-          variant="body1"
-          id="modal-description"
+          variant='body1'
+          id='modal-description'
           sx={{ mt: 3, color: "black" }}
         >
           {content}
@@ -119,14 +139,14 @@ const StoreModal = ({ open, setOpen, item }) => {
           }}
         >
           <Button
-            variant="outlined"
+            variant='outlined'
             sx={{ mr: 2, width: 150, height: 60, fontSize: 20 }}
             onClick={purchaseHandle}
           >
             바로구매
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             sx={{ width: 150, height: 60, fontSize: 20 }}
             onClick={addToCartHandle}
           >
