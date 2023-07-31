@@ -3,8 +3,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Container } from "reactstrap";
 import "../scss/Join.scss";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../../util/AuthContext";
-import { API_BASE_URL as BASE, USER } from "../../util/host-config";
+import AuthContext from "../../../util/AuthContext";
+import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import DaumPostcode from "react-daum-postcode";
 
 const Join = () => {
@@ -260,7 +260,7 @@ const Join = () => {
 
     setUserValue({
       ...userValue,
-      address: roadAddress,
+      address2: roadAddress,
     });
 
     setCorrect({

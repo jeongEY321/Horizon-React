@@ -12,7 +12,7 @@ import { getLoginUserInfo } from "../../../util/login-utils";
 
 const StoreMain = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(getLoginUserInfo().token);
 
   // 요청 헤더 설정
   const requestHeader = {
@@ -27,10 +27,6 @@ const StoreMain = () => {
   const [selectedItem, setSelectedItem] = useState([]); // 클릭한 아이템 정보를 저장할 상태변수
 
   useEffect(() => {
-    if (isLoggedIn) {
-      setToken(getLoginUserInfo().token);
-    }
-
     // 페이지가 렌더링 됨과 동시에 할 일 목록을 요청해서 뿌려주기.
     fetch(API_SHOP_URL + "/list", {
       method: "GET",

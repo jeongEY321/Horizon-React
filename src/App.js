@@ -9,6 +9,7 @@ import History from "./components/store/js/History";
 import Login from "./components/user/js/Login";
 import Mypage from "./components/user/js/Mypage";
 import { AuthContextProvider } from "./util/AuthContext";
+import Join from "./components/user/js/Join";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/join" element={<Join />} />
         {/* <Route path='/horoscope' element={<HsMain />} /> */}
       </Routes>
     </AuthContextProvider>
