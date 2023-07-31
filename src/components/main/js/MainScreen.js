@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import kindpng_5401205 from "../assets/kindpng_5401205.png";
 import blackHole from "../assets/blackHole.png";
 import Cosmos from "../assets/Cosmos.png";
+import { height } from "@mui/system";
 
 const MainScreen = () => {
   return (
@@ -12,7 +13,7 @@ const MainScreen = () => {
       <CSHeader />
       <div className="MainMenu">
         <div className="BigBtn">
-          <Link to="/News">
+          <Link to="/News" style={{ width: "550px", height: "800px" }}>
             <div className="NewsMenu">
               <button className="News-main-btn">News</button>
               <img
@@ -22,7 +23,7 @@ const MainScreen = () => {
               ></img>
             </div>
           </Link>
-          <Link to="/SolarSystem">
+          <Link to="/SolarSystem" style={{ width: "550px", height: "800px" }}>
             <div className="solarMenu">
               <button className="Solar-main-btn">SolarSystem</button>
               <img
@@ -32,7 +33,7 @@ const MainScreen = () => {
               />
             </div>
           </Link>
-          <Link to="/Store">
+          <Link to="/Store" style={{ width: "550px", height: "800px" }}>
             <div className="storeMenu">
               <button className="store-main-btn">Store</button>
               <img

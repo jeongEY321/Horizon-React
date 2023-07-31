@@ -9,7 +9,7 @@ const PageHeader = () => {
     <div className="MainHeader">
       <header className="menu">
         <div className="menuBtn">
-          <Link to="/" className="mainBtn">
+          <Link to="/Main" className="mainBtn">
             <button>Main</button>
           </Link>
           <Link to="/News" className="newsBtn">
