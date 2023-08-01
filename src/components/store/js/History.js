@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 import {
   Box,
@@ -9,24 +9,63 @@ import {
   Typography,
 } from "@mui/material";
 import HistoryItem from "./HistoryItem";
+import { AuthContext } from "../../../util/AuthContext";
+import { getLoginUserInfo } from "../../../util/login-utils";
+import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
+import { useNavigate } from "react-router-dom";
 
 const History = () => {
+  // 로그인 인증 토큰 얻어오기
+  const { isLoggedIn } = useContext(AuthContext);
+  const [token, setToken] = useState(getLoginUserInfo().token);
+  const [list, setList] = useState([]);
+  const redirection = useNavigate();
+
+  // 요청 헤더 설정
+  const requestHeader = {
+    "content-type": "application/json",
+    Authorization: "Bearer " + token,
+  };
+
+  // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
+  const API_SHOP_URL = BASE + SHOP;
+
+  useEffect(() => {
+    //로그아웃 상태면 로그인페이지로
+    if (!isLoggedIn) {
+      redirection("/");
+    }
+    // 페이지가 렌더링 됨과 동시에 할 일 목록을 요청해서 뿌려주기.
+    fetch(API_SHOP_URL + "/historyList", {
+      method: "GET",
+      headers: requestHeader,
+    })
+      .then((response) => response.json()) // JSON 형식으로 변환
+      .then((data) => {
+        // fetch를 통해 받아온 데이터를 상태 변수에 할당
+        if (data) setList(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <>
       <HeaderSolar />
-      <Typography variant='h4' align='center' marginTop={5}>
+      <Typography variant="h4" align="center" marginTop={5}>
         결제내역
       </Typography>
 
       <Container
-        component='main'
-        className='history-main-wrapper'
+        component="main"
+        className="history-main-wrapper"
         sx={{ display: "flex" }}
         style={{ marginTop: "30px" }}
       >
         <Grid container>
           <Box
-            className='list-box'
+            className="list-box"
             sx={{
               width: "100%",
               margin: "auto",
@@ -39,26 +78,28 @@ const History = () => {
               sx={{ tableLayout: "fixed" }}
               style={{ border: "1px solid white" }}
             >
-              <TableCell align='center' style={{ width: "200px" }}>
+              <TableCell align="center" style={{ width: "200px" }}>
                 상품명
               </TableCell>
-              <TableCell align='center' style={{ width: "10" }}>
+              <TableCell align="center" style={{ width: "10" }}>
                 개수
               </TableCell>
-              <TableCell align='center' style={{ width: "10" }}>
+              <TableCell align="center" style={{ width: "10" }}>
                 가격
               </TableCell>
-              <TableCell align='center' style={{ width: "10" }}>
+              <TableCell align="center" style={{ width: "10" }}>
                 주소
               </TableCell>
-              <TableCell align='center' style={{ width: "10" }}>
+              <TableCell align="center" style={{ width: "10" }}>
                 구입날짜
               </TableCell>
-              <TableCell align='center' style={{ width: "10" }}>
+              <TableCell align="center" style={{ width: "10" }}>
                 도착예정일
               </TableCell>
-              <TableCell align='center' style={{ width: "10" }}></TableCell>
-              <HistoryItem />
+              <TableCell align="center" style={{ width: "10" }}></TableCell>
+              {list.map((product) => (
+                <HistoryItem key={product.id} item={product} />
+              ))}
             </Table>
           </Box>
         </Grid>

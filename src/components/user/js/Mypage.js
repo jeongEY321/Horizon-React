@@ -7,13 +7,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import { Color } from "three";
 import { getLoginUserInfo } from "../../../util/login-utils";
 import { useNavigate } from "react-router-dom";
 import "../scss/Mypage.scss";
+import { AuthContext } from "../../../util/AuthContext";
 
 const Mypage = () => {
   const API_USER_URL = BASE + USER;
@@ -31,6 +32,15 @@ const Mypage = () => {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
+
+  const { isLoggedIn } = useContext(AuthContext);
+
+  //로그아웃 상태면 로그인페이지로
+  useEffect(() => {
+    if (!isLoggedIn) {
+      redirection("/login");
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     fetch(API_USER_URL + "/user", {
@@ -87,14 +97,6 @@ const Mypage = () => {
     if (inputValue) {
       flag = true;
     }
-    // setUser((prevUser) => ({
-    //   ...prevUser,
-    //   address2: inputValue,
-    // }));
-    // setCorrect((prevCorrect) => ({
-    //   ...prevCorrect,
-    //   address2: !prevCorrect.address2,
-    // }));
     setUser({
       ...user,
       address2: inputValue,
@@ -150,14 +152,14 @@ const Mypage = () => {
   return (
     <>
       <Container
-        component='main'
-        maxWidth='xs'
+        component="main"
+        maxWidth="xs"
         style={{ margin: "200px auto" }}
       >
         <form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography component='h1' variant='h5'>
+              <Typography component="h1" variant="h5">
                 마이페이지
               </Typography>
             </Grid>
@@ -165,11 +167,11 @@ const Mypage = () => {
             <Grid item xs={12}>
               <InputLabel>이메일(계정)</InputLabel>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 disabled
                 fullWidth
-                id='email'
-                name='email'
+                id="email"
+                name="email"
                 value={user.email}
               />
             </Grid>
@@ -177,11 +179,11 @@ const Mypage = () => {
             <Grid item xs={12}>
               <InputLabel>이름</InputLabel>
               <TextField
-                name='name'
-                variant='outlined'
+                name="name"
+                variant="outlined"
                 disabled
                 fullWidth
-                id='name'
+                id="name"
                 value={user.userName}
               />
             </Grid>
@@ -189,19 +191,19 @@ const Mypage = () => {
             <Grid item xs={12} sm={8}>
               <InputLabel>우편번호</InputLabel>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 fullWidth
                 disabled
-                id='sample4_postcode'
-                name='postCode'
+                id="sample4_postcode"
+                name="postCode"
                 value={user.postCode}
                 InputProps={{ style: { color: "white" } }}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Button
-                className='searchAddrBtn'
-                variant='contained'
+                className="searchAddrBtn"
+                variant="contained"
                 fullWidth
                 onClick={searchAddrClickHandler}
                 style={{
@@ -217,11 +219,11 @@ const Mypage = () => {
             <Grid item xs={12}>
               <InputLabel>도로명주소</InputLabel>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 fullWidth
                 disabled
-                id='sample4_roadAddress'
-                name='roadAddress'
+                id="sample4_roadAddress"
+                name="roadAddress"
                 value={user.address1}
                 InputProps={{ style: { color: "white" } }}
               />
@@ -230,11 +232,11 @@ const Mypage = () => {
             <Grid item xs={12}>
               <InputLabel>상세주소</InputLabel>
               <TextField
-                type='text'
-                variant='outlined'
+                type="text"
+                variant="outlined"
                 fullWidth
-                id='detail-address'
-                name='detail-address'
+                id="detail-address"
+                name="detail-address"
                 value={user.address2}
                 onChange={addrDetailHandler}
                 InputProps={{ style: { color: "white" } }}
@@ -242,9 +244,9 @@ const Mypage = () => {
             </Grid>
             <Grid item xs={12}>
               <Button
-                type='submit'
+                type="submit"
                 fullWidth
-                variant='contained'
+                variant="contained"
                 style={{ background: "#3159d1" }}
                 onClick={modifyClickHandler}
               >
@@ -260,16 +262,16 @@ const Mypage = () => {
                 }}
               >
                 <Button
-                  type='submit'
-                  variant='contained'
+                  type="submit"
+                  variant="contained"
                   style={{ background: "#3159d1" }}
                   // onClick={modifyClickHandler}
                 >
                   장바구니
                 </Button>
                 <Button
-                  type='submit'
-                  variant='contained'
+                  type="submit"
+                  variant="contained"
                   style={{ background: "#3159d1" }}
                   // onClick={modifyClickHandler}
                 >
@@ -280,7 +282,7 @@ const Mypage = () => {
           </Grid>
         </form>
       </Container>
-      <div id='postcode' style={{ display: "none" }}>
+      <div id="postcode" style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
     </>
