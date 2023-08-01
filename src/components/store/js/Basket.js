@@ -103,6 +103,7 @@ const Basket = () => {
   const [payOpen, setPayOpen] = useState(false);
 
   const handleOpenModal = (item) => {
+    console.log(item.content);
     setSelectedItem(item);
     setOpen(!open);
   };
