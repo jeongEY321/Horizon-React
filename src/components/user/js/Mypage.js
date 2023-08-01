@@ -7,13 +7,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import { Color } from "three";
 import { getLoginUserInfo } from "../../../util/login-utils";
 import { useNavigate } from "react-router-dom";
 import "../scss/Mypage.scss";
+import { AuthContext } from "../../../util/AuthContext";
 import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 
 const Mypage = () => {
@@ -32,6 +33,15 @@ const Mypage = () => {
     "Content-Type": "application/json",
     Authorization: "Bearer " + token,
   };
+
+  const { isLoggedIn } = useContext(AuthContext);
+
+  //로그아웃 상태면 로그인페이지로
+  useEffect(() => {
+    if (!isLoggedIn) {
+      redirection("/login");
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     fetch(API_USER_URL + "/user", {
@@ -88,14 +98,6 @@ const Mypage = () => {
     if (inputValue) {
       flag = true;
     }
-    // setUser((prevUser) => ({
-    //   ...prevUser,
-    //   address2: inputValue,
-    // }));
-    // setCorrect((prevCorrect) => ({
-    //   ...prevCorrect,
-    //   address2: !prevCorrect.address2,
-    // }));
     setUser({
       ...user,
       address2: inputValue,

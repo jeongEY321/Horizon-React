@@ -1,43 +1,46 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Container } from "reactstrap";
 import "../scss/Join.scss";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../../../util/AuthContext";
+import { AuthContext } from "../../../util/AuthContext";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import DaumPostcode from "react-daum-postcode";
+import { getLoginUserInfo } from "../../../util/login-utils";
 import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 
 const Join = () => {
-  //베이스 URL
   const API_BASE_URL = BASE + USER;
-
-  //리다이렉트
-  const redirection = useNavigate();
-
-  //로그인 확인 설정 authcontext
-  // const { isLoggedIn } = useContext(AuthContext);
-
-  // const [open, setOpen] = useState(false);
-
-  // useEffect(() => {
-  //   if(isLoggedIn) {
-  //     setOpen(true);
-  //     setTimeout(() => {
-  //       redirection('/');
-  //     }, 2000);
-  //   }
-  // }, [isLoggedIn, redirection]);
-
-  // 상태변수로 회원가입 입력값 관리
-  const [userValue, setUserValue] = useState({
+  const [user, setUser] = useState({
     userName: "",
-    password: "",
     email: "",
+    password: "",
+    passwordCheck: "",
     postCode: "",
     address1: "",
     address2: "",
   });
+  const [token, setToken] = useState(getLoginUserInfo().token);
+
+  const redirection = useNavigate();
+
+  const { isLoggedIn } = useContext(AuthContext);
+  const [join, setJoin] = useState(false);
+
+  //이미 로그인상태면 메인페이지로
+  useEffect(() => {
+    if (isLoggedIn) {
+      setTimeout(() => {
+        redirection("/");
+      }, 1000);
+    }
+
+    if (join) {
+      setTimeout(() => {
+        redirection("/login");
+      }, 1000);
+    }
+  }, [isLoggedIn, join]);
 
   // 검증 메세지 상태변수 관리
   const [message, setMessage] = useState({
@@ -54,14 +57,14 @@ const Join = () => {
     passwordCheck: false,
     email: false,
     address1: false,
-    address2: false,
+    postCode: false,
   });
 
   // 검증 데이터 상태변수에 저장
   const saveInputState = ({ key, inputVal, flag, msg }) => {
     inputVal !== "pass" &&
-      setUserValue({
-        ...userValue,
+      setUser({
+        ...user,
         [key]: inputVal,
       });
 
@@ -112,14 +115,13 @@ const Join = () => {
         }
       })
       .then((json) => {
-        console.log(json);
         if (json) {
           msg = "사용중인 이메일입니다!";
         } else {
           msg = "사용 가능한 이메일 입니다.";
           flag = true;
         }
-        setUserValue({ ...userValue, email: email });
+        setUser({ ...user, email: email });
         setMessage({ ...message, email: msg });
         setCorrect({ ...correct, email: flag });
       })
@@ -198,7 +200,7 @@ const Join = () => {
       flag = false;
     if (!e.target.value) {
       msg = "비밀번호 확인란은 필수입니다.";
-    } else if (userValue.password !== e.target.value) {
+    } else if (user.password !== e.target.value) {
       msg = "비밀번호가 일치하지 않습니다.";
     } else {
       msg = "비밀번호가 일치합니다.";
@@ -220,16 +222,15 @@ const Join = () => {
       oncomplete: function (data) {
         const { zonecode, roadAddress, buildingName, apartment } = data;
         let extraRoadAddr = "";
-        console.log("zonecode: ", zonecode);
 
         if (data.buildingName !== "" && data.apartment === "Y") {
           extraRoadAddr +=
             extraRoadAddr !== "" ? ", " + data.buildingName : data.buildingName;
         }
         if (zonecode) {
-          // flag = true;
-          setUserValue({
-            ...userValue,
+          flag = true;
+          setUser({
+            ...user,
             postCode: zonecode,
             address1: roadAddress,
           });
@@ -250,27 +251,26 @@ const Join = () => {
     if (inputValue) {
       flag = true;
     }
-    setUserValue({
-      ...userValue,
+    setUser({
+      ...user,
       address2: inputValue,
     });
-    setCorrect({
-      ...correct,
-      address2: !correct.address2,
-    });
+    setCorrect({ ...correct, address2: flag });
   };
 
   const handlePostcodeComplete = (data) => {
     // 다음 주소 검색 완료 시 호출되는 콜백 함수
     const { zonecode, roadAddress } = data;
 
-    setUserValue({
-      ...userValue,
+    setUser({
+      ...user,
+      postCode: zonecode,
       address1: roadAddress,
     });
 
     setCorrect({
       ...correct,
+      postCode: true,
       address1: true,
     });
 
@@ -302,21 +302,23 @@ const Join = () => {
 
   // 회원가입 처리 서버 요청
   const fetchSignUpPost = () => {
-    //JSON을 Blob 타입으로 변경 후 FormData에 넣기
-    const userJsonBlob = new Blob([JSON.stringify(userValue)], {
-      type: "application/json",
-    });
-
+    // FormData에 바로 데이터를 넣기
     const userFormData = new FormData();
-    userFormData.append("user", userJsonBlob);
+    userFormData.append("email", user.email);
+    userFormData.append("password", user.password);
+    userFormData.append("userName", user.userName);
+    userFormData.append("postCode", user.postCode);
+    userFormData.append("address1", user.address1);
+    userFormData.append("address2", user.address2);
 
     fetch(API_BASE_URL, {
       method: "POST",
       body: userFormData,
     }).then((res) => {
+      console.log(res.status);
       if (res.status === 200) {
-        alert("회원가입 되었습니다!");
-        redirection("/login");
+        alert("회원가입에 성공했습니다!");
+        setJoin(true);
       } else {
         alert("서버와의 통신이 원활하지 않습니다.");
       }
@@ -447,7 +449,7 @@ const Join = () => {
                   id='sample4_postcode'
                   name='Postcode'
                   placeholder='우편번호*'
-                  value={userValue.postCode}
+                  value={user.postCode}
                   fullWidth
                   disabled
                   required
@@ -479,7 +481,7 @@ const Join = () => {
                   id='sample4_roadAddress'
                   name='roadAddress'
                   placeholder='도로명주소*'
-                  value={userValue.address1}
+                  value={user.address1}
                   fullWidth
                   disabled
                   required
