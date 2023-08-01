@@ -103,6 +103,7 @@ const Basket = () => {
   const [payOpen, setPayOpen] = useState(false);
 
   const handleOpenModal = (item) => {
+    console.log(item.content);
     setSelectedItem(item);
     setOpen(!open);
   };
@@ -244,124 +245,130 @@ const Basket = () => {
 
   return (
     <>
-      <HeaderSolar />
-      <Typography variant="h4" align="center" marginTop={5}>
-        장바구니
-      </Typography>
-      <Container
-        component="main"
-        className="basket-main-wrapper"
-        sx={{ padding: "50px", display: "flex" }}
-        style={{ marginTop: "30px" }}
-      >
-        <Grid container spacing={4}>
-          <Box
-            className="list-box"
-            sx={{
-              width: "90%",
-              maxWidth: "900px",
-              margin: "auto",
-              display: "flex",
-              flexDirection: "column",
-              overflowY: "auto",
-              maxHeight: "50vh",
-            }}
-          >
-            <Table
-              sx={{ tableLayout: "fixed" }}
-              style={{ border: "1px solid white" }}
-            >
-              <TableHead>
-                <TableRow sx={{ align: "center" }}>
-                  <TableCell align="center" style={{ width: "20%" }}>
-                    상품
-                  </TableCell>
-                  <TableCell align="center" style={{ width: "20%" }}>
-                    가격
-                  </TableCell>
-                  <TableCell align="center" style={{ width: "15%" }}>
-                    수량
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    style={{ width: "10%" }}
-                  ></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {basketList.map((products) => (
-                  <BasketItem
-                    open={handleOpenModal}
-                    increase={increaseQuntity}
-                    decrease={decreaseQuantity}
-                    deleteProduct={deleteProduct}
-                    key={products.id}
-                    item={products}
-                  />
-                ))}
-              </TableBody>
-            </Table>
-          </Box>
-          <Box
-            className="cal-pay-wrapper"
-            sx={{
-              marginTop: "20px",
-              position: "fixed",
-              left: "0",
-              bottom: "0",
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              width: "100%",
-              height: "100px",
-              borderTop: "1px solid white",
-              borderBottom: "1px solid white",
-            }}
-          >
+      <div className='basket-wrapper'>
+        <HeaderSolar />
+
+        <Typography variant='h4' align='center' marginTop={5}>
+          장바구니
+        </Typography>
+        <Container
+          component='main'
+          className='basket-main-wrapper'
+          sx={{ padding: "50px", display: "flex" }}
+          style={{ marginTop: "30px" }}
+        >
+          <Grid container spacing={4}>
             <Box
-              className="calculate-box"
+              className='list-box'
               sx={{
-                padding: "10px",
+                width: "90%",
+                maxWidth: "900px",
+                margin: "auto",
+                display: "flex",
+                flexDirection: "column",
+                overflowY: "auto",
+                maxHeight: "50vh",
               }}
             >
-              <Box>
-                <strong>총 가격: {totalPrice()}원</strong>
-              </Box>
+              <Table
+                sx={{ tableLayout: "fixed" }}
+                style={{
+                  border: "1px solid white",
+                  background: "rgba(0,0,0,0.5)",
+                }}
+              >
+                <TableHead>
+                  <TableRow sx={{ align: "center" }}>
+                    <TableCell align='center' style={{ width: "20%" }}>
+                      상품
+                    </TableCell>
+                    <TableCell align='center' style={{ width: "20%" }}>
+                      가격
+                    </TableCell>
+                    <TableCell align='center' style={{ width: "15%" }}>
+                      수량
+                    </TableCell>
+                    <TableCell
+                      align='center'
+                      style={{ width: "10%" }}
+                    ></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {basketList.map((products) => (
+                    <BasketItem
+                      open={handleOpenModal}
+                      increase={increaseQuntity}
+                      decrease={decreaseQuantity}
+                      deleteProduct={deleteProduct}
+                      key={products.id}
+                      item={products}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
             </Box>
-
-            <Button
-              className="payment-btn"
-              variant="contained"
+            <Box
+              className='cal-pay-wrapper'
               sx={{
-                width: 100,
-                height: 40,
-                margin: "50px",
+                marginTop: "20px",
+                position: "fixed",
+                left: "0",
+                bottom: "0",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                width: "100%",
+                height: "100px",
+                borderTop: "1px solid white",
+                borderBottom: "1px solid white",
               }}
-              onClick={handleOpenPayModal}
             >
-              결제하기
-            </Button>
-          </Box>
-        </Grid>
-      </Container>
+              <Box
+                className='calculate-box'
+                sx={{
+                  padding: "10px",
+                }}
+              >
+                <Box>
+                  <strong>총 가격: {totalPrice()}원</strong>
+                </Box>
+              </Box>
 
-      {open && (
-        <BasketModal
-          open={open}
-          setOpen={setOpen}
-          handleOpen={handleOpenModal}
-          selectedItem={selectedItem}
-        />
-      )}
+              <Button
+                className='payment-btn'
+                variant='contained'
+                sx={{
+                  width: 100,
+                  height: 40,
+                  margin: "50px",
+                }}
+                onClick={handleOpenPayModal}
+              >
+                결제하기
+              </Button>
+            </Box>
+          </Grid>
+        </Container>
 
-      {payOpen && (
-        <PayModal
-          open={payOpen}
-          setPayOpen={setPayOpen}
-          handleOpen={handleOpenPayModal}
-          yesPayHandle={yesPayHandle}
-        />
-      )}
+        {open && (
+          <BasketModal
+            open={open}
+            setOpen={setOpen}
+            handleOpen={handleOpenModal}
+            selectedItem={selectedItem}
+          />
+        )}
+
+        {payOpen && (
+          <PayModal
+            open={payOpen}
+            setPayOpen={setPayOpen}
+            handleOpen={handleOpenPayModal}
+            yesPayHandle={yesPayHandle}
+          />
+        )}
+      </div>
     </>
   );
 };

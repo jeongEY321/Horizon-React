@@ -1,10 +1,11 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Container } from "reactstrap";
 import "../scss/Login.scss";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import { AuthContext } from "../../../util/AuthContext";
 import { useNavigate } from "react-router-dom";
+import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 
 const Login = () => {
   const redirection = useNavigate();
@@ -63,69 +64,91 @@ const Login = () => {
     fetchLogin();
   };
 
+  //회원가입 버튼 클릭 핸들러
+  const joinButtonClickHandler = () => {
+    redirection("/join");
+  };
+
   return (
     <>
-      <Container
-        component="main"
-        maxwidth="xs"
-        style={{ margin: "200px auto" }}
-      >
-        <form noValidate onSubmit={loginHandler}>
-          <Grid container spacing={2} maxwidth="xs">
-            <Grid item xs={12}>
-              <Typography component="h1" variant="h5">
-                로그인
-              </Typography>
+      <div className='login-wrapper'>
+        <HeaderSolar />
+        <Container
+          component='main'
+          maxWidth='xs'
+          style={{ margin: "80px auto" }}
+        >
+          <form noValidate onSubmit={loginHandler}>
+            <Grid container spacing={2} maxWidth='xs'>
+              <Grid item xs={12}>
+                <Typography component='h1' variant='h5'>
+                  로그인
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
 
-          <br />
+            <br />
 
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="email address"
-                name="email"
-                autoComplete="email"
-                InputLabelProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='email'
+                  label='email address'
+                  name='email'
+                  autoFocus
+                  autoComplete='email'
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  name='password'
+                  label='on your password'
+                  type='password'
+                  id='password'
+                  autoComplete='current-password'
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type='submit'
+                  fullWidth
+                  variant='contained'
+                  style={{ background: "#3159d1" }}
+                >
+                  로그인
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Box sx={{ textAlign: "center" }}>아직 회원이 아니신가요~?</Box>
+                <Button
+                  fullWidth
+                  variant='contained'
+                  style={{ background: "#3159d1", marginTop: "10px" }}
+                  onClick={joinButtonClickHandler}
+                >
+                  회원가입
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="on your password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                InputLabelProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                style={{ background: "#3159d1" }}
-              >
-                로그인
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Container>
+          </form>
+        </Container>
+      </div>
     </>
   );
 };

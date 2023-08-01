@@ -1,6 +1,5 @@
-import { TableCell, TableRow } from "@mui/material";
+import { Button, TableCell, TableRow } from "@mui/material";
 import React from "react";
-import { Button } from "reactstrap";
 
 const HistoryItem = ({ item }) => {
   const { id, name, content, price, address1, address2, buyDate, count } = item;
