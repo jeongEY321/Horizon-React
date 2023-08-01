@@ -2,20 +2,12 @@ import { Box, Button, Modal, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const PayModal = ({ open, setPayOpen }) => {
+const PayModal = ({ open, setPayOpen, yesPayHandle }) => {
   const redirection = useNavigate();
 
   // 닫기 버튼 클릭 실행 함수
   const handleClose = () => {
     setPayOpen(!open);
-  };
-
-  // 예 버튼 클릭
-  const yesPayHandle = () => {
-    const confirmed = window.confirm("결제하시겠습니까?");
-    if (confirmed) {
-      redirection("/history");
-    }
   };
 
   // 아니오 버튼 클릭
@@ -24,11 +16,15 @@ const PayModal = ({ open, setPayOpen }) => {
     handleClose();
   };
 
+  const yesPay = () => {
+    yesPayHandle();
+  };
+
   return (
     <Modal
       open={open}
-      aria-labelledby='modal-title'
-      aria-describedby='modal-description'
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
       sx={{ border: "none" }}
     >
       <Box
@@ -61,8 +57,8 @@ const PayModal = ({ open, setPayOpen }) => {
         </Button>
 
         <Typography
-          variant='body1'
-          id='modal-description'
+          variant="body1"
+          id="modal-description"
           sx={{ mt: 3, color: "black" }}
         >
           가격란
@@ -76,14 +72,14 @@ const PayModal = ({ open, setPayOpen }) => {
           }}
         >
           <Button
-            variant='outlined'
+            variant="outlined"
             sx={{ mr: 2, width: 150, height: 60, fontSize: 20 }}
-            onClick={yesPayHandle}
+            onClick={yesPay}
           >
             예
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             sx={{ width: 150, height: 60, fontSize: 20 }}
             onClick={noPayAndClose}
           >

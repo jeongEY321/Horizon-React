@@ -1,8 +1,10 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
+import { getLoginUserInfo } from "../../../util/login-utils";
+import { AuthContext } from "../../../util/AuthContext";
 
 const StoreModal = ({ open, setOpen, item }) => {
   const redirection = useNavigate();
@@ -11,14 +13,13 @@ const StoreModal = ({ open, setOpen, item }) => {
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
   const API_SHOP_URL = BASE + SHOP;
-  const API_USER_URL = BASE + USER;
+  const { isLoggedIn } = useContext(AuthContext);
 
+  const [token, setToken] = useState(getLoginUserInfo().token);
   // 요청 헤더 설정
   const requestHeader = {
     "content-type": "application/json",
-    Authorization:
-      "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImFhYTExMTFAYWFhLmNvbSIsImlzcyI6IuuUuOq4sOqyheuTgCIsImlhdCI6MTY5MDY5NTM4OSwiZXhwIjoxNjkwNzgxNzg5LCJzdWIiOiJhYWExMTExQGFhYS5jb20ifQ.7O9D2PtK-LpS1EaCn6KhgUlVyiaS_p31xUTGbRr1C5FMvb6FwaY04s5bLFPTstTflizNUZoW1Ox2lQIU6z-i3A",
+    Authorization: "Bearer " + token,
   };
 
   const newProduct = {
@@ -32,15 +33,19 @@ const StoreModal = ({ open, setOpen, item }) => {
 
   // 바로구매 버튼 클릭 실행 함수
   const purchaseHandle = () => {
+    //로그아웃 상태면 로그인페이지로
+    if (!isLoggedIn) {
+      alert("로그인이 필요합니다.");
+      redirection("/login");
+      return;
+    }
     fetch(API_SHOP_URL, {
       method: "POST",
       headers: requestHeader,
       body: JSON.stringify(newProduct),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => {})
       .catch((error) => {
         error = "이미 장바구니에 추가하셨습니다.";
         alert("Error: " + error);
@@ -51,6 +56,12 @@ const StoreModal = ({ open, setOpen, item }) => {
 
   //장바구니 버튼 클릭 실행 함수
   const addToCartHandle = () => {
+    //로그아웃 상태면 로그인페이지로
+    if (!isLoggedIn) {
+      alert("로그인이 필요합니다.");
+      redirection("/login");
+      return;
+    }
     // 장바구니 리스트만 추가 로직
     fetch(API_SHOP_URL, {
       method: "POST",
@@ -59,7 +70,7 @@ const StoreModal = ({ open, setOpen, item }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => {
         error = "이미 장바구니에 추가하셨습니다.";
@@ -77,8 +88,8 @@ const StoreModal = ({ open, setOpen, item }) => {
   return (
     <Modal
       open={open}
-      aria-labelledby='modal-title'
-      aria-describedby='modal-description'
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
       sx={{ border: "none" }}
     >
       <Box
@@ -110,21 +121,21 @@ const StoreModal = ({ open, setOpen, item }) => {
           X
         </Button>
         <Typography
-          variant='h6'
-          id='modal-title'
+          variant="h6"
+          id="modal-title"
           gutterBottom
           sx={{ color: "black" }}
         >
           {name}
         </Typography>
 
-        <Box className='modal-md-img' sx={{ textAlign: "center", mt: 3 }}>
-          <img src='#' alt=''></img>
+        <Box className="modal-md-img" sx={{ textAlign: "center", mt: 3 }}>
+          <img src="#" alt=""></img>
         </Box>
 
         <Typography
-          variant='body1'
-          id='modal-description'
+          variant="body1"
+          id="modal-description"
           sx={{ mt: 3, color: "black" }}
         >
           {content}
@@ -139,14 +150,14 @@ const StoreModal = ({ open, setOpen, item }) => {
           }}
         >
           <Button
-            variant='outlined'
+            variant="outlined"
             sx={{ mr: 2, width: 150, height: 60, fontSize: 20 }}
             onClick={purchaseHandle}
           >
             바로구매
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             sx={{ width: 150, height: 60, fontSize: 20 }}
             onClick={addToCartHandle}
           >

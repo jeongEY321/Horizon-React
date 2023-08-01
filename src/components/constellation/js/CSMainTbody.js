@@ -6,7 +6,6 @@ const CSMainTbody = (board) => {
   return (
     <>
       <tr id="News-tbody">
-        {/* <td>[{category}]</td> */}
         <td className="td-photo">{Photo}</td>
         <td className="td-title">{Title}</td>
         <td className="td-date">{Date}</td>
