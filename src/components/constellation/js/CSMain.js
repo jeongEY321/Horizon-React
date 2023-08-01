@@ -1,9 +1,10 @@
 import React from "react";
-import HeaderSolar from "../../solarsystem/js/HeaderSolar";
-import CSHeader from "./CSHeader";
+import PageHeader from "../../layout/js/PageHeader";
 import { Table } from "react-bootstrap";
 import CSMainTbody from "./CSMainTbody";
-import "../scss/CSMain.scss";
+import "../../constellation/scss/CSMain.scss";
+import CSNewsPage from "./CSNewsPage";
+import CSMainNews from "./CSMainNews";
 
 const CSMain = () => {
   //임시 데이터
@@ -37,13 +38,14 @@ const CSMain = () => {
 
   return (
     <section className="News-board">
-      <HeaderSolar />
+      <PageHeader />
+      <CSMainNews />
       <Table board hover border={1} className="News-table" width="100%">
         <thead className="mini-table">
-          <tr>
+          <tr className="tbl">
             <th>Photo</th>
             <th>Title</th>
-            <th>date</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +54,7 @@ const CSMain = () => {
           ))}
         </tbody>
       </Table>
+      <CSNewsPage />
     </section>
   );
 };

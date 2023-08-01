@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../solarsystem/scss/headerSolar.scss";
 import { AuthContext } from "../../../util/AuthContext";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
@@ -17,27 +16,27 @@ const HeaderSolar = () => {
   };
 
   return (
-    <div className='MainHeader'>
-      <header className='menu'>
-        <div className='menuBtn'>
-          <Link to='/' className='mainBtn'>
+    <div className="MainHeader">
+      <header className="menu">
+        <div className="menuBtn">
+          <Link to="/" className="mainBtn">
             <button>Main</button>
           </Link>
-          <Link to='/News' className='newsBtn'>
+          <Link to="/News" className="newsBtn">
             <button>News</button>
           </Link>
-          <Link to='/SolarSystem' className='hsBtn'>
+          <Link to="/SolarSystem" className="hsBtn">
             <button>Solar System</button>
           </Link>
-          <Link to='/Store' className='storeBtn'>
+          <Link to="/Store" className="storeBtn">
             <button>Store</button>
           </Link>
           {!isLoggedIn && (
-            <Link to='/login'>
+            <Link to="/login">
               <Icon
-                className='locked'
+                className="locked"
                 path={mdiLock}
-                title='lock'
+                title="lock"
                 size={2}
                 horizontal
                 vertical
@@ -48,11 +47,11 @@ const HeaderSolar = () => {
 
           {isLoggedIn && (
             <>
-              <Link to='/mypage'>
+              <Link to="/mypage">
                 <Icon
-                  className='profile-icon'
+                  className="profile-icon"
                   path={mdiAccount}
-                  title='User Profile'
+                  title="User Profile"
                   size={2}
                   horizontal
                   vertical
@@ -61,9 +60,9 @@ const HeaderSolar = () => {
               </Link>
               <div onClick={logoutHandler}>
                 <Icon
-                  className='lock-open'
+                  className="lock-open"
                   path={mdiLockOpen}
-                  title='lockOpen'
+                  title="lockOpen"
                   size={2}
                   horizontal
                   vertical

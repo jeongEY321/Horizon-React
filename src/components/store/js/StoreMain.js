@@ -5,7 +5,7 @@ import StoreItem from "./StoreItem";
 import StoreModal from "./StoreModal";
 
 import { API_BASE_URL as BASE, SHOP } from "../../../config/host-config";
-import HeaderSolar from "../../solarsystem/js/HeaderSolar";
+import PageHeader from "../../layout/js/PageHeader";
 import { getLoginUserInfo } from "../../../util/login-utils";
 
 const StoreMain = () => {
@@ -48,9 +48,9 @@ const StoreMain = () => {
 
   return (
     <>
-      <div className='store-wrapper'>
-        <HeaderSolar />
-        <Container component='main' maxWidth='xl' style={{ padding: "50px" }}>
+      <div className="store-wrapper">
+        <PageHeader />
+        <Container component="main" maxWidth="xl" style={{ padding: "50px" }}>
           <Grid container spacing={4}>
             {list.map((product) => (
               <StoreItem open={handleOpen} key={product.id} item={product} />
