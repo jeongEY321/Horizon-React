@@ -1,4 +1,4 @@
-import { TableCell, TableRow } from "@mui/material";
+import { Button, TableCell, TableRow } from "@mui/material";
 import React from "react";
 
 const HistoryItem = () => {
@@ -11,7 +11,9 @@ const HistoryItem = () => {
         <TableCell align='center'>주소</TableCell>
         <TableCell align='center'>구입날짜</TableCell>
         <TableCell align='center'>도착예정일</TableCell>
-        <TableCell align='center'>구매취소</TableCell>
+        <TableCell align='center'>
+          <Button variant='contained'>구매취소</Button>
+        </TableCell>
       </TableRow>
     </>
   );

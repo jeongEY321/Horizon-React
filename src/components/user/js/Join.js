@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../../util/AuthContext";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import DaumPostcode from "react-daum-postcode";
+import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 
 const Join = () => {
   //베이스 URL
@@ -52,6 +53,8 @@ const Join = () => {
     password: false,
     passwordCheck: false,
     email: false,
+    address1: false,
+    address2: false,
   });
 
   // 검증 데이터 상태변수에 저장
@@ -251,7 +254,10 @@ const Join = () => {
       ...userValue,
       address2: inputValue,
     });
-    setCorrect({ ...correct, address2: !correct.address2 });
+    setCorrect({
+      ...correct,
+      address2: !correct.address2,
+    });
   };
 
   const handlePostcodeComplete = (data) => {
@@ -260,12 +266,12 @@ const Join = () => {
 
     setUserValue({
       ...userValue,
-      address2: roadAddress,
+      address1: roadAddress,
     });
 
     setCorrect({
       ...correct,
-      address: true,
+      address1: true,
     });
 
     const element = document.getElementById("postcode");
@@ -285,14 +291,12 @@ const Join = () => {
 
   // 회원가입 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = (e) => {
-    e.preventDefalt();
-    console.log(userValue);
-
     // 회원 가입 서버 요청
     if (isValid()) {
       fetchSignUpPost();
     } else {
       alert("입력란을 다시 확인 해주세요.");
+      return;
     }
   };
 
@@ -321,191 +325,210 @@ const Join = () => {
 
   return (
     <>
-      <Container
-        component='main'
-        maxWidth='xs'
-        style={{ margin: "200px auto" }}
-      >
-        <form noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography component='h1' variant='h5'>
-                회원 가입
-              </Typography>
-            </Grid>
+      <div className='join-wrapper'>
+        <HeaderSolar />
+        <Container
+          component='main'
+          maxwidth='xs'
+          style={{ margin: "80px auto" }}
+        >
+          <form noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography component='h1' variant='h5'>
+                  회원 가입
+                </Typography>
+              </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                autoComplete='fname'
-                name='username'
-                variant='outlined'
-                required
-                fullWidth
-                id='username'
-                label='유저 이름'
-                autoFocus
-                onChange={nameHandler}
-                InputLabelProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
-              <span
-                style={correct.userName ? { color: "green" } : { color: "red" }}
-              >
-                {message.userName}
-              </span>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='email'
-                label='이메일 주소'
-                name='email'
-                autoComplete='email'
-                onChange={emailHandler}
-                InputLabelProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
-              <span
-                style={correct.email ? { color: "green" } : { color: "red" }}
-              >
-                {message.email}
-              </span>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='password'
-                label='패스워드'
-                type='password'
-                id='password'
-                autoComplete='current-password'
-                onChange={passwordHandler}
-                InputLabelProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
-              <span
-                style={correct.password ? { color: "green" } : { color: "red" }}
-              >
-                {message.password}
-              </span>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='password-check'
-                label='패스워드 확인'
-                type='password'
-                id='password-check'
-                autoComplete='check-password'
-                onChange={pwChkHandler}
-                InputLabelProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
-              <span
-                id='check-span'
-                style={
-                  correct.passwordCheck ? { color: "green" } : { color: "red" }
-                }
-              >
-                {message.passwordCheck}
-              </span>
-            </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete='fname'
+                  name='username'
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='username'
+                  label='유저 이름'
+                  autoFocus
+                  onChange={nameHandler}
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+                <span
+                  style={
+                    correct.userName ? { color: "green" } : { color: "red" }
+                  }
+                >
+                  {message.userName}
+                </span>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='email'
+                  label='이메일 주소'
+                  name='email'
+                  autoComplete='email'
+                  onChange={emailHandler}
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+                <span
+                  style={correct.email ? { color: "green" } : { color: "red" }}
+                >
+                  {message.email}
+                </span>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  name='password'
+                  label='패스워드'
+                  type='password'
+                  id='password'
+                  autoComplete='current-password'
+                  onChange={passwordHandler}
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+                <span
+                  style={
+                    correct.password ? { color: "green" } : { color: "red" }
+                  }
+                >
+                  {message.password}
+                </span>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  name='password-check'
+                  label='패스워드 확인'
+                  type='password'
+                  id='password-check'
+                  autoComplete='check-password'
+                  onChange={pwChkHandler}
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+                <span
+                  id='check-span'
+                  style={
+                    correct.passwordCheck
+                      ? { color: "green" }
+                      : { color: "red" }
+                  }
+                >
+                  {message.passwordCheck}
+                </span>
+              </Grid>
 
-            <Grid item xs={12} sm={8}>
-              <TextField
-                type='text'
-                id='sample4_postcode'
-                name='Postcode'
-                placeholder='우편번호'
-                value={userValue.postCode}
-                fullWidth
-                disabled
-                InputPlaceholderProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Button
-                className='searchAddrBtn'
-                variant='contained'
-                fullWidth
-                onClick={searchAddrClickHandler}
-                style={{
-                  background: "#3159d1",
-                  height: "50px",
-                  fontSize: "18px",
-                }}
-              >
-                주소검색
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                type='text'
-                id='sample4_roadAddress'
-                name='roadAddress'
-                placeholder='도로명주소'
-                value={userValue.address1}
-                fullWidth
-                disabled
-                InputLabelProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
-            </Grid>
+              <Grid item xs={12} sm={8}>
+                <TextField
+                  type='text'
+                  id='sample4_postcode'
+                  name='Postcode'
+                  placeholder='우편번호*'
+                  value={userValue.postCode}
+                  fullWidth
+                  disabled
+                  required
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Button
+                  className='searchAddrBtn'
+                  variant='contained'
+                  fullWidth
+                  onClick={searchAddrClickHandler}
+                  style={{
+                    background: "#3159d1",
+                    height: "50px",
+                    fontSize: "18px",
+                  }}
+                >
+                  주소검색
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type='text'
+                  id='sample4_roadAddress'
+                  name='roadAddress'
+                  placeholder='도로명주소*'
+                  value={userValue.address1}
+                  fullWidth
+                  disabled
+                  required
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                name='detail-address'
-                variant='outlined'
-                fullWidth
-                id='detail-address'
-                label='상세주소'
-                onClick={addrDetailHandler}
-                InputLabelProps={{
-                  style: { color: "white" },
-                }}
-                InputProps={{ style: { color: "white" } }}
-              />
+              <Grid item xs={12}>
+                <TextField
+                  name='detail-address'
+                  variant='outlined'
+                  fullWidth
+                  required
+                  id='detail-address'
+                  label='상세주소'
+                  onChange={addrDetailHandler}
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
+              <Grid item>
+                <Link to='/login' variant='body2' style={{ color: "white" }}>
+                  이미 계정이 있습니까? 로그인 하세요.
+                </Link>
+              </Grid>
+              <Grid container justifyContent='flex-end'>
+                <Grid item xs={4}>
+                  <Button
+                    type='submit'
+                    fullWidth
+                    variant='contained'
+                    style={{ background: "#3159d1", fontSize: "20px" }}
+                    onClick={joinButtonClickHandler}
+                  >
+                    계정 생성
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <Button
-                type='submit'
-                fullWidth
-                variant='contained'
-                style={{ background: "#3159d1", fontSize: "20px" }}
-                onClick={joinButtonClickHandler}
-              >
-                계정 생성
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid container justify='flex-end'>
-            <Grid item>
-              {/* <Link href="/login" variant="body2">
-                이미 계정이 있습니까? 로그인 하세요.
-              </Link> */}
-            </Grid>
-          </Grid>
-        </form>
-      </Container>
+          </form>
+        </Container>
+      </div>
       <div id='postcode' style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>

@@ -51,9 +51,9 @@ const StoreMain = () => {
 
   return (
     <>
-      <HeaderSolar />
-      <div className="store-wrapper">
-        <Container component="main" maxWidth="xl" style={{ padding: "50px" }}>
+      <div className='store-wrapper'>
+        <HeaderSolar />
+        <Container component='main' maxWidth='xl' style={{ padding: "50px" }}>
           <Grid container spacing={4}>
             {list.map((product) => (
               <StoreItem open={handleOpen} key={product.id} item={product} />

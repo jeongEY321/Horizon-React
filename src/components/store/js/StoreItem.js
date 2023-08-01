@@ -3,8 +3,10 @@ import { Box, Grid } from "@mui/material";
 import { Padding } from "@mui/icons-material";
 
 const StoreItem = ({ open, item }) => {
-  const { id, name, content } = item;
-
+  const { id, name, content, price } = item;
+  console.log("../img/" + { name } + ".jpg");
+  console.log(name);
+  console.log({ name });
   const handleClick = () => {
     open(item); // 클릭한 아이템 정보를 매개변수로 넘겨줍니다.
   };
@@ -18,7 +20,7 @@ const StoreItem = ({ open, item }) => {
             sx={{ position: "absolute", top: 30, left: 50, paddingTop: 3 }}
           >
             <img
-              src={require("../img/planet_set.jpg")}
+              src={require("../img/" + name + ".jpg")}
               alt='이미지입니다'
               onClick={handleClick}
             />
@@ -34,14 +36,27 @@ const StoreItem = ({ open, item }) => {
               fontSize: 30,
             }}
           >
-            <ul>
-              <li
-                onClick={handleClick}
-                style={{ cursor: "pointer", listStyle: "none" }}
-              >
-                {name}
-              </li>
-            </ul>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Box>
+                <Box
+                  onClick={handleClick}
+                  sx={{ marginBottom: "10px" }}
+                  style={{ cursor: "pointer", listStyle: "none" }}
+                >
+                  {name}
+                </Box>
+              </Box>
+              <Box>
+                <Box style={{ listStyle: "none" }}>{price}원</Box>
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Grid>

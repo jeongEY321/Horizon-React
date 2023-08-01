@@ -14,6 +14,7 @@ import { Color } from "three";
 import { getLoginUserInfo } from "../../../util/login-utils";
 import { useNavigate } from "react-router-dom";
 import "../scss/Mypage.scss";
+import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 
 const Mypage = () => {
   const API_USER_URL = BASE + USER;
@@ -147,139 +148,163 @@ const Mypage = () => {
     });
   };
 
+  // 장바구니 버튼 클릭
+  const basketBtnHandel = () => {
+    redirection("/basket");
+  };
+
+  // 결제내역 버튼 클릭
+  const historyBtnHandle = () => {
+    redirection("/history");
+  };
+
   return (
     <>
-      <Container
-        component='main'
-        maxWidth='xs'
-        style={{ margin: "200px auto" }}
-      >
-        <form noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography component='h1' variant='h5'>
-                마이페이지
-              </Typography>
-            </Grid>
+      <div className='mypage-wrapper'>
+        <HeaderSolar />
+        <Container
+          className='mypage'
+          component='main'
+          maxWidth='xs'
+          style={{ margin: "80px auto" }}
+        >
+          <form noValidate>
+            <Grid
+              container
+              spacing={2}
+              alignItems='center'
+              justifyContent='space-between'
+            >
+              <Grid item xs={12}>
+                <Grid container alignItems='center'>
+                  <Typography component='h1' variant='h5'>
+                    마이페이지
+                  </Typography>
+                  <Grid item xs={12}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignContent: "center",
+                      }}
+                    >
+                      <Button
+                        variant='contained'
+                        style={{ background: "#3159d1", marginRight: "10px" }}
+                        onClick={basketBtnHandel}
+                      >
+                        장바구니
+                      </Button>
+                      <Button
+                        variant='contained'
+                        style={{ background: "#3159d1" }}
+                        onClick={historyBtnHandle}
+                      >
+                        결제내역
+                      </Button>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Grid>
 
-            <Grid item xs={12}>
-              <InputLabel>이메일(계정)</InputLabel>
-              <TextField
-                variant='outlined'
-                disabled
-                fullWidth
-                id='email'
-                name='email'
-                value={user.email}
-              />
-            </Grid>
+              <Grid item xs={12}>
+                <InputLabel>이메일(계정)</InputLabel>
+                <TextField
+                  variant='outlined'
+                  disabled
+                  fullWidth
+                  id='email'
+                  name='email'
+                  value={user.email}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <InputLabel>이름</InputLabel>
-              <TextField
-                name='name'
-                variant='outlined'
-                disabled
-                fullWidth
-                id='name'
-                value={user.userName}
-              />
-            </Grid>
+              <Grid item xs={12}>
+                <InputLabel>이름</InputLabel>
+                <TextField
+                  name='name'
+                  variant='outlined'
+                  disabled
+                  fullWidth
+                  id='name'
+                  value={user.userName}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
 
-            <Grid item xs={12} sm={8}>
-              <InputLabel>우편번호</InputLabel>
-              <TextField
-                variant='outlined'
-                fullWidth
-                disabled
-                id='sample4_postcode'
-                name='postCode'
-                value={user.postCode}
-                InputProps={{ style: { color: "white" } }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Button
-                className='searchAddrBtn'
-                variant='contained'
-                fullWidth
-                onClick={searchAddrClickHandler}
-                style={{
-                  background: "#3159d1",
-                  height: "55px",
-                  fontSize: "18px",
-                  marginTop: "23px",
-                }}
-              >
-                주소검색
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <InputLabel>도로명주소</InputLabel>
-              <TextField
-                variant='outlined'
-                fullWidth
-                disabled
-                id='sample4_roadAddress'
-                name='roadAddress'
-                value={user.address1}
-                InputProps={{ style: { color: "white" } }}
-              />
-            </Grid>
+              <Grid item xs={12} sm={8}>
+                <InputLabel>우편번호</InputLabel>
+                <TextField
+                  variant='outlined'
+                  fullWidth
+                  disabled
+                  id='sample4_postcode'
+                  name='postCode'
+                  value={user.postCode}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Button
+                  className='searchAddrBtn'
+                  variant='contained'
+                  fullWidth
+                  onClick={searchAddrClickHandler}
+                  style={{
+                    background: "#3159d1",
+                    height: "55px",
+                    fontSize: "18px",
+                    marginTop: "23px",
+                  }}
+                >
+                  주소검색
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <InputLabel>도로명주소</InputLabel>
+                <TextField
+                  variant='outlined'
+                  fullWidth
+                  disabled
+                  id='sample4_roadAddress'
+                  name='roadAddress'
+                  value={user.address1}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <InputLabel>상세주소</InputLabel>
-              <TextField
-                type='text'
-                variant='outlined'
-                fullWidth
-                id='detail-address'
-                name='detail-address'
-                value={user.address2}
-                onChange={addrDetailHandler}
-                InputProps={{ style: { color: "white" } }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type='submit'
-                fullWidth
-                variant='contained'
-                style={{ background: "#3159d1" }}
-                onClick={modifyClickHandler}
-              >
-                정보수정
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  marginTop: "25px",
-                }}
-              >
+              <Grid item xs={12}>
+                <InputLabel>상세주소</InputLabel>
+                <TextField
+                  type='text'
+                  variant='outlined'
+                  fullWidth
+                  id='detail-address'
+                  name='detail-address'
+                  value={user.address2}
+                  onChange={addrDetailHandler}
+                  InputProps={{ style: { color: "white" } }}
+                  style={{ background: "rgba(0,0,0,0.5)" }}
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <Button
                   type='submit'
+                  fullWidth
                   variant='contained'
                   style={{ background: "#3159d1" }}
-                  // onClick={modifyClickHandler}
+                  onClick={modifyClickHandler}
                 >
-                  장바구니
+                  정보수정
                 </Button>
-                <Button
-                  type='submit'
-                  variant='contained'
-                  style={{ background: "#3159d1" }}
-                  // onClick={modifyClickHandler}
-                >
-                  결제내역
-                </Button>
-              </Box>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </Container>
+          </form>
+        </Container>
+      </div>
       <div id='postcode' style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
