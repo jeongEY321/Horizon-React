@@ -1,5 +1,6 @@
 import { TableCell, TableRow } from "@mui/material";
 import React from "react";
+import { Button } from "reactstrap";
 
 const HistoryItem = ({ item }) => {
   const { id, name, content, price, address1, address2, buyDate, count } = item;
@@ -22,7 +23,9 @@ const HistoryItem = ({ item }) => {
         </TableCell>
         <TableCell align="center">{formattedDate}</TableCell>
         <TableCell align="center">도착예정일</TableCell>
-        <TableCell align="center">구매취소</TableCell>
+        <TableCell align="center">
+          <Button variant="contained">구매취소</Button>
+        </TableCell>
       </TableRow>
     </>
   );

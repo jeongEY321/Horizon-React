@@ -76,27 +76,26 @@ const History = () => {
           >
             <Table
               sx={{ tableLayout: "fixed" }}
-              style={{ border: "1px solid white" }}
+              style={{
+                border: "1px solid white",
+                background: "rgba(0,0,0,0.5)",
+              }}
             >
               <TableCell align="center" style={{ width: "200px" }}>
                 상품명
               </TableCell>
-              <TableCell align="center" style={{ width: "10" }}>
+              <TableCell align="center" style={{ width: "80px" }}>
                 개수
               </TableCell>
-              <TableCell align="center" style={{ width: "10" }}>
+              <TableCell align="center" style={{ width: "150px" }}>
                 가격
               </TableCell>
-              <TableCell align="center" style={{ width: "10" }}>
+              <TableCell align="center" style={{ width: "300px" }}>
                 주소
               </TableCell>
-              <TableCell align="center" style={{ width: "10" }}>
-                구입날짜
-              </TableCell>
-              <TableCell align="center" style={{ width: "10" }}>
-                도착예정일
-              </TableCell>
-              <TableCell align="center" style={{ width: "10" }}></TableCell>
+              <TableCell align="center">구입날짜</TableCell>
+              <TableCell align="center">도착예정일</TableCell>
+              <TableCell align="center"></TableCell>
               {list.map((product) => (
                 <HistoryItem key={product.id} item={product} />
               ))}
