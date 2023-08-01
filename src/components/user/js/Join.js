@@ -1,5 +1,5 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Container } from "reactstrap";
 import "../scss/Join.scss";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,22 +23,23 @@ const Join = () => {
 
   const redirection = useNavigate();
 
-  const requestHeader = {
-    "content-type": "multipart/form-data",
-    Authorization: "Bearer " + token,
-  };
-
   const { isLoggedIn } = useContext(AuthContext);
-  const [open, setOpen] = useState(false);
+  const [join, setJoin] = useState(false);
 
+  //이미 로그인상태면 메인페이지로
   useEffect(() => {
     if (isLoggedIn) {
-      setOpen(true);
       setTimeout(() => {
         redirection("/");
-      }, 2000);
+      }, 1000);
     }
-  }, [isLoggedIn, redirection]);
+
+    if (join) {
+      setTimeout(() => {
+        redirection("/login");
+      }, 1000);
+    }
+  }, [isLoggedIn, join]);
 
   // 검증 메세지 상태변수 관리
   const [message, setMessage] = useState({
@@ -113,7 +114,6 @@ const Join = () => {
         }
       })
       .then((json) => {
-        console.log(json);
         if (json) {
           msg = "사용중인 이메일입니다!";
         } else {
@@ -254,7 +254,7 @@ const Join = () => {
       ...user,
       address2: inputValue,
     });
-    setCorrect({ ...correct, address2: !correct.address2 });
+    setCorrect({ ...correct, address2: flag });
   };
 
   const handlePostcodeComplete = (data) => {
@@ -313,9 +313,10 @@ const Join = () => {
       method: "POST",
       body: userFormData,
     }).then((res) => {
+      console.log(res.status);
       if (res.status === 200) {
-        alert("회원가입 되었습니다!");
-        redirection("/login");
+        alert("회원가입에 성공했습니다!");
+        setJoin(true);
       } else {
         alert("서버와의 통신이 원활하지 않습니다.");
       }
@@ -481,7 +482,7 @@ const Join = () => {
                 fullWidth
                 id="detail-address"
                 label="상세주소"
-                onClick={addrDetailHandler}
+                onChange={addrDetailHandler}
                 InputLabelProps={{
                   style: { color: "white" },
                 }}

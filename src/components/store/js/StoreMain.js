@@ -6,12 +6,9 @@ import StoreModal from "./StoreModal";
 
 import { API_BASE_URL as BASE, SHOP } from "../../../config/host-config";
 import HeaderSolar from "../../solarsystem/js/HeaderSolar";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../util/AuthContext";
 import { getLoginUserInfo } from "../../../util/login-utils";
 
 const StoreMain = () => {
-  const { isLoggedIn } = useContext(AuthContext);
   const [token, setToken] = useState(getLoginUserInfo().token);
 
   // 요청 헤더 설정
