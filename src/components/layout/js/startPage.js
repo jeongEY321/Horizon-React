@@ -12,8 +12,6 @@ const StartPage = () => {
       <div className="setBtn">
         <Link to="/Main">
           <button className="start-btn">Start</button>
-        </Link>
-        <Link to="/Join">
           <button className="join-btn">Join</button>
         </Link>
       </div>
