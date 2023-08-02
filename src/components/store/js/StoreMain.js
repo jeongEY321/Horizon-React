@@ -1,19 +1,20 @@
 import { Container, Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../store/scss/storemain.scss";
 import StoreItem from "./StoreItem";
 import StoreModal from "./StoreModal";
 
 import { API_BASE_URL as BASE, SHOP } from "../../../config/host-config";
 import PageHeader from "../../layout/js/PageHeader";
+import { getLoginUserInfo } from "../../../util/login-utils";
 
 const StoreMain = () => {
+  const [token, setToken] = useState(getLoginUserInfo().token);
+
   // 요청 헤더 설정
   const requestHeader = {
     "content-type": "application/json",
-    Authorization:
-      "Bearer " +
-      "eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImFhYTExMTFAYWFhLmNvbSIsImlzcyI6IuuUuOq4sOqyheuTgCIsImlhdCI6MTY5MDY5NTM4OSwiZXhwIjoxNjkwNzgxNzg5LCJzdWIiOiJhYWExMTExQGFhYS5jb20ifQ.7O9D2PtK-LpS1EaCn6KhgUlVyiaS_p31xUTGbRr1C5FMvb6FwaY04s5bLFPTstTflizNUZoW1Ox2lQIU6z-i3A",
+    Authorization: "Bearer " + token,
   };
 
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
@@ -30,8 +31,6 @@ const StoreMain = () => {
     })
       .then((response) => response.json()) // JSON 형식으로 변환
       .then((data) => {
-        // console.log(data);
-
         // fetch를 통해 받아온 데이터를 상태 변수에 할당
         if (data) setList(data);
       })
@@ -49,8 +48,8 @@ const StoreMain = () => {
 
   return (
     <>
-      <PageHeader />
       <div className="store-wrapper">
+        <PageHeader />
         <Container component="main" maxWidth="xl" style={{ padding: "50px" }}>
           <Grid container spacing={4}>
             {list.map((product) => (

@@ -2,15 +2,8 @@
 export const getLoginUserInfo = () => {
   return {
     token: localStorage.getItem("ACCESS_TOKEN"),
-    username: localStorage.getItem("LOGIN_USERNAME"),
+    email: localStorage.getItem("LOGIN_USEREMAIL"),
   };
 };
-
-//로그인 여부를 확인하는 함수
-// const isLogin = () => {
-//     const token = localStorage.getItem('ACCESS_TOKEN');
-//     if(token === null) return false;
-//     return true;
-// }
 
 export const isLogin = () => !!localStorage.getItem("ACCESS_TOKEN");
