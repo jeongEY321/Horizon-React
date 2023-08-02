@@ -57,11 +57,11 @@ const PlanetContext = () => {
         <div className="left-content">
           <div className="planet-name">천체명</div>
           <div className="planet-information">
-            <div>지름: (km)</div>
-            <div>표면적: (10⁶ km²)</div>
-            <div>질량: (10²⁰ kg)</div>
-            <div>자전주기: (일)</div>
-            <div>공전주기: (일)</div>
+            <div className="diameter">지름: (km)</div>
+            <div className="surface-area">표면적: (10⁶ km²)</div>
+            <div className="mass">질량: (10²⁰ kg)</div>
+            <div className="rotation">자전주기: (일)</div>
+            <div className="revolution">공전주기: (일)</div>
           </div>
         </div>
       </div>
