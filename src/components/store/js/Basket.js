@@ -274,7 +274,7 @@ const Basket = () => {
                 sx={{ tableLayout: "fixed" }}
                 style={{
                   border: "1px solid white",
-                  background: "rgba(0,0,0,0.8)",
+                  background: "rgba(0,0,0,0.5)",
                 }}
               >
                 <TableHead>
