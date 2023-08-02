@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "Orbitron-Bold";
+    src: url("../../../../public/assets/fonts/Orbitron-Bold.woff2");
+    font-style: normal;
+ }
+
+//[헤더 배경]
+.CSHeader {
+    background-color: black;
+}
+
+.header-menubar {
+    background-image: url("../../solarsystem/img/Tip001Blue.png");
+    background-size: 100% 100%;
+    width: 100%;
+    // max-width: 1920px;
+    height: 100px;
+
+    //[Page-Title]
+    .typography-cs {
+       margin-top: 10px;
+    }
+
+    //[아아콘 버튼]
+    .hamburger {
+        margin-top: 10px;
+        color: #2196F3;
+    }
+
+    .profile-icon {
+        cursor: pointer;
+        margin-top: 5px;
+        color: #2196F3;
+    }
+
+    .join-icon {
+        cursor: pointer;
+        margin-right: 10px;
+        margin-top: 7px;
+        color: #2196F3;
+    }
+
+    .locked {
+        cursor: pointer;
+        margin-top: 5px;
+        color: #2196F3;
+    }
+
+    .lock-open {
+        cursor: pointer;
+        margin-top: 5px;
+        color: #2196F3;
+    }
+}
+
+//페이지 이름
+

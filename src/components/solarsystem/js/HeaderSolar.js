@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../solarsystem/scss/headerSolar.scss";
 import { AuthContext } from "../../../util/AuthContext";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiBasket, mdiLock, mdiLockOpen } from "@mdi/js";
