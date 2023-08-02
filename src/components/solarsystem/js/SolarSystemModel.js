@@ -37,7 +37,7 @@ import CameraControls from "camera-controls";
 import ModelLoadingPage from "./ModelLoadingPage";
 import Footer from "../../layout/js/Footer";
 import PlanetContext from "../../layout/js/PlanetContext";
-import HeaderSolar from "./HeaderSolar";
+import HeaderSolar from "../../layout/js/PageHeader";
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);

@@ -5,7 +5,7 @@ import "../scss/Login.scss";
 import { API_BASE_URL as BASE, USER } from "../../../config/host-config";
 import { AuthContext } from "../../../util/AuthContext";
 import { useNavigate } from "react-router-dom";
-import HeaderSolar from "../../solarsystem/js/HeaderSolar";
+import HeaderSolar from "../../layout/js/PageHeader";
 
 const Login = () => {
   const redirection = useNavigate();
@@ -20,7 +20,7 @@ const Login = () => {
       setOpen(true);
       setTimeout(() => {
         redirection("/");
-      }, 3000);
+      }, 1000);
     }
   }, [isLoggedIn, redirection]);
 
@@ -71,17 +71,17 @@ const Login = () => {
 
   return (
     <>
-      <div className='login-wrapper'>
+      <div className="login-wrapper">
         <HeaderSolar />
         <Container
-          component='main'
-          maxWidth='xs'
+          component="main"
+          maxwidth="xs"
           style={{ margin: "80px auto" }}
         >
           <form noValidate onSubmit={loginHandler}>
-            <Grid container spacing={2} maxWidth='xs'>
+            <Grid container spacing={2} maxwidth="xs">
               <Grid item xs={12}>
-                <Typography component='h1' variant='h5'>
+                <Typography component="h1" variant="h5">
                   로그인
                 </Typography>
               </Grid>
@@ -92,14 +92,14 @@ const Login = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <TextField
-                  variant='outlined'
+                  variant="outlined"
                   required
                   fullWidth
-                  id='email'
-                  label='email address'
-                  name='email'
+                  id="email"
+                  label="email address"
+                  name="email"
                   autoFocus
-                  autoComplete='email'
+                  autoComplete="email"
                   InputLabelProps={{
                     style: { color: "white" },
                   }}
@@ -109,14 +109,14 @@ const Login = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  variant='outlined'
+                  variant="outlined"
                   required
                   fullWidth
-                  name='password'
-                  label='on your password'
-                  type='password'
-                  id='password'
-                  autoComplete='current-password'
+                  name="password"
+                  label="on your password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
                   InputLabelProps={{
                     style: { color: "white" },
                   }}
@@ -126,9 +126,9 @@ const Login = () => {
               </Grid>
               <Grid item xs={12}>
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
-                  variant='contained'
+                  variant="contained"
                   style={{ background: "#3159d1" }}
                 >
                   로그인
@@ -138,7 +138,7 @@ const Login = () => {
                 <Box sx={{ textAlign: "center" }}>아직 회원이 아니신가요~?</Box>
                 <Button
                   fullWidth
-                  variant='contained'
+                  variant="contained"
                   style={{ background: "#3159d1", marginTop: "10px" }}
                   onClick={joinButtonClickHandler}
                 >

@@ -2,7 +2,6 @@ import { Box, Button, Modal, Typography } from "@mui/material";
 import React from "react";
 
 const BasketModal = ({ open, setOpen, handleOpen, selectedItem }) => {
-  console.log(selectedItem);
   const { name, content } = selectedItem;
 
   // 닫기 버튼 클릭 실행 함수

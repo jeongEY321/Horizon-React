@@ -19,7 +19,13 @@ import HeaderSolar from "../../solarsystem/js/HeaderSolar";
 
 const Mypage = () => {
   const API_USER_URL = BASE + USER;
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({
+    email: "",
+    userName: "",
+    postCode: "",
+    address1: "",
+    address2: "",
+  });
   const [token, setToken] = useState(getLoginUserInfo().token);
 
   const redirection = useNavigate();
@@ -162,24 +168,24 @@ const Mypage = () => {
 
   return (
     <>
-      <div className='mypage-wrapper'>
+      <div className="mypage-wrapper">
         <HeaderSolar />
         <Container
-          className='mypage'
-          component='main'
-          maxWidth='xs'
+          className="mypage"
+          component="main"
+          maxwidth="xs"
           style={{ margin: "80px auto" }}
         >
           <form noValidate>
             <Grid
               container
               spacing={2}
-              alignItems='center'
-              justifyContent='space-between'
+              alignItems="center"
+              justifyContent="space-between"
             >
               <Grid item xs={12}>
-                <Grid container alignItems='center'>
-                  <Typography component='h1' variant='h5'>
+                <Grid container alignItems="center">
+                  <Typography component="h1" variant="h5">
                     마이페이지
                   </Typography>
                   <Grid item xs={12}>
@@ -191,14 +197,14 @@ const Mypage = () => {
                       }}
                     >
                       <Button
-                        variant='contained'
+                        variant="contained"
                         style={{ background: "#3159d1", marginRight: "10px" }}
                         onClick={basketBtnHandel}
                       >
                         장바구니
                       </Button>
                       <Button
-                        variant='contained'
+                        variant="contained"
                         style={{ background: "#3159d1" }}
                         onClick={historyBtnHandle}
                       >
@@ -212,11 +218,11 @@ const Mypage = () => {
               <Grid item xs={12}>
                 <InputLabel>이메일(계정)</InputLabel>
                 <TextField
-                  variant='outlined'
+                  variant="outlined"
                   disabled
                   fullWidth
-                  id='email'
-                  name='email'
+                  id="email"
+                  name="email"
                   value={user.email}
                   style={{ background: "rgba(0,0,0,0.5)" }}
                 />
@@ -225,11 +231,11 @@ const Mypage = () => {
               <Grid item xs={12}>
                 <InputLabel>이름</InputLabel>
                 <TextField
-                  name='name'
-                  variant='outlined'
+                  name="name"
+                  variant="outlined"
                   disabled
                   fullWidth
-                  id='name'
+                  id="name"
                   value={user.userName}
                   style={{ background: "rgba(0,0,0,0.5)" }}
                 />
@@ -238,11 +244,11 @@ const Mypage = () => {
               <Grid item xs={12} sm={8}>
                 <InputLabel>우편번호</InputLabel>
                 <TextField
-                  variant='outlined'
+                  variant="outlined"
                   fullWidth
                   disabled
-                  id='sample4_postcode'
-                  name='postCode'
+                  id="sample4_postcode"
+                  name="postCode"
                   value={user.postCode}
                   InputProps={{ style: { color: "white" } }}
                   style={{ background: "rgba(0,0,0,0.5)" }}
@@ -250,8 +256,8 @@ const Mypage = () => {
               </Grid>
               <Grid item xs={12} sm={4}>
                 <Button
-                  className='searchAddrBtn'
-                  variant='contained'
+                  className="searchAddrBtn"
+                  variant="contained"
                   fullWidth
                   onClick={searchAddrClickHandler}
                   style={{
@@ -267,11 +273,11 @@ const Mypage = () => {
               <Grid item xs={12}>
                 <InputLabel>도로명주소</InputLabel>
                 <TextField
-                  variant='outlined'
+                  variant="outlined"
                   fullWidth
                   disabled
-                  id='sample4_roadAddress'
-                  name='roadAddress'
+                  id="sample4_roadAddress"
+                  name="roadAddress"
                   value={user.address1}
                   InputProps={{ style: { color: "white" } }}
                   style={{ background: "rgba(0,0,0,0.5)" }}
@@ -281,11 +287,11 @@ const Mypage = () => {
               <Grid item xs={12}>
                 <InputLabel>상세주소</InputLabel>
                 <TextField
-                  type='text'
-                  variant='outlined'
+                  type="text"
+                  variant="outlined"
                   fullWidth
-                  id='detail-address'
-                  name='detail-address'
+                  id="detail-address"
+                  name="detail-address"
                   value={user.address2}
                   onChange={addrDetailHandler}
                   InputProps={{ style: { color: "white" } }}
@@ -294,9 +300,9 @@ const Mypage = () => {
               </Grid>
               <Grid item xs={12}>
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
-                  variant='contained'
+                  variant="contained"
                   style={{ background: "#3159d1" }}
                   onClick={modifyClickHandler}
                 >
@@ -307,7 +313,7 @@ const Mypage = () => {
           </form>
         </Container>
       </div>
-      <div id='postcode' style={{ display: "none" }}>
+      <div id="postcode" style={{ display: "none" }}>
         <DaumPostcode onComplete={handlePostcodeComplete} />
       </div>
     </>

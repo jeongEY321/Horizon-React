@@ -71,9 +71,11 @@ export default function SearchAppBar() {
 
   //로그아웃 핸들러
   const logoutHandler = () => {
-    onLogout();
-    alert("로그아웃 되었습니다.");
-    redirection("/");
+    const confirmed = window.confirm("로그아웃하시겠습니까?");
+    if (confirmed) {
+      onLogout();
+      redirection("/");
+    }
   };
 
   const handlerDrawerOpen = () => {

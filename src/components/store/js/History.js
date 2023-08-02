@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import HeaderSolar from "../../solarsystem/js/HeaderSolar";
+import HeaderSolar from "../../layout/js/PageHeader";
 import {
   Box,
   Container,
@@ -18,9 +18,14 @@ import "../scss/history.scss";
 const History = () => {
   // 로그인 인증 토큰 얻어오기
   const { isLoggedIn } = useContext(AuthContext);
-  const [token, setToken] = useState(getLoginUserInfo().token);
+  const [token, setToken] = useState("");
   const [list, setList] = useState([]);
   const redirection = useNavigate();
+
+  useEffect(() => {
+    const userToken = getLoginUserInfo().token;
+    setToken(userToken);
+  }, []);
 
   // 요청 헤더 설정
   const requestHeader = {
@@ -31,25 +36,54 @@ const History = () => {
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
   const API_SHOP_URL = BASE + SHOP;
 
+  const [isRendered, setIsRendered] = useState(false);
+
+  const handlePageChange = () => {
+    redirection("/");
+  };
+
   useEffect(() => {
     //로그아웃 상태면 로그인페이지로
-    if (!isLoggedIn) {
-      redirection("/");
+    if (token === "") {
+      handlePageChange();
+    } else if (!isRendered) {
+      // 삭제 시 랜더링시간때문에 날짜데이터가 이상하게 들어와서 추가
+      setIsRendered(true);
     }
-    // 페이지가 렌더링 됨과 동시에 할 일 목록을 요청해서 뿌려주기.
     fetch(API_SHOP_URL + "/historyList", {
       method: "GET",
       headers: requestHeader,
     })
-      .then((response) => response.json()) // JSON 형식으로 변환
+      .then((response) => response.json())
       .then((data) => {
-        // fetch를 통해 받아온 데이터를 상태 변수에 할당
-        if (data) setList(data);
+        console.log(data);
+        if (Array.isArray(data)) {
+          setList(data);
+        } else {
+          console.error("Data is not an array:", data);
+        }
+      });
+  }, [isRendered, isLoggedIn]);
+
+  // 삭제
+  const deleteProduct = (id) => {
+    fetch(API_SHOP_URL + "/history/" + id, {
+      method: "DELETE",
+      headers: requestHeader,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (Array.isArray(data.products)) {
+          setList(data.products);
+        } else {
+          console.error("Data.products is not an array:", data.products);
+        }
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error("Error deleting product:", error);
       });
-  }, []);
+  };
 
   return (
     <>
@@ -99,7 +133,11 @@ const History = () => {
                 <TableCell align="center">도착예정일</TableCell>
                 <TableCell align="center"></TableCell>
                 {list.map((product) => (
-                  <HistoryItem key={product.id} item={product} />
+                  <HistoryItem
+                    key={product.id}
+                    item={product}
+                    deleteProduct={deleteProduct}
+                  />
                 ))}
               </Table>
             </Box>
