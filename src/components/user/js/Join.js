@@ -28,19 +28,19 @@ const Join = () => {
   const [join, setJoin] = useState(false);
 
   //이미 로그인상태면 메인페이지로
-  useEffect(() => {
-    if (isLoggedIn) {
-      setTimeout(() => {
-        redirection("/");
-      }, 1000);
-    }
+  // useEffect(() => {
+  //   // if (isLoggedIn) {
+  //   //   setTimeout(() => {
+  //   //     redirection("/");
+  //   //   }, 1000);
+  //   // }
 
-    if (join) {
-      setTimeout(() => {
-        redirection("/login");
-      }, 1000);
-    }
-  }, [isLoggedIn, join]);
+  //   if (join) {
+  //     setTimeout(() => {
+  //       redirection("/login");
+  //     }, 1000);
+  //   }
+  // }, [join, redirection]);
 
   // 검증 메세지 상태변수 관리
   const [message, setMessage] = useState({
@@ -291,6 +291,7 @@ const Join = () => {
 
   // 회원가입 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = (e) => {
+    alert("회원 가입을 진행합니다.");
     // 회원 가입 서버 요청
     if (isValid()) {
       fetchSignUpPost();
@@ -318,7 +319,7 @@ const Join = () => {
       console.log(res.status);
       if (res.status === 200) {
         alert("회원가입에 성공했습니다!");
-        setJoin(true);
+        window.location.href("/login");
       } else {
         alert("서버와의 통신이 원활하지 않습니다.");
       }

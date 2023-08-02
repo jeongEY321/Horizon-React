@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../solarsystem/scss/headerSolar.scss";
 import { AuthContext } from "../../../util/AuthContext";
 import Icon from "@mdi/react";
-import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
+import { mdiAccount, mdiBasket, mdiLock, mdiLockOpen } from "@mdi/js";
 
 const HeaderSolar = () => {
   const { isLoggedIn, onLogout, name } = React.useContext(AuthContext);
@@ -20,6 +20,13 @@ const HeaderSolar = () => {
     <div className='MainHeader'>
       <header className='menu'>
         <div className='menuBtn'>
+          <Link to='/'>
+            <img
+              src={require("../../../final-logo-removebg.png")}
+              alt='logo'
+              style={{ width: "80px", height: "80px" }}
+            />
+          </Link>
           <Link to='/' className='mainBtn'>
             <button>Main</button>
           </Link>
@@ -37,7 +44,7 @@ const HeaderSolar = () => {
               <Icon
                 className='locked'
                 path={mdiLock}
-                title='lock'
+                title='LOGIN'
                 size={2}
                 horizontal
                 vertical
@@ -52,7 +59,18 @@ const HeaderSolar = () => {
                 <Icon
                   className='profile-icon'
                   path={mdiAccount}
-                  title='User Profile'
+                  title='MYPAGE'
+                  size={2}
+                  horizontal
+                  vertical
+                  rotate={180}
+                />
+              </Link>
+              <Link to='/basket'>
+                <Icon
+                  className='shop-basket'
+                  path={mdiBasket}
+                  title='BASKET'
                   size={2}
                   horizontal
                   vertical
@@ -63,7 +81,7 @@ const HeaderSolar = () => {
                 <Icon
                   className='lock-open'
                   path={mdiLockOpen}
-                  title='lockOpen'
+                  title='LOGOUT'
                   size={2}
                   horizontal
                   vertical

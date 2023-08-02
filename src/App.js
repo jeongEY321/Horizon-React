@@ -15,15 +15,15 @@ function App() {
   return (
     <AuthContextProvider>
       <Routes>
-        <Route path="/" element={<MainScreen />} />
-        <Route path="/SolarSystem" element={<SolarSystemModel />} />
-        <Route path="/News" element={<CSMain />} />
-        <Route path="/Store" element={<StoreMain />} />
-        <Route path="/Basket" element={<Basket />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/join" element={<Join />} />
+        <Route path='/' element={<MainScreen />} />
+        <Route path='/SolarSystem' element={<SolarSystemModel />} />
+        <Route path='/News' element={<CSMain />} />
+        <Route path='/Store' element={<StoreMain />} />
+        <Route path='/Basket' element={<Basket />} />
+        <Route path='/history' element={<History />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/mypage' element={<Mypage />} />
+        <Route path='/join' element={<Join />} />
         {/* <Route path='/horoscope' element={<HsMain />} /> */}
       </Routes>
     </AuthContextProvider>
