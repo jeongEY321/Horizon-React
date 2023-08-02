@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../solarsystem/scss/headerSolar.scss";
+import "../scss/PageHeader.scss";
 import { AuthContext } from "../../../util/AuthContext";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
@@ -13,14 +13,13 @@ const HeaderSolar = () => {
   const logoutHandler = () => {
     onLogout();
     alert("로그아웃 되었습니다.");
-    redirection("/");
   };
 
   return (
     <div className="MainHeader">
       <header className="menu">
         <div className="menuBtn">
-          <Link to="/" className="mainBtn">
+          <Link to="/Main" className="mainBtn">
             <button>Main</button>
           </Link>
           <Link to="/News" className="newsBtn">

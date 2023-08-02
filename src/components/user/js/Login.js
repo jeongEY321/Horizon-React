@@ -19,7 +19,7 @@ const Login = () => {
     if (isLoggedIn) {
       setOpen(true);
       setTimeout(() => {
-        redirection("/");
+        redirection("/Main");
       }, 1000);
     }
   }, [isLoggedIn, redirection]);
@@ -53,7 +53,7 @@ const Login = () => {
     onLogin(token, email);
 
     // 홈으로 리다이렉트
-    redirection("/");
+    redirection("/Main");
   };
 
   //로그인 요청 핸들러

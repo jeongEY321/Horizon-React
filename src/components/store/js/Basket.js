@@ -69,6 +69,8 @@ const Basket = () => {
   useEffect(() => {
     if (!isRendered) {
       setIsRendered(!isRendered);
+    } else if (!isLoggedIn) {
+      redirection("/login");
     }
 
     // 페이지가 렌더링 됨과 동시에 할 일 목록을 요청해서 뿌려주기.
@@ -103,7 +105,6 @@ const Basket = () => {
   const [payOpen, setPayOpen] = useState(false);
 
   const handleOpenModal = (item) => {
-    console.log(item.content);
     setSelectedItem(item);
     setOpen(!open);
   };

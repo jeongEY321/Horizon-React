@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderSolar from "../../solarsystem/js/HeaderSolar";
+import PageHeader from "../../layout/js/PageHeader";
 import CSHeader from "./CSHeader";
 import { Table } from "react-bootstrap";
 import CSMainTbody from "./CSMainTbody";
@@ -37,7 +37,7 @@ const CSMain = () => {
 
   return (
     <section className="News-board">
-      <HeaderSolar />
+      <PageHeader />
       <Table board hover border={1} className="News-table" width="100%">
         <thead className="mini-table">
           <tr>

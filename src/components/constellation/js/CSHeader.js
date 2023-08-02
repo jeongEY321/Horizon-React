@@ -74,7 +74,6 @@ export default function SearchAppBar() {
     const confirmed = window.confirm("로그아웃하시겠습니까?");
     if (confirmed) {
       onLogout();
-      redirection("/");
     }
   };
 

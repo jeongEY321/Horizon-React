@@ -1,34 +1,85 @@
 .planet-content-box {
-    /* display: none; */
-    width: 25%;
-    height: 70%;
-    background: rgba(148, 191, 247, 0.9);
-    position: absolute;
-    right: 1%;
-    top: 17%;
-    border-radius: 10px;
-    overflow-y: scroll;  
-    
-    .content {
-      padding: 10%;
-      color: white;    
-    }
+  /* display: none; */
+  width: 25%;
+  height: 70%;
+  background: rgba(148, 191, 247, 0.9);
+  position: absolute;
+  right: 1%;
+  top: 17%;
+  border-radius: 10px;
+  overflow-y: scroll;  
+  
+  .content {
+    padding: 10%;
+    color: white;    
   }
+}
 
 .left-planet-content-box {
-    /* display: none; */
-    width: 25%;
-    height: 70%;
-    background: rgba(148, 191, 247, 0.9);
-    position: absolute;
-    left: 1%;
-    top: 17%;
-    border-radius: 10px;
-    overflow-y: scroll;  
-    
-    .left-content {
-      padding: 10%;
-      color: white;    
-    }
-  }
+  /* display: none; */
+  width: 25%;
+  height: 70%;
+  background: rgba(148, 191, 247, 0.9);
+  position: absolute;
+  left: 1%;
+  top: 17%;
+  border-radius: 10px;
+  overflow-y: scroll;  
   
+  .left-content {
+    padding: 10%;
+    color: white;    
+  }
+}
+
+//천체명 css
+.planet-name {
+  border-bottom: 1px solid white;
+  text-align: center;
+  font-size: 30px;
+}
+
+//천체 정보 css
+.planet-information {
+  padding: 6%;
+  font-size: 14px;
+  
+  .diameter {
+    width: 285px;
+    height: 40px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 10%;
+  }
+
+  .surface-area {
+    width: 285px;
+    height: 40px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 10%;
+  }
+
+  .mass {
+    width: 285px;
+    height: 40px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 10%;
+  }
+
+  .rotation {
+    width: 285px;
+    height: 40px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 10%;
+  }
+
+  .revolution {
+    width: 285px;
+    height: 40px;
+    border: 1px solid white;
+    border-radius: 5px;
+  }
+}

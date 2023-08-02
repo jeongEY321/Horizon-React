@@ -15,7 +15,7 @@ import { getLoginUserInfo } from "../../../util/login-utils";
 import { useNavigate } from "react-router-dom";
 import "../scss/Mypage.scss";
 import { AuthContext } from "../../../util/AuthContext";
-import HeaderSolar from "../../solarsystem/js/HeaderSolar";
+import PageHeader from "../../layout/js/PageHeader";
 
 const Mypage = () => {
   const API_USER_URL = BASE + USER;
@@ -169,7 +169,7 @@ const Mypage = () => {
   return (
     <>
       <div className="mypage-wrapper">
-        <HeaderSolar />
+        <PageHeader />
         <Container
           className="mypage"
           component="main"

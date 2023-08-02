@@ -130,7 +130,7 @@ const StoreModal = ({ open, setOpen, item }) => {
         </Typography>
 
         <Box className="modal-md-img" sx={{ textAlign: "center", mt: 3 }}>
-          <img src="#" alt=""></img>
+          <img src={"assets/img/" + name + ".jpg"} alt="이미지입니다"></img>
         </Box>
 
         <Typography

@@ -5,8 +5,6 @@ import { Padding } from "@mui/icons-material";
 const StoreItem = ({ open, item }) => {
   const { id, name, content, price } = item;
   console.log("../img/" + { name } + ".jpg");
-  console.log(name);
-  console.log({ name });
   const handleClick = () => {
     open(item); // 클릭한 아이템 정보를 매개변수로 넘겨줍니다.
   };
@@ -14,19 +12,19 @@ const StoreItem = ({ open, item }) => {
   return (
     <>
       <Grid item xs={12} md={5} lg={4}>
-        <Box className='md' sx={{ position: "relative" }}>
+        <Box className="md" sx={{ position: "relative" }}>
           <Box
-            className='md-img'
+            className="md-img"
             sx={{ position: "absolute", top: 30, left: 50, paddingTop: 3 }}
           >
             <img
-              src={require("../img/" + name + ".jpg")}
-              alt='이미지입니다'
+              src={"assets/img/" + name + ".jpg"}
+              alt="이미지입니다"
               onClick={handleClick}
             />
           </Box>
           <Box
-            className='md-name'
+            className="md-name"
             sx={{
               position: "absolute",
               bottom: 60,

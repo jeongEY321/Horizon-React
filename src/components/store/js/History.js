@@ -18,7 +18,7 @@ import "../scss/history.scss";
 const History = () => {
   // 로그인 인증 토큰 얻어오기
   const { isLoggedIn } = useContext(AuthContext);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(getLoginUserInfo().token);
   const [list, setList] = useState([]);
   const redirection = useNavigate();
 
@@ -39,7 +39,7 @@ const History = () => {
   const [isRendered, setIsRendered] = useState(false);
 
   const handlePageChange = () => {
-    redirection("/");
+    redirection("/login");
   };
 
   useEffect(() => {
@@ -56,7 +56,6 @@ const History = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (Array.isArray(data)) {
           setList(data);
         } else {
