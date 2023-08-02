@@ -1,8 +1,10 @@
 //전체 배경화면
 body {
-    background: black;
-    // background-image: url("../img/galaxy.gif");
-    // background-size: cover;
+    width: 100%;
+    height: 100vh;
+    background: url("../img/galaxy.gif") no-repeat;
+    background-size: 100% 100%;
+    
     
 
 //폰트
@@ -29,6 +31,11 @@ body {
 
 }
 
+.main-logo {
+    width: 10%;
+    height: 10%;
+    margin-left: 20px;
+}
 
 //Welcome 글씨
 .welcome-img {
@@ -44,7 +51,7 @@ body {
     outline: 0;
     padding: 10px;
     margin-left: 20px;
-    //margin-top: 10%;
+    margin-top: 5%;
     z-index: 1;
     
 
@@ -53,16 +60,16 @@ body {
         outline: 0;
         background: none;
         background-image: url("../../../../public/assets/button/Btn05Blue_p.png");
-        background-size: cover;
+        background-size: 100% 100%;
         font-family: 'Orbitron-Bold' !important;
         font-size: 50px;
         color: white;
         max-width: 1920px;
-        width: 22%;
+        width: 30%;
         height: 200px;
         cursor: pointer;
         position: absolute;
-        margin-top: 5%;
+        // margin-top: 5%;
         margin-left: 3%;
     }
 
@@ -76,12 +83,12 @@ body {
         outline: 0;
         background: none;
         background-image: url("../../../../public/assets/button/Btn05Blue_p.png");
-        background-size: cover;
+        background-size: 100% 100%;
         font-family: 'Orbitron-Bold' !important;
         font-size: 50px;
         color: white;
         max-width: 1920px;
-        width: 22%;
+        width: 30%;
         height: 200px;
         cursor: pointer;
         //margin-left: 2%;

@@ -8,18 +8,23 @@ import galaxy from "../img/galaxy.gif";
 const StartPage = () => {
   return (
     <>
-      <img className="welcome-img" src={welcome} alt="welcome-img" />
-      <div className="setBtn">
-        <Link to="/Main">
-          <button className="start-btn">Start</button>
+      <img
+        className='main-logo'
+        src={require("../../../final-logo-removebg.png")}
+        alt='logo'
+      />
+      <img className='welcome-img' src={welcome} alt='welcome-img' />
+      <div className='setBtn'>
+        <Link to='/Main'>
+          <button className='start-btn'>Start</button>
         </Link>
-        <Link to="/Join">
-          <button className="join-btn">Join</button>
+        <Link to='/Join'>
+          <button className='join-btn'>Join</button>
         </Link>
       </div>
-      <div className="main-start-img">
-        <img className="start-page-body" src={galaxy} alt="universegif" />
-      </div>
+      {/* <div className='main-start-img'>
+        <img className='start-page-body' src={galaxy} alt='universegif' />
+      </div> */}
     </>
   );
 };
