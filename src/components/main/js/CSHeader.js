@@ -12,7 +12,7 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Icon from "@mdi/react";
-import { mdiAccount, mdiBasket, mdiLock, mdiLockOpen } from "@mdi/js";
+import { mdiAccount, mdiLock, mdiLockOpen } from "@mdi/js";
 import "../scss/CSHeader.scss";
 import "../../solarsystem/img/Tip001Blue.png";
 import { useTheme } from "@emotion/react";
@@ -89,20 +89,28 @@ export default function SearchAppBar() {
         flexGrow: 1,
       }}
     >
-      <div className='CSHeader'>
-        <Toolbar className='header-menubar'>
-          <Link to='/'>
-            <img
-              src={require("../../../final-logo.png")}
-              alt='logo'
-              style={{ width: "80px", height: "80px" }}
-            />
-          </Link>
+      <div className="CSHeader">
+        <Toolbar className="header-menubar">
+          <IconButton
+            className="hamburger"
+            //size="small"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{
+              mr: 2,
+              marginLeft: "20px",
+              color: "white",
+            }}
+            fontcolor="white"
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography
-            className='typography-cs'
-            variant='h5'
+            className="typography-cs"
+            variant="h5"
             noWrap
-            component='div'
+            component="div"
             sx={{
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
@@ -114,23 +122,23 @@ export default function SearchAppBar() {
             Over the Horizon
           </Typography>
 
-          <Search style={{ marginRight: "20px" }}>
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder='Search…'
+              placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
-              color='white'
+              color="white"
             />
           </Search>
 
           {!isLoggedIn && (
-            <Link to='/login'>
+            <Link to="/login">
               <Icon
-                className='locked'
+                className="locked"
                 path={mdiLock}
-                title='LOGIN'
+                title="lock"
                 size={2}
                 horizontal
                 vertical
@@ -141,22 +149,11 @@ export default function SearchAppBar() {
 
           {isLoggedIn && (
             <>
-              <Link to='/mypage'>
+              <Link to="/mypage">
                 <Icon
-                  className='profile-icon'
+                  className="profile-icon"
                   path={mdiAccount}
-                  title='MYPAGE'
-                  size={2}
-                  horizontal
-                  vertical
-                  rotate={180}
-                />
-              </Link>
-              <Link to='/basket'>
-                <Icon
-                  className='shop-basket'
-                  path={mdiBasket}
-                  title='BASKET'
+                  title="User Profile"
                   size={2}
                   horizontal
                   vertical
@@ -165,9 +162,9 @@ export default function SearchAppBar() {
               </Link>
               <div onClick={logoutHandler}>
                 <Icon
-                  className='lock-open'
+                  className="lock-open"
                   path={mdiLockOpen}
-                  title='LOGOUT'
+                  title="lockOpen"
                   size={2}
                   horizontal
                   vertical

@@ -2,7 +2,6 @@
   width: 100%;
   height: 100vh;
   background: url("../../layout/img/background2.jpg");
-  background-repeat: no-repeat;
 }
 
 .MuiTableCell-root {
@@ -14,34 +13,3 @@
   border-bottom: 1px solid white;
 }
 
-.count-wrap {
-  display: flex;
-  align-items: center;
-}
-
-.inp {
-  width: 50px; /* 숫자 입력란의 너비 설정 */
-  text-align: center;
-  margin: 0; /* 숫자 입력란과 버튼 사이의 간격 설정 */
-  color: white;
-}
-
-.minus,
-.plus {
-  font-size: 20px;
-  flex: 1; /* 감소와 증가 버튼이 남은 공간을 동일하게 차지하도록 설정 */
-  color: white !important;
-}
-
-.minus:hover {
-  color: red !important;
-}
-.plus:hover {
-  color: blue !important;
-}
-.delete {
-  color: white !important;
-}
-.delete:hover {
-  color: red !important;
-}

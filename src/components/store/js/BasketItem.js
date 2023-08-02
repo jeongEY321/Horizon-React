@@ -1,14 +1,6 @@
-import { Box, Button, Input, TableCell, TableRow } from "@mui/material";
+import { Box, Button, TableCell, TableRow } from "@mui/material";
 import React from "react";
 import "../scss/basket.scss";
-import {
-  mdiDelete,
-  mdiMinusThick,
-  mdiPlusThick,
-  mdiTriangle,
-  mdiTriangleDown,
-} from "@mdi/js";
-import Icon from "@mdi/react";
 
 const BasketItem = ({ open, item, increase, decrease, deleteProduct }) => {
   const { id, name, count, price } = item;
@@ -35,32 +27,31 @@ const BasketItem = ({ open, item, increase, decrease, deleteProduct }) => {
     <>
       <TableRow>
         <TableCell
-          align='center'
+          align="center"
           style={{ cursor: "pointer" }}
           onClick={modalOpen}
         >
           {name}
         </TableCell>
-        <TableCell align='center'>{price * count}원</TableCell>
-        <TableCell align='center' sx={{ padding: 0 }}>
-          <div className='count-wrap'>
-            {/* 수량 감소 버튼 */}
-            <Button className='minus' onClick={() => decreaseCount()}>
-              <Icon path={mdiTriangleDown} size={1} />
+        <TableCell align="center">{price * count}원</TableCell>
+        <TableCell align="center" sx={{ padding: 0 }}>
+          {/* 수량 감소 버튼 */}
+          <Box sx={{ padding: 0 }}>
+            <Button sx={{ padding: 0 }} onClick={() => decreaseCount()}>
+              -
             </Button>
-            <div>{count}</div>
+            {count}
+
             {/* 수량 증가 버튼 */}
-            <Button className='plus' onClick={() => increaseCount()}>
-              <Icon path={mdiTriangle} size={1} />
+            <Button sx={{ padding: 0 }} onClick={() => increaseCount()}>
+              +
             </Button>
-          </div>
+          </Box>
         </TableCell>
 
-        <TableCell align='center'>
+        <TableCell align="center">
           {/* 삭제 버튼 */}
-          <Button onClick={() => deleteOnClick()}>
-            <Icon className='delete' path={mdiDelete} size={1.3} />
-          </Button>
+          <Button onClick={() => deleteOnClick()}>X</Button>
         </TableCell>
       </TableRow>
     </>
