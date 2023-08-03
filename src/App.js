@@ -10,7 +10,7 @@ import Login from "./components/user/js/Login";
 import Mypage from "./components/user/js/Mypage";
 import { AuthContextProvider } from "./util/AuthContext";
 import Join from "./components/user/js/Join";
-import StartPage from "./components/layout/js/StartPage";
+import StartPage from "./components/layout/js/StartPage.js";
 
 function App() {
   return (

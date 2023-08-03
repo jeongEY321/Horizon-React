@@ -1,3 +1,10 @@
+//폰트
+@font-face {
+    font-family: "Orbitron-Bold";
+    src: url("../../../../public/assets/fonts/Orbitron-Bold.woff2");
+    font-style: normal;
+ }
+
 //전체 배경화면
 body {
     background-color: black;
@@ -5,25 +12,87 @@ body {
     height: 100%;
 }
 
+//테이블 세부사항
 .News-board {
     text-align: center;
+    //background-color: black;
 
     .News-table {
         flex-direction: column;
-        font-size: large;
-        padding: 5%;
+        font-size: 12px;
+        padding: 3%;
         border: none;
-    
+
         th {
             border: none;
+            font-family: 'Orbitron-Bold' !important;
+            font-size: 20px;
+        }
+
+
+        thead,tr,td {
+            padding: 2%;
+            border-collapse: collapse;
+            border: none;
+            font-family: 'Orbitron-Bold';
         }
 
         td {
-            padding: 2%;
+            border-top: 1px solid white;
+            border-bottom: 2px solid white;
         }
+
+        #News-tbody {
+            cursor: pointer;
+        }
+    
+        
+        #News-tbody:nth-child(even) {
+            background-color: #e2e2e2;
+            color: #1976d2;
+        }
+
+        #News-tbody:nth-child(odd) {
+            //background-color: black;
+            color: 
+            #b3c9ef;
+        }
+
     
         
     }
 }
 
+//main news 
+.notic-table-body2 {
+    font-size: 17px;
+}
 
+//각 테이블 속성 (가로 크기 조정)
+
+.td-title {
+    font-size: 17px;
+}
+
+.td-date {
+    // width: 200px;
+    font-size: 17px;
+}
+
+//mui select 설정
+#demo-simple-select-helper-label {
+    color: white;
+    font-family: "Orbitron-Bold";
+}
+
+#demo-simple-select-helper {
+    color: white;
+    font-family: "Orbitron-Bold";
+}
+
+// //mui Button 
+.select-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

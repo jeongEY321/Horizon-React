@@ -35,7 +35,7 @@ const Join = () => {
   useEffect(() => {
     if (isLoggedIn) {
       setTimeout(() => {
-        redirection("/");
+        redirection("/Main");
       }, 1000);
     }
   }, [isLoggedIn]);

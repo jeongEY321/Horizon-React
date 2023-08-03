@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import HeaderSolar from "../../layout/js/PageHeader";
+import PageHeader from "../../layout/js/PageHeader";
 import {
   Box,
   Container,
   Grid,
   Table,
+  TableBody,
   TableCell,
+  TableHead,
+  TableRow,
   Typography,
 } from "@mui/material";
 import HistoryItem from "./HistoryItem";
@@ -22,11 +25,6 @@ const History = () => {
   const [list, setList] = useState([]);
   const redirection = useNavigate();
 
-  useEffect(() => {
-    const userToken = getLoginUserInfo().token;
-    setToken(userToken);
-  }, []);
-
   // 요청 헤더 설정
   const requestHeader = {
     "content-type": "application/json",
@@ -36,58 +34,30 @@ const History = () => {
   // 서버에 할일 목록(json)을 요청(fetch)해서 받아와야 함.
   const API_SHOP_URL = BASE + SHOP;
 
-  const [isRendered, setIsRendered] = useState(false);
-
-  const handlePageChange = () => {
-    redirection("/login");
-  };
-
   useEffect(() => {
     //로그아웃 상태면 로그인페이지로
-    if (token === "") {
-      handlePageChange();
-    } else if (!isRendered) {
-      // 삭제 시 랜더링시간때문에 날짜데이터가 이상하게 들어와서 추가
-      setIsRendered(true);
+    if (!isLoggedIn) {
+      redirection("/");
     }
+    // 페이지가 렌더링 됨과 동시에 할 일 목록을 요청해서 뿌려주기.
     fetch(API_SHOP_URL + "/historyList", {
       method: "GET",
       headers: requestHeader,
     })
-      .then((response) => response.json())
+      .then((response) => response.json()) // JSON 형식으로 변환
       .then((data) => {
-        if (Array.isArray(data)) {
-          setList(data);
-        } else {
-          console.error("Data is not an array:", data);
-        }
-      });
-  }, [isRendered, isLoggedIn]);
-
-  // 삭제
-  const deleteProduct = (id) => {
-    fetch(API_SHOP_URL + "/history/" + id, {
-      method: "DELETE",
-      headers: requestHeader,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (Array.isArray(data.products)) {
-          setList(data.products);
-        } else {
-          console.error("Data.products is not an array:", data.products);
-        }
+        // fetch를 통해 받아온 데이터를 상태 변수에 할당
+        if (data) setList(data);
       })
       .catch((error) => {
-        console.error("Error deleting product:", error);
+        console.error("Error fetching data:", error);
       });
-  };
+  }, []);
 
   return (
     <>
       <div className="history-wrapper">
-        <HeaderSolar />
+        <PageHeader />
         <Typography variant="h4" align="center" marginTop={5}>
           결제내역
         </Typography>
@@ -106,7 +76,16 @@ const History = () => {
                 margin: "auto",
                 display: "flex",
                 flexDirection: "column",
-                overflow: "auto",
+                maxHeight: "65vh",
+                overflowY: "auto",
+                // 스크롤바 모양 제거
+                "&::-webkit-scrollbar": {
+                  width: "0",
+                  height: "0",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: "transparent",
+                },
               }}
             >
               <Table
@@ -116,28 +95,60 @@ const History = () => {
                   background: "rgba(0,0,0,0.5)",
                 }}
               >
-                <TableCell align="center" style={{ width: "200px" }}>
-                  상품명
-                </TableCell>
-                <TableCell align="center" style={{ width: "80px" }}>
-                  개수
-                </TableCell>
-                <TableCell align="center" style={{ width: "150px" }}>
-                  가격
-                </TableCell>
-                <TableCell align="center" style={{ width: "300px" }}>
-                  주소
-                </TableCell>
-                <TableCell align="center">구입날짜</TableCell>
-                <TableCell align="center">도착예정일</TableCell>
-                <TableCell align="center"></TableCell>
-                {list.map((product) => (
-                  <HistoryItem
-                    key={product.id}
-                    item={product}
-                    deleteProduct={deleteProduct}
-                  />
-                ))}
+                <TableHead
+                  style={{
+                    position: "sticky",
+                    top: 0,
+                  }}
+                >
+                  <TableRow>
+                    <TableCell
+                      align="center"
+                      style={{
+                        width: "200px",
+                      }}
+                    >
+                      상품명
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      style={{
+                        width: "80px",
+                      }}
+                    >
+                      개수
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      style={{
+                        width: "150px",
+                      }}
+                    >
+                      가격
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      style={{
+                        width: "300px",
+                      }}
+                    >
+                      주소
+                    </TableCell>
+                    <TableCell align="center">구입날짜</TableCell>
+                    <TableCell align="center">도착예정일</TableCell>
+                    <TableCell align="center"></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody
+                  style={{
+                    position: "sticky",
+                    top: "48px",
+                  }}
+                >
+                  {list.map((product) => (
+                    <HistoryItem key={product.id} item={product} />
+                  ))}
+                </TableBody>
               </Table>
             </Box>
           </Grid>

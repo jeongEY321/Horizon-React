@@ -11,3 +11,4 @@ if (clientHostName === "localhost") {
 export const API_BASE_URL = backEndHostName;
 export const SHOP = "/shop";
 export const USER = "/api/auth";
+export const SOLAR = "/solar";

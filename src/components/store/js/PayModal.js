@@ -1,8 +1,28 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { mdiCloseThick } from "@mdi/js";
+import Icon from "@mdi/react";
+import {
+  Box,
+  Button,
+  Modal,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import BasketItem from "./BasketItem";
+import PayModalList from "./PayModalList";
 
-const PayModal = ({ open, setPayOpen, yesPayHandle }) => {
+const PayModal = ({
+  open,
+  setPayOpen,
+  yesPayHandle,
+  basketList,
+  totalPrice,
+}) => {
   const redirection = useNavigate();
 
   // 닫기 버튼 클릭 실행 함수
@@ -33,36 +53,63 @@ const PayModal = ({ open, setPayOpen, yesPayHandle }) => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 800,
+          width: 700,
           height: 750,
-          bgcolor: "background.paper",
+          // bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          overflow: "auto",
+          // overflow: "auto",
+          borderRadius: "20px",
+          backgroundImage: `url("assets/panel/Popup005_Blue_Opaque.png")`,
+          backgroundSize: "105% 105%",
+          backgroundPosition: "center",
         }}
       >
+        <div className="pay-list" style={{ fontSize: "30px" }}>
+          결제 목록
+        </div>
         {/* 우측 상단에 닫기 버튼 추가 */}
         <Button
+          variant="contained"
           sx={{
             position: "absolute",
-            top: 10,
-            right: 10,
+            top: 30,
+            right: 40,
           }}
           onClick={handleClose}
         >
-          X
+          <Icon path={mdiCloseThick} size={1} />
         </Button>
 
-        <Typography
-          variant="body1"
-          id="modal-description"
-          sx={{ mt: 3, color: "black" }}
+        <Table
+          sx={{ tableLayout: "fixed" }}
+          style={{
+            border: "1px solid white",
+            background: "rgba(0,0,0,0.5)",
+            margin: "30px",
+          }}
         >
-          가격란
-        </Typography>
+          <TableHead>
+            <TableRow sx={{ align: "center" }}>
+              <TableCell align="center" style={{ width: "20%" }}>
+                상품
+              </TableCell>
+              <TableCell align="center" style={{ width: "20%" }}>
+                가격
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {basketList.map((products) => (
+              <PayModalList key={products.id} item={products} />
+            ))}
+          </TableBody>
+        </Table>
+
+        <strong>총 가격: {totalPrice()}원</strong>
 
         <Box
           sx={{
@@ -72,18 +119,18 @@ const PayModal = ({ open, setPayOpen, yesPayHandle }) => {
           }}
         >
           <Button
-            variant="outlined"
+            variant="contained"
             sx={{ mr: 2, width: 150, height: 60, fontSize: 20 }}
             onClick={yesPay}
           >
-            예
+            결제하기
           </Button>
           <Button
             variant="contained"
             sx={{ width: 150, height: 60, fontSize: 20 }}
             onClick={noPayAndClose}
           >
-            아니오
+            결제취소
           </Button>
         </Box>
       </Box>

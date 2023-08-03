@@ -38,6 +38,8 @@ import ModelLoadingPage from "./ModelLoadingPage";
 import Footer from "../../layout/js/Footer";
 import PlanetContext from "../../layout/js/PlanetContext";
 import PageHeader from "../../layout/js/PageHeader";
+import { getLoginUserInfo } from "../../../util/login-utils";
+import { API_BASE_URL as BASE, SOLAR } from "../../../config/host-config";
 
 const SolarSystemModel = () => {
   const canvasRef = useRef(null);
@@ -47,7 +49,7 @@ const SolarSystemModel = () => {
   let count = 0;
 
   // 버튼눌렀을 때 값 가져오기
-  const [change, setChange] = useState("all");
+  const [change, setChange] = useState("All");
 
   const changeValue = (e) => {
     setChange(e.target.value);
@@ -305,7 +307,7 @@ const SolarSystemModel = () => {
         cameraControls.update(delta);
 
         // 행성을 기준으로 보기
-        if (changeRef.current !== "all") {
+        if (changeRef.current !== "All") {
           sun.rotation.y += 0.0009;
           earth.rotation.y += 0.008; //자전 속도
           earthObj.rotation.y += 0.0008; //공전 속도
@@ -316,7 +318,7 @@ const SolarSystemModel = () => {
           venusObj.rotation.y += 0.00129;
           mars.rotation.y += 0.005;
           marsObj.rotation.y += 0.0004; // 화성까지는 2.92/@ 365일 기준
-          saturn.rotation.y += 0.038;
+          saturn.rotation.y += 0.0038;
           saturnObj.rotation.y += 0.0002; // 목성부터는 2.92/@ 100으로 나눔
           jupiter.rotation.y += 0.0034;
           jupiterObj.rotation.y += 0.0001;
@@ -326,7 +328,7 @@ const SolarSystemModel = () => {
           neptuneObj.rotation.y += 0.00002;
 
           switch (changeRef.current) {
-            case "mercury": // 수성
+            case "Mercury": // 수성
               const mercuryPosition = mercury.getWorldPosition(
                 new THREE.Vector3()
               );
@@ -334,25 +336,25 @@ const SolarSystemModel = () => {
               camera.position.z += 0.5;
               camera.lookAt(mercuryPosition); // 건들지 못하게 만들기
               break;
-            case "venus": // 금성
+            case "Venus": // 금성
               const venusPosition = venus.getWorldPosition(new THREE.Vector3());
               camera.position.copy(venusPosition);
               camera.position.z += 0.5;
               camera.lookAt(venusPosition);
               break;
-            case "earth": // 지구
+            case "Earth": // 지구
               const earthPosition = earth.getWorldPosition(new THREE.Vector3());
               camera.position.copy(earthPosition);
               camera.position.z += 0.5;
               camera.lookAt(earthPosition);
               break;
-            case "mars": // 화성
+            case "Mars": // 화성
               const marsPosition = mars.getWorldPosition(new THREE.Vector3());
               camera.position.copy(marsPosition);
               camera.position.z += 0.5;
               camera.lookAt(marsPosition);
               break;
-            case "jupiter": // 목성
+            case "Jupiter": // 목성
               const jupiterPosition = jupiter.getWorldPosition(
                 new THREE.Vector3()
               );
@@ -360,7 +362,7 @@ const SolarSystemModel = () => {
               camera.position.z += 0.5;
               camera.lookAt(jupiterPosition);
               break;
-            case "saturn": // 토성
+            case "Saturn": // 토성
               const saturnPosition = saturn.getWorldPosition(
                 new THREE.Vector3()
               );
@@ -368,7 +370,7 @@ const SolarSystemModel = () => {
               camera.position.z += 0.5;
               camera.lookAt(saturnPosition);
               break;
-            case "uranus": // 천왕성
+            case "Uranus": // 천왕성
               const uranusPosition = uranus.getWorldPosition(
                 new THREE.Vector3()
               );
@@ -376,7 +378,7 @@ const SolarSystemModel = () => {
               camera.position.z += 0.5;
               camera.lookAt(uranusPosition);
               break;
-            case "neptune": // 해왕성
+            case "Neptune": // 해왕성
               const neptunePosition = neptune.getWorldPosition(
                 new THREE.Vector3()
               );
@@ -384,13 +386,13 @@ const SolarSystemModel = () => {
               camera.position.z += 0.5;
               camera.lookAt(neptunePosition);
               break;
-            case "moon": // 달
+            case "Moon": // 달
               const moonPosition = moon.getWorldPosition(new THREE.Vector3());
               camera.position.copy(moonPosition);
               camera.position.z += 0.5;
               camera.lookAt(moonPosition);
               break;
-            case "sun": // 태양
+            case "Sun": // 태양
               const sunPosition = sun.getWorldPosition(new THREE.Vector3());
               camera.position.copy(sunPosition);
               camera.position.z += 1.3;
@@ -408,7 +410,7 @@ const SolarSystemModel = () => {
           venusObj.rotation.y += 0.0129;
           mars.rotation.y += 0.005;
           marsObj.rotation.y += 0.004; // 화성까지는 2.92/@ 365일 기준
-          saturn.rotation.y += 0.038;
+          saturn.rotation.y += 0.0038;
           saturnObj.rotation.y += 0.002; // 목성부터는 2.92/@ 100으로 나눔
           jupiter.rotation.y += 0.0034;
           jupiterObj.rotation.y += 0.001;
@@ -437,12 +439,53 @@ const SolarSystemModel = () => {
     SolarSystemScript(); // SolarSystemScript 함수를 호출합니다.
   }, []);
 
+  const [token, setToken] = useState(getLoginUserInfo().token);
+  const requestHeader = {
+    "content-type": "application/json",
+  };
+  const API_SOLAR_URL = BASE + SOLAR;
+  const [essential, setEssential] = useState({});
+  const [optional, setOptional] = useState({});
+  useEffect(() => {
+    if (change !== "All") {
+      fetch(API_SOLAR_URL + "/essential/" + change, {
+        method: "GET",
+        headers: requestHeader,
+      })
+        .then((response) => response.json()) // JSON 형식으로 변환
+        .then((data) => {
+          // fetch를 통해 받아온 데이터를 상태 변수에 할당
+          if (data) setEssential(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+
+      fetch(API_SOLAR_URL + "/optional/" + change, {
+        method: "GET",
+        headers: requestHeader,
+      })
+        .then((response) => response.json()) // JSON 형식으로 변환
+        .then((data) => {
+          // fetch를 통해 받아온 데이터를 상태 변수에 할당
+          if (data) setOptional(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }
+  }, [change]);
+
   return (
     <>
-      <PageHeader />
       <canvas ref={canvasRef} id="three-canvas" />
       {isLoading && <ModelLoadingPage />}
-      {change != "all" ? <PlanetContext /> : ""}
+      <PageHeader />
+      {change != "All" ? (
+        <PlanetContext optional={optional} essential={essential} />
+      ) : (
+        ""
+      )}
       <Footer change={changeValue} />
     </>
   );

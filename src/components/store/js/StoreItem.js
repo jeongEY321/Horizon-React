@@ -4,10 +4,11 @@ import { Padding } from "@mui/icons-material";
 
 const StoreItem = ({ open, item }) => {
   const { id, name, content, price } = item;
-  console.log("../img/" + { name } + ".jpg");
   const handleClick = () => {
     open(item); // 클릭한 아이템 정보를 매개변수로 넘겨줍니다.
   };
+
+  const [hover, setHover] = useState(false);
 
   return (
     <>
@@ -21,6 +22,11 @@ const StoreItem = ({ open, item }) => {
               src={"assets/img/" + name + ".jpg"}
               alt="이미지입니다"
               onClick={handleClick}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              style={{
+                border: hover ? "3px solid #03A9F4" : "3px solid black",
+              }}
             />
           </Box>
           <Box
@@ -45,6 +51,8 @@ const StoreItem = ({ open, item }) => {
               <Box>
                 <Box
                   onClick={handleClick}
+                  onMouseEnter={() => setHover(true)}
+                  onMouseLeave={() => setHover(false)}
                   sx={{ marginBottom: "10px" }}
                   style={{ cursor: "pointer", listStyle: "none" }}
                 >

@@ -1,6 +1,8 @@
 import { Box, Button, TableCell, TableRow } from "@mui/material";
 import React from "react";
 import "../scss/basket.scss";
+import Icon from "@mdi/react";
+import { mdiDelete, mdiTriangle, mdiTriangleDown } from "@mdi/js";
 
 const BasketItem = ({ open, item, increase, decrease, deleteProduct }) => {
   const { id, name, count, price } = item;
@@ -37,21 +39,31 @@ const BasketItem = ({ open, item, increase, decrease, deleteProduct }) => {
         <TableCell align="center" sx={{ padding: 0 }}>
           {/* 수량 감소 버튼 */}
           <Box sx={{ padding: 0 }}>
-            <Button sx={{ padding: 0 }} onClick={() => decreaseCount()}>
-              -
+            <Button
+              className="minus"
+              sx={{ padding: 0 }}
+              onClick={() => decreaseCount()}
+            >
+              <Icon path={mdiTriangleDown} size={1} />
             </Button>
             {count}
 
             {/* 수량 증가 버튼 */}
-            <Button sx={{ padding: 0 }} onClick={() => increaseCount()}>
-              +
+            <Button
+              className="plus"
+              sx={{ padding: 0 }}
+              onClick={() => increaseCount()}
+            >
+              <Icon path={mdiTriangle} size={1} />
             </Button>
           </Box>
         </TableCell>
 
         <TableCell align="center">
           {/* 삭제 버튼 */}
-          <Button onClick={() => deleteOnClick()}>X</Button>
+          <Button className="delete" onClick={() => deleteOnClick()}>
+            <Icon path={mdiDelete} size={1.3} />
+          </Button>
         </TableCell>
       </TableRow>
     </>

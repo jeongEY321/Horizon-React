@@ -22,6 +22,7 @@ import { getLoginUserInfo } from "../../../util/login-utils";
 import { AuthContext } from "../../../util/AuthContext";
 import PayModal from "./PayModal";
 import { BorderBottom } from "@mui/icons-material";
+import PageHeader from "../../layout/js/PageHeader";
 
 const Basket = () => {
   // 로그인 인증 토큰 얻어오기
@@ -132,6 +133,7 @@ const Basket = () => {
             count: product.count,
             name: product.name.name,
             price: product.name.price,
+            content: product.name.content,
           }));
           setBasketList(basketItems);
         }
@@ -157,6 +159,7 @@ const Basket = () => {
             count: product.count,
             name: product.name.name,
             price: product.name.price,
+            content: product.name.content,
           }));
           setBasketList(basketItems);
         }
@@ -179,6 +182,7 @@ const Basket = () => {
             count: product.count,
             name: product.name.name,
             price: product.name.price,
+            content: product.name.content,
           }));
           setBasketList(basketItems);
         }
@@ -247,7 +251,7 @@ const Basket = () => {
   return (
     <>
       <div className="basket-wrapper">
-        <HeaderSolar />
+        <PageHeader />
 
         <Typography variant="h4" align="center" marginTop={5}>
           장바구니
@@ -367,6 +371,8 @@ const Basket = () => {
             setPayOpen={setPayOpen}
             handleOpen={handleOpenPayModal}
             yesPayHandle={yesPayHandle}
+            basketList={basketList}
+            totalPrice={totalPrice}
           />
         )}
       </div>

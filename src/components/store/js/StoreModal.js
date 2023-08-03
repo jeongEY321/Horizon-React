@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { API_BASE_URL as BASE, SHOP, USER } from "../../../config/host-config";
 import { getLoginUserInfo } from "../../../util/login-utils";
 import { AuthContext } from "../../../util/AuthContext";
+import { mdiCloseThick } from "@mdi/js";
+import Icon from "@mdi/react";
 
 const StoreModal = ({ open, setOpen, item }) => {
   const redirection = useNavigate();
@@ -48,9 +50,9 @@ const StoreModal = ({ open, setOpen, item }) => {
       .then((data) => {})
       .catch((error) => {
         error = "이미 장바구니에 추가하셨습니다.";
-        alert("Error: " + error);
+        // alert("Error: " + error);
       });
-
+    alert("결제 페이지로 이동합니다.");
     redirection("/basket");
   };
 
@@ -71,9 +73,13 @@ const StoreModal = ({ open, setOpen, item }) => {
       .then((response) => response.json())
       .then((data) => {
         // console.log(data);
+        const userConfirm = window.confirm("장바구니에 추가하시겠습니까?");
       })
       .catch((error) => {
-        error = "이미 장바구니에 추가하셨습니다.";
+        const userConfirm = window.confirm("장바구니에 추가하시겠습니까?");
+        if (userConfirm) {
+          error = "이미 장바구니에 추가하셨습니다.";
+        }
         alert("Error: " + error);
       });
 
@@ -90,7 +96,6 @@ const StoreModal = ({ open, setOpen, item }) => {
       open={open}
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
-      sx={{ border: "none" }}
     >
       <Box
         sx={{
@@ -98,45 +103,50 @@ const StoreModal = ({ open, setOpen, item }) => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 800,
+          width: 700,
           height: 750,
-          bgcolor: "background.paper",
+          // bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          overflow: "auto",
+          // overflow: "auto",
+          borderRadius: "20px",
+          backgroundImage: `url("assets/panel/Popup005_Blue_Opaque.png")`,
+          backgroundSize: "105% 105%",
+          backgroundPosition: "center",
         }}
       >
         {/* 우측 상단에 닫기 버튼 추가 */}
         <Button
+          variant="contained"
           sx={{
             position: "absolute",
-            top: 10,
-            right: 10,
+            top: 30,
+            right: 40,
           }}
           onClick={handleClose}
         >
-          X
+          <Icon path={mdiCloseThick} size={1} />
         </Button>
         <Typography
           variant="h6"
           id="modal-title"
           gutterBottom
-          sx={{ color: "black" }}
+          sx={{ color: "white" }}
         >
           {name}
         </Typography>
 
         <Box className="modal-md-img" sx={{ textAlign: "center", mt: 3 }}>
-          <img src={"assets/img/" + name + ".jpg"} alt="이미지입니다"></img>
+          <img src={"assets/img/" + name + ".jpg"} alt="이미지입니다" />
         </Box>
 
         <Typography
           variant="body1"
           id="modal-description"
-          sx={{ mt: 3, color: "black" }}
+          sx={{ mt: 3, color: "white" }}
         >
           {content}
         </Typography>
@@ -150,9 +160,15 @@ const StoreModal = ({ open, setOpen, item }) => {
           }}
         >
           <Button
-            variant="outlined"
-            sx={{ mr: 2, width: 150, height: 60, fontSize: 20 }}
+            variant="contained"
+            sx={{
+              mr: 2,
+              width: 150,
+              height: 60,
+              fontSize: 20,
+            }}
             onClick={purchaseHandle}
+            style={{ color: "white" }}
           >
             바로구매
           </Button>

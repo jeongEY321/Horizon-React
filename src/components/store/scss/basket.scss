@@ -13,3 +13,25 @@
   border-bottom: 1px solid white;
 }
 
+.minus,
+.plus,
+.delete {
+  color: white !important;
+} 
+
+.minus:hover {
+  color: red !important;
+}
+.plus:hover {
+  color: blue !important;
+}
+.delete {
+  color: white !important;
+}
+.delete:hover {
+  color: red !important;
+}
+
+.MuiPaper-root {
+  border: none !important;
+}
